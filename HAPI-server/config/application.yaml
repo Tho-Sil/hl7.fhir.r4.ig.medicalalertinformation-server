@@ -58,9 +58,19 @@ hapi:
 
     # Convenience features useful at the hackathon.
     cors:
-      allow_Credentials: true
+      allow_credentials: false
       allowed_origin:
         - '*'
+      allowed_headers:
+        - 'X-FHIR-Starter'
+        - 'Origin'
+        - 'Accept'
+        - 'X-Requested-With'
+        - 'Content-Type'
+        - 'Access-Control-Request-Method'
+        - 'Access-Control-Request-Headers'
+        - 'Cache-Control'
+        - 'Prefer'
 
     # Subscriptions disabled to keep the demo simple. (Don't add an
     # 'email:' subkey here unless you also set email.host — HAPI 8.x
