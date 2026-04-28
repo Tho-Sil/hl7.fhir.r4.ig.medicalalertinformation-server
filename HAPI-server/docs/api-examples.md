@@ -7,6 +7,12 @@ en miljövariabel om du vill kunna kopiera dem rakt av:
 export FHIR=http://localhost:8080/fhir
 ```
 
+> **NB:** FHIR R4 saknar standardsökparametrar för `Flag.status`,
+> `Flag.code` och `Flag.category`. `data/01-search-parameters.json`
+> lägger till dem som anpassade SearchParameters så att exemplen
+> nedan fungerar — `load-data.sh` laddar dem först av allt och PUT
+> mot Flag-resurserna sedan triggar omindexering automatiskt.
+
 ## Hälsa och kapabiliteter
 
 ```bash

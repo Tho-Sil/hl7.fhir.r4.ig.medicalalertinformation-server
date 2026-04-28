@@ -1,0 +1,61 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-search-parameters",
+  "type": "transaction",
+  "entry": [
+    {
+      "request": { "method": "PUT", "url": "SearchParameter/se-flag-status" },
+      "resource": {
+        "resourceType": "SearchParameter",
+        "id": "se-flag-status",
+        "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/SearchParameter/se-flag-status",
+        "version": "0.1.0",
+        "name": "status",
+        "status": "active",
+        "experimental": false,
+        "description": "Search by Flag.status. FHIR R4 does not define a standard 'status' search parameter for Flag, so this implementation guide adds one to allow filtering active vs inactive alerts in demos and integration tests.",
+        "code": "status",
+        "base": ["Flag"],
+        "type": "token",
+        "expression": "Flag.status",
+        "xpathUsage": "normal"
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "SearchParameter/se-flag-code" },
+      "resource": {
+        "resourceType": "SearchParameter",
+        "id": "se-flag-code",
+        "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/SearchParameter/se-flag-code",
+        "version": "0.1.0",
+        "name": "code",
+        "status": "active",
+        "experimental": false,
+        "description": "Search by Flag.code. Useful for finding flags by SNOMED CT or ICD-10 concept across patients.",
+        "code": "code",
+        "base": ["Flag"],
+        "type": "token",
+        "expression": "Flag.code",
+        "xpathUsage": "normal"
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "SearchParameter/se-flag-category" },
+      "resource": {
+        "resourceType": "SearchParameter",
+        "id": "se-flag-category",
+        "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/SearchParameter/se-flag-category",
+        "version": "0.1.0",
+        "name": "category",
+        "status": "active",
+        "experimental": false,
+        "description": "Search by Flag.category. Allows filtering by alert category (A1, B1, C1, …) defined in SEAlertInformationCategoryCS.",
+        "code": "category",
+        "base": ["Flag"],
+        "type": "token",
+        "expression": "Flag.category",
+        "xpathUsage": "normal"
+      }
+    }
+  ]
+}
