@@ -28,7 +28,7 @@
     </div>
     <nav class="tabs" role="tablist">
       <button class="tab active" data-tab="patients" role="tab">Patienter</button>
-      <button class="tab" data-tab="testpatients" role="tab">Testpersoner</button>
+      <button class="tab" data-tab="testpatients" role="tab">Översikt</button>
       <button class="tab" data-tab="api" role="tab">API-exempel</button>
       <button class="tab" data-tab="about" role="tab">Om</button>
     </nav>
@@ -57,11 +57,12 @@
       </div>
     </section>
 
-    <!-- TAB: Test patients -->
+    <!-- TAB: Overview / catalogue -->
     <section id="tab-testpatients" class="tab-panel">
       <div class="docs">
-        <h1>Testpersoner</h1>
-        <p>Tio fiktiva patienter med samtliga tio uppmärksamhets­profiler representerade. Demodatat finns
+        <h1>Översikt</h1>
+        <p>Sammanställning av profilkoder och en tabell­vy av samtliga laddade flaggor per testperson.
+          Tio fiktiva patienter täcker alla tio uppmärksamhets­profiler. Demodatat finns
           i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>.</p>
 
         <div class="profile-table">
