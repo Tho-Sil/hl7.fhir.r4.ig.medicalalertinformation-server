@@ -341,7 +341,7 @@ const API_EXAMPLES = [
     title: "Sök patient på personnummer",
     desc: "Identifierare med Inera-OID 1.2.752.129.2.1.3.1.",
     method: "GET",
-    path: "/Patient?identifier=urn:oid:1.2.752.129.2.1.3.1|194506121518",
+    path: "/Patient?identifier=urn:oid:1.2.752.129.2.1.3.1%7C194506121518",
   },
   {
     title: "Aktiva flaggor för en patient",
@@ -371,7 +371,7 @@ const API_EXAMPLES = [
     title: "Sök på SNOMED-kod",
     desc: "Hitta alla flaggor med en specifik SCT-kod.",
     method: "GET",
-    path: "/Flag?code=http://snomed.info/sct|111088007",
+    path: "/Flag?code=http://snomed.info/sct%7C111088007",
   },
   {
     title: "Allt om en patient ($everything)",
