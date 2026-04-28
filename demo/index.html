@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uppmärksamhetsinformation — demoportal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="banner" class="banner">
+    <strong>Demodata</strong> — påhittad uppmärksamhetsinformation för testpersoner. Inte verklig patientdata.
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2L2 28h28L16 2z" fill="#fbbf24"/>
+        <rect x="14.5" y="11" width="3" height="9" fill="#0c1117"/>
+        <circle cx="16" cy="23.5" r="1.6" fill="#0c1117"/>
+      </svg>
+      <div>
+        <div class="brand-title">Uppmärksamhetsinformation</div>
+        <div class="brand-sub">Demoportal · HL7 Sverige FHIR-IG</div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="patients" role="tab">Patienter</button>
+      <button class="tab" data-tab="testpatients" role="tab">Testpersoner</button>
+      <button class="tab" data-tab="api" role="tab">API-exempel</button>
+      <button class="tab" data-tab="about" role="tab">Om</button>
+    </nav>
+    <div class="server">
+      <label>FHIR-bas</label>
+      <input id="fhirBase" type="text" value="http://localhost:8080/fhir" spellcheck="false">
+      <span id="serverStatus" class="status-dot" title="Status">●</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- TAB: Patients -->
+    <section id="tab-patients" class="tab-panel active">
+      <div class="layout">
+        <aside class="patient-list">
+          <h2>Patienter</h2>
+          <div id="patientList" class="patient-list-body"></div>
+        </aside>
+        <article class="patient-detail">
+          <div id="patientDetail" class="patient-detail-body">
+            <div class="empty-state">
+              <p>Välj en patient i listan för att se uppmärksamhetsinformationen.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TAB: Test patients -->
+    <section id="tab-testpatients" class="tab-panel">
+      <div class="docs">
+        <h1>Testpersoner</h1>
+        <p>Tio fiktiva patienter med samtliga tio uppmärksamhets­profiler representerade. Demodatat finns
+          i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>.</p>
+
+        <div class="profile-table">
+          <h2>Profilkoder</h2>
+          <table>
+            <thead><tr><th>Kod</th><th>Profil</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge cat-A">A1</span></td><td>SEAlertInformation-1-OtherMedicalConditionFlag — Annat medicinskt tillstånd</td></tr>
+              <tr><td><span class="badge cat-A">A2</span></td><td>SEAlertInformation-2-TreatmentFlag — Behandling</td></tr>
+              <tr><td><span class="badge cat-A">A3</span></td><td>SEAlertInformation-3-PresenceOfGraftsConditionFlag — Förekomst av transplantat</td></tr>
+              <tr><td><span class="badge cat-A">A4</span></td><td>SEAlertInformation-4-PresenceOfImplantFlag — Förekomst av implantat</td></tr>
+              <tr><td><span class="badge cat-B">B1</span></td><td>SEAlertInformation-5-PresenceOfInfectiousAgentFlag — Förekomst av smittämne</td></tr>
+              <tr><td><span class="badge cat-B">B2</span></td><td>SEAlertInformation-6-PresenceOfContagiousDiseaseFlag — Förekomst av smittsam sjukdom</td></tr>
+              <tr><td><span class="badge cat-C">C1</span></td><td>SEAlertInformation-7-AllergyIntoleranceFlag — Överkänslighet</td></tr>
+              <tr><td><span class="badge cat-D">D1</span></td><td>SEAlertInformation-8-SpecialCareRoutineFlag — Information om särskild vårdrutin</td></tr>
+              <tr><td><span class="badge cat-D">D2</span></td><td>SEAlertInformation-9-DecisionSpecialCareRoutineFlag — Beslut om särskild vårdrutin</td></tr>
+              <tr><td><span class="badge cat-E">E1</span></td><td>SEAlertInformation-10-UnstructuredFlag — Ostrukturerad uppmärksamhetsinformation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="patientDocs" class="patient-docs"></div>
+      </div>
+    </section>
+
+    <!-- TAB: API examples -->
+    <section id="tab-api" class="tab-panel">
+      <div class="docs">
+        <h1>API-exempel</h1>
+        <p>HAPI-servern svarar på <code>GET</code>, <code>POST</code>, <code>PUT</code> och <code>DELETE</code>
+          enligt FHIR R4. Klicka <strong>Kör</strong> för att utföra anropet mot servern och se svaret nedan.</p>
+
+        <div id="apiExamples" class="api-examples"></div>
+      </div>
+    </section>
+
+    <!-- TAB: About -->
+    <section id="tab-about" class="tab-panel">
+      <div class="docs">
+        <h1>Om demoportalen</h1>
+        <p>Den här portalen är en del av <code>hl7.fhir.r4.ig.medicalalertinformation-server</code>
+          — en demonstrations­miljö för den svenska FHIR Implementation Guide:n för
+          uppmärksamhetsinformation. Den visualiserar data från en lokalt körande HAPI FHIR-server.</p>
+
+        <h2>Uppmärksamhetsinformation</h2>
+        <p>Uppmärksamhets­information är data om patientens särskilda behov, risker eller
+          förhållanden som vården behöver känna till. Den gör vården säkrare genom att lyfta fram
+          information som annars riskerar att missas — överkänslighet, smitta, implantat,
+          transplantat, sällsynta diagnoser, pågående behandlingar med särskilda hänsyn,
+          och beslut om särskilda vårdrutiner.</p>
+
+        <h2>Profil­struktur</h2>
+        <p>FHIR-resursen <code>Flag</code> bär uppmärksamhets­signalen. Tio specialiserade profiler
+          representerar de tio typerna i Socialstyrelsens informations­specifikation. Vissa har
+          tillhörande <code>Observation</code>-resurser med detaljerad klinisk information.</p>
+
+        <h2>Källkod</h2>
+        <p>Repot finns på
+          <a href="https://github.com/Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server"
+             target="_blank" rel="noopener">GitHub</a>.</p>
+
+        <h2>Kontakt</h2>
+        <p>Frågor om IG:n: <a href="mailto:claudia.ehrentraut@regionstockholm.se">Claudia Ehrentraut</a>,
+          projektledare för arbetsgruppen för uppmärksamhetsinformation.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>HL7 Sverige · Vitalis 2026</span>
+    <span id="footerStats"></span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

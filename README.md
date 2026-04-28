@@ -22,12 +22,24 @@ docker compose up -d
 curl -s http://localhost:8080/fhir/Patient?_count=20 | jq
 ```
 
+## Demoportal
+
+En liten självstående webbsida i `demo/` visualiserar
+uppmärksamhetsinformationen från servern i NPÖ-stil:
+
+```bash
+cd demo
+python3 -m http.server 8000
+# öppna http://localhost:8000
+```
+
 Detaljerad dokumentation, testpatienter och API-exempel:
 
 - [`HAPI-server/README.md`](HAPI-server/README.md) — snabbstart och översikt
 - [`HAPI-server/docs/test-patients.md`](HAPI-server/docs/test-patients.md) — alla testpersoner och deras uppmärksamhetsinformation
 - [`HAPI-server/docs/api-examples.md`](HAPI-server/docs/api-examples.md) — klippa-och-klistra-anrop
 - [`HAPI-server/docs/architecture.md`](HAPI-server/docs/architecture.md) — designval och kända begränsningar
+- [`demo/README.md`](demo/README.md) — om demoportalen
 
 ## Bygga IG:n
 
