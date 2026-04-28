@@ -51,6 +51,7 @@ hapi:
     # to load profiles into the demo server is the REST-based loader:
     #
 <<<<<<< HEAD
+<<<<<<< HEAD
     #   ./scripts/build-ig.sh --sushi   # produce ig/*.tgz
     #   ./scripts/load-ig.sh            # PUT each profile into the server
     #
@@ -65,6 +66,15 @@ hapi:
         reloadExisting: true
         installMode: STORE_AND_INSTALL
 >>>>>>> 8c4f5b4 (Enable implementation guide for medical alert information in application.yaml and add the corresponding binary file for version 0.1.0.)
+=======
+    # implementationguides:
+    #   medicalalertinformation:
+    #     name: hl7.fhir.r4.ig.medicalalertinformation
+    #     version: 0.1.0
+    #     url: file:///hapi/ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz
+    #     reloadExisting: true
+    #     installMode: STORE_AND_INSTALL
+>>>>>>> parent of 8c4f5b4 (Enable implementation guide for medical alert information in application.yaml and add the corresponding binary file for version 0.1.0.)
 
     # Convenience features useful at the hackathon.
     cors:
