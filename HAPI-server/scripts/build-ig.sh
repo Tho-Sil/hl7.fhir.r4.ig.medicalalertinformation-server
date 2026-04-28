@@ -37,11 +37,30 @@ echo "[build-ig] running SUSHI..."
 sushi .
 
 if [[ "${1:-}" == "--sushi" ]]; then
-  PKG_TGZ="$IG_DIR/fsh-generated/package.tgz"
-  if [[ ! -f "$PKG_TGZ" ]]; then
-    echo "[build-ig] packaging fsh-generated/resources/ into a tgz..."
-    tar -czf "$PKG_TGZ" -C "$IG_DIR/fsh-generated" resources
+  echo "[build-ig] assembling NPM-style FHIR package from SUSHI output..."
+  RES_DIR="$IG_DIR/fsh-generated/resources"
+  if [[ ! -d "$RES_DIR" ]] || ! ls "$RES_DIR"/*.json >/dev/null 2>&1; then
+    echo "error: no resources at $RES_DIR (sushi did not produce output)" >&2
+    exit 1
   fi
+  STAGE="$(mktemp -d)"
+  trap 'rm -rf "$STAGE"' EXIT
+  mkdir -p "$STAGE/package"
+  cp "$RES_DIR"/*.json "$STAGE/package/"
+  cat >"$STAGE/package/package.json" <<'JSON'
+{
+  "name": "hl7.fhir.r4.ig.medicalalertinformation",
+  "version": "0.1.0",
+  "canonical": "http://hl7.se/fhir/r4/ig/medicalalertinformation",
+  "fhirVersions": ["4.0.1"],
+  "type": "fhir.ig",
+  "dependencies": {},
+  "title": "HL7 FHIR R4 Medical alert information for Sweden",
+  "description": "Swedish IG for medical alert information (uppmärksamhetsinformation), assembled from SUSHI output for the Vitalis hackathon."
+}
+JSON
+  PKG_TGZ="$STAGE/package.tgz"
+  tar -czf "$PKG_TGZ" -C "$STAGE" package
 else
   echo "[build-ig] running IG Publisher..."
   if [[ ! -f "$IG_DIR/input-cache/publisher.jar" ]]; then
