@@ -47,27 +47,49 @@ for i in $(seq 1 60); do
   fi
 done
 
-read_field() {
-  python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get(sys.argv[2],''))" "$1" "$2"
-}
+# Read resourceType/id, and rewrite the id to a HAPI-acceptable form
+# when SUSHI generated a purely-numeric id (HAPI-0960 forbids those
+# on PUT). The canonical URL in .url is left untouched, so consumers
+# look up by canonical and don't notice the tweak.
+PREP="$EXTRACT/prepared"
+mkdir -p "$PREP"
+python3 - "$EXTRACT/package" "$PREP" <<'PY'
+import json, os, re, sys
+src, dst = sys.argv[1], sys.argv[2]
+NUMERIC = re.compile(r'^[0-9]+$')
+out = []
+for name in sorted(os.listdir(src)):
+    if not name.endswith('.json'):
+        continue
+    if name in ('package.json', '.index.json'):
+        continue
+    if name.startswith('ImplementationGuide-'):
+        continue
+    path = os.path.join(src, name)
+    with open(path) as fh:
+        try:
+            d = json.load(fh)
+        except json.JSONDecodeError:
+            continue
+    rt = d.get('resourceType')
+    rid = d.get('id')
+    if not rt or not rid:
+        continue
+    if NUMERIC.fullmatch(rid):
+        rid = 'se-' + rid
+        d['id'] = rid
+    out_path = os.path.join(dst, name)
+    with open(out_path, 'w') as fh:
+        json.dump(d, fh)
+    out.append((rt, rid, out_path))
+with open(os.path.join(dst, '_index.tsv'), 'w') as fh:
+    for rt, rid, p in out:
+        fh.write(f"{rt}\t{rid}\t{p}\n")
+PY
 
 count=0
-skipped=0
-for f in "$EXTRACT/package"/*.json; do
-  name="$(basename "$f")"
-  case "$name" in
-    package.json|.index.json) skipped=$((skipped+1)); continue ;;
-    ImplementationGuide-*) skipped=$((skipped+1)); continue ;;
-  esac
-
-  rt="$(read_field "$f" resourceType)"
-  rid="$(read_field "$f" id)"
-  if [[ -z "$rt" || -z "$rid" ]]; then
-    echo "[load-ig] skip $name (no resourceType/id)"
-    skipped=$((skipped+1))
-    continue
-  fi
-
+while IFS=$'\t' read -r rt rid f; do
+  [[ -z "$rt" ]] && continue
   http_code=$(curl -sS -o /tmp/load-ig-resp.json -w '%{http_code}' \
     -H 'Content-Type: application/fhir+json' \
     -H 'Accept: application/fhir+json' \
@@ -79,6 +101,6 @@ for f in "$EXTRACT/package"/*.json; do
   fi
   echo "[load-ig] PUT $rt/$rid"
   count=$((count+1))
-done
+done < "$PREP/_index.tsv"
 
-echo "[load-ig] loaded $count canonical resources, skipped $skipped"
+echo "[load-ig] loaded $count canonical resources"
