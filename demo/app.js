@@ -155,12 +155,14 @@ function renderPatientList() {
     const activeCount = flags.filter(f => f.status === "active").length;
     const initials = name.split(" ").filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
     const sel = id === state.selectedPatientId ? " selected" : "";
+    const mini = renderAlertSymbolMini(flags);
     return `<div class="patient-card${sel}" data-id="${id}">
       <div class="patient-avatar ${gender[0] || ""}">${escapeHtml(initials)}</div>
       <div class="patient-card-info">
         <div class="patient-card-name">${escapeHtml(name)}</div>
         <div class="patient-card-meta">${formatPnr(pnr)}</div>
       </div>
+      ${mini}
       <span class="patient-card-flagcount${activeCount === 0 ? " zero" : ""}">${activeCount}</span>
     </div>`;
   }).join("");
@@ -194,6 +196,7 @@ function renderPatientDetail(id) {
     return (a.category?.[0]?.coding?.[0]?.code || "").localeCompare(b.category?.[0]?.coding?.[0]?.code || "");
   });
   const activeCount = flags.filter(f => f.status === "active").length;
+  const symbol = renderAlertSymbol(flags);
 
   const header = `
     <div class="patient-header">
@@ -207,6 +210,7 @@ function renderPatientDetail(id) {
           <span>${birthDate ? "född " + birthDate : ""}</span>
         </div>
       </div>
+      ${symbol}
     </div>`;
 
   const banner = activeCount > 0
@@ -247,6 +251,143 @@ function renderPatientDetail(id) {
 
   detail.innerHTML = header + banner + (groups || `
     <div class="empty-state"><p>Inga uppmärksamhetssignaler för denna patient.</p></div>`);
+}
+
+/* ── NPÖ-style alert symbol ──────────────────────────────── */
+function renderAlertSymbol(flags) {
+  const active = flags.filter(f => f.status === "active");
+  const cats = new Set();
+  let allergySeverity = null; // "life-threatening" | "harmful" | "discomforting"
+
+  const SEVERITY_RANK = { "life-threatening": 3, "harmful": 2, "discomforting": 1 };
+
+  for (const f of active) {
+    const code = f.category?.[0]?.coding?.find(c => c.system === CATEGORY_CS)?.code
+              || f.category?.[0]?.coding?.[0]?.code;
+    if (code) cats.add(code);
+    if (code === "C1") {
+      const ext = (f.extension || []).find(e => e.url === CRIT_LEVEL_EXT);
+      const cc = ext?.valueCodeableConcept?.coding?.[0]?.code;
+      const sev = CRITICALITY[cc]?.cls;
+      if (sev && (!allergySeverity || SEVERITY_RANK[sev] > SEVERITY_RANK[allergySeverity])) {
+        allergySeverity = sev;
+      }
+    }
+  }
+
+  // C1 with no severity extension → assume discomforting (still gives bottom dot)
+  if (cats.has("C1") && !allergySeverity) allergySeverity = "discomforting";
+
+  const has = group => [...cats].some(c => c.startsWith(group));
+  const C_RED = "#c11616";
+  const A_BLUE = "#1f5f9e";
+  const B_YELLOW = "#f5b800";
+  const D_BLUE = "#2563b3";
+  const E_ORANGE = "#c14516";
+  const OFF = "#e5e7eb";
+
+  // Allergy severity → which of the 3 stacked dots are red
+  const sev = SEVERITY_RANK[allergySeverity] || 0;
+  const aTop = sev >= 3 ? C_RED : OFF;
+  const aMid = sev >= 2 ? C_RED : OFF;
+  const aBot = sev >= 1 ? C_RED : OFF;
+
+  const cMedical = has("A") ? A_BLUE : OFF;
+  const cInfection = has("B") ? B_YELLOW : OFF;
+  const cCare = has("D") ? D_BLUE : OFF;
+  const cUnstr = has("E") ? E_ORANGE : OFF;
+
+  const tooltip = activeAreas(cats, allergySeverity);
+
+  return `<div class="alert-symbol-wrap" title="${escapeHtml(tooltip)}">
+    <svg viewBox="0 0 90 110" class="alert-symbol" aria-label="Uppmärksamhetssymbol">
+      <!-- Top column: allergy severity (3 stacked dots) -->
+      <rect x="38" y="3"  width="14" height="10" rx="3" fill="${aTop}" stroke="#374151" stroke-width="1.2"/>
+      <rect x="38" y="15" width="14" height="10" rx="3" fill="${aMid}" stroke="#374151" stroke-width="1.2"/>
+      <rect x="38" y="27" width="14" height="10" rx="3" fill="${aBot}" stroke="#374151" stroke-width="1.2"/>
+
+      <!-- Upper-left: ej strukturanpassad -->
+      <polygon points="6,46 26,40 30,52 22,58 6,58" fill="${cUnstr}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Upper-right: medicinskt tillstånd och behandling -->
+      <polygon points="84,46 64,40 60,52 68,58 84,58" fill="${cMedical}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Lower-left: smitta -->
+      <polygon points="6,77 26,83 30,71 22,65 6,65" fill="${cInfection}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Lower-right: vårdrutinavvikelse -->
+      <polygon points="84,77 64,83 60,71 68,65 84,65" fill="${cCare}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+
+      <!-- Bottom: pedestal/foot -->
+      <rect x="35" y="92" width="20" height="10" rx="3" fill="white" stroke="#374151" stroke-width="1.2"/>
+
+      <!-- Central body -->
+      <circle cx="45" cy="61" r="14" fill="white" stroke="#374151" stroke-width="1.4"/>
+
+      <!-- Lightning + period (uppmärksamhetssignal-glyph) -->
+      <rect x="42.5" y="50" width="5" height="13" rx="1.5" fill="#1f2937"/>
+      <circle cx="45" cy="69" r="2.4" fill="#1f2937"/>
+    </svg>
+    ${activeAreasLabel(cats, allergySeverity)}
+  </div>`;
+}
+
+function renderAlertSymbolMini(flags) {
+  // Same symbol logic, smaller size and no caption.
+  const active = flags.filter(f => f.status === "active");
+  const cats = new Set();
+  let allergySeverity = null;
+  const SR = { "life-threatening": 3, "harmful": 2, "discomforting": 1 };
+  for (const f of active) {
+    const code = f.category?.[0]?.coding?.find(c => c.system === CATEGORY_CS)?.code
+              || f.category?.[0]?.coding?.[0]?.code;
+    if (code) cats.add(code);
+    if (code === "C1") {
+      const ext = (f.extension || []).find(e => e.url === CRIT_LEVEL_EXT);
+      const cc = ext?.valueCodeableConcept?.coding?.[0]?.code;
+      const sev = CRITICALITY[cc]?.cls;
+      if (sev && (!allergySeverity || SR[sev] > SR[allergySeverity])) allergySeverity = sev;
+    }
+  }
+  if (cats.has("C1") && !allergySeverity) allergySeverity = "discomforting";
+
+  const has = group => [...cats].some(c => c.startsWith(group));
+  const OFF = "#e5e7eb";
+  const sev = SR[allergySeverity] || 0;
+
+  return `<svg class="alert-symbol-mini" viewBox="0 0 90 110" aria-hidden="true">
+    <rect x="38" y="3"  width="14" height="10" rx="3" fill="${sev>=3 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <rect x="38" y="15" width="14" height="10" rx="3" fill="${sev>=2 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <rect x="38" y="27" width="14" height="10" rx="3" fill="${sev>=1 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <polygon points="6,46 26,40 30,52 22,58 6,58" fill="${has("E") ? "#c14516" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="84,46 64,40 60,52 68,58 84,58" fill="${has("A") ? "#1f5f9e" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="6,77 26,83 30,71 22,65 6,65" fill="${has("B") ? "#f5b800" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="84,77 64,83 60,71 68,65 84,65" fill="${has("D") ? "#2563b3" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <rect x="35" y="92" width="20" height="10" rx="3" fill="white" stroke="#374151" stroke-width="1.2"/>
+    <circle cx="45" cy="61" r="14" fill="white" stroke="#374151" stroke-width="1.4"/>
+    <rect x="42.5" y="50" width="5" height="13" rx="1.5" fill="#1f2937"/>
+    <circle cx="45" cy="69" r="2.4" fill="#1f2937"/>
+  </svg>`;
+}
+
+function activeAreas(cats, allergySeverity) {
+  const parts = [];
+  if (cats.has("C1")) {
+    const sev = ({ "life-threatening": "livshotande", "harmful": "skadlig", "discomforting": "besvärande" })[allergySeverity] || "";
+    parts.push(`Överkänslighet${sev ? " (" + sev + ")" : ""}`);
+  }
+  if ([...cats].some(c => c.startsWith("A"))) parts.push("Medicinskt tillstånd och behandling");
+  if ([...cats].some(c => c.startsWith("B"))) parts.push("Smitta");
+  if ([...cats].some(c => c.startsWith("D"))) parts.push("Vårdrutinavvikelse");
+  if ([...cats].some(c => c.startsWith("E"))) parts.push("Ej strukturanpassad uppmärksamhetsinformation");
+  return parts.length
+    ? "Aktiva signaler: " + parts.join(" · ")
+    : "Ingen aktuell uppmärksamhetsinformation";
+}
+
+function activeAreasLabel(cats, allergySeverity) {
+  if (cats.size === 0) return `<div class="alert-symbol-cap">Ingen UMI</div>`;
+  const sev = allergySeverity
+    ? ({ "life-threatening": "Livshotande", "harmful": "Skadlig", "discomforting": "Besvärande" })[allergySeverity]
+    : null;
+  return sev ? `<div class="alert-symbol-cap">${sev} överkänslighet</div>` : "";
 }
 
 function renderFlag(flag) {
