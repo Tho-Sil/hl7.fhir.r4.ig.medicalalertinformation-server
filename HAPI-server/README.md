@@ -51,6 +51,7 @@ docker compose restart hapi && ./scripts/load-data.sh
 | `data/` | Transaction-bundles med exempeldata (`02-patients.json`, `10-flags-medical.json`, …) |
 | `scripts/build-ig.sh` | Bygger IG-paketet med SUSHI (+ valfritt IG Publisher) |
 | `scripts/load-data.sh` | Laddar alla bundles till en körande server |
+| `scripts/load-ig.sh` | PUTar profiler/value sets/code systems från IG-tgz:en |
 | `scripts/reset.sh` | Rensar Flag/Observation/Patient och laddar om |
 | `docs/test-patients.md` | Vilka testpersoner som finns och deras uppmärksamhetsinformation |
 | `docs/api-examples.md` | Klippa-och-klistra-exempel för demo |
@@ -59,17 +60,21 @@ docker compose restart hapi && ./scripts/load-data.sh
 ## Profilvalidering (frivilligt)
 
 Servern startar och fungerar utan IG-paketet. Vill ni aktivera
-profil­validering — bygg paketet och ladda om:
+profil­validering — bygg paketet och ladda upp profilerna via REST:
 
 ```bash
-./scripts/build-ig.sh
-# avkommentera 'implementationguides:' i config/application.yaml
-docker compose restart hapi
+./scripts/build-ig.sh --sushi      # bygger HAPI-server/ig/*.tgz med SUSHI
+./scripts/load-ig.sh               # PUTar profiler/value sets/code systems
 ```
 
-`build-ig.sh` kräver SUSHI (`npm install -g fsh-sushi`), Java och nät­
-access till `packages.fhir.org`. Resultatet hamnar som
-`ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz`.
+`load-ig.sh` packar upp tgz:en och PUTar varje canonical-resurs till
+servern. Profilerna går sedan att använda i `$validate`-anrop. Det
+här flödet undviker HAPI:s `implementationguides:`-block som är
+opålitligt med lokala `file://`-URL:er.
+
+`build-ig.sh --sushi` kräver SUSHI (`npm install -g fsh-sushi`) och
+nät­access till `packages.fhir.org` för core-paketen. Resultatet
+hamnar som `ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz`.
 
 ## Testpatienter — kort översikt
 

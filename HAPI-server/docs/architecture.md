@@ -56,17 +56,22 @@ SE-profilerna. Vill ni se bindningsfel skarpt — sätt
 `Flag/$validate` fungerar oberoende av flaggorna ovan; man kan
 använda den för att validera ett utkast manuellt.
 
-### IG-paket — frikopplat från servern
+### IG-paket — laddas via REST, inte via HAPI:s package installer
 
 Servern startar utan IG-paketet. Profil-validering (om aktiverad)
-behöver paketet. Skälet att hålla det separat:
+behöver paketet. Vi laddar det i två steg:
 
-- `package.tgz` byggs av SUSHI och kräver nätaccess till
-  `packages.fhir.org` — passar inte alltid i en hackathon-miljö.
-- Server kan bytas/uppdateras utan att bygga om IG.
+1. `scripts/build-ig.sh --sushi` kör SUSHI och paketerar resultatet
+   som ett NPM-format­paket (`package/package.json` + FHIR-JSON).
+2. `scripts/load-ig.sh` packar upp och PUTar varje canonical-resurs
+   (StructureDefinition, ValueSet, CodeSystem, NamingSystem,
+   ConceptMap) till servern.
 
-`scripts/build-ig.sh` producerar paketet, kopierar in det i `ig/` och
-ger instruktioner för att aktivera laddningen.
+Skälet att inte använda HAPI:s `implementationguides:`-block: med
+lokala `file://`-URL:er är beteendet vingligt mellan HAPI-versioner
+och misslyckas typiskt med `HAPI-1301: Unable to locate package`.
+REST-vägen fungerar oberoende av HAPI-version och kräver inget extra
+i `application.yaml`.
 
 ### Idempotenta bundles
 

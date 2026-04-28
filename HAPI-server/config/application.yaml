@@ -45,17 +45,16 @@ hapi:
       requests_enabled: false
       responses_enabled: false
 
-    # Optional: load the locally built IG package once available.
-    # The build-ig.sh script writes the tgz to ./ig/ which is mounted
-    # into the container at /hapi/ig. Uncomment after running build-ig.sh.
+    # NB: HAPI's 'implementationguides:' block is fussy about local
+    # file:// URLs and has caused HAPI-1301 ("Unable to locate package")
+    # when the path is mounted into the container. The recommended way
+    # to load profiles into the demo server is the REST-based loader:
     #
-    # implementationguides:
-    #   medicalalertinformation:
-    #     name: hl7.fhir.r4.ig.medicalalertinformation
-    #     version: 0.1.0
-    #     url: file:///hapi/ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz
-    #     reloadExisting: true
-    #     installMode: STORE_AND_INSTALL
+    #   ./scripts/build-ig.sh --sushi   # produce ig/*.tgz
+    #   ./scripts/load-ig.sh            # PUT each profile into the server
+    #
+    # That sidesteps the npm package installer entirely and works
+    # regardless of HAPI starter version.
 
     # Convenience features useful at the hackathon.
     cors:
