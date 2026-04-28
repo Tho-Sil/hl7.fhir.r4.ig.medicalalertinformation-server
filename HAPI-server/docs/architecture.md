@@ -29,14 +29,21 @@ Bytet till nyare patch-version är säkert.
 
 ### Persistens
 
-H2 i fil (volymen `hapi-h2`) ger:
-- Snabb start (inga externa beroenden).
-- Beständighet mellan omstarter (container-restart förlorar inget).
-- Enkel reset (`docker compose down -v`).
+H2 in-memory (`jdbc:h2:mem:hapi;DB_CLOSE_DELAY=-1`) ger:
+- Inga externa beroenden, inga filsystemspermissions att hantera.
+- Datat lever så länge containern är igång; försvinner vid restart.
+- Enkel reset: `docker compose restart hapi && scripts/load-data.sh`,
+  alternativt `scripts/reset.sh` mot körande server.
+
+Skälet att inte använda H2 i fil med en namngiven volym: HAPI-bilden
+kör som non-root och Docker-volymer skapas som root, vilket ger
+`AccessDeniedException` vid skrivning till `/data/hapi`. För det här
+demo-bruket ger ändå filpersistens marginellt värde — `load-data.sh`
+laddar alla bundles på under en sekund.
 
 Postgres-profil är inte med i compose. Vill ni testa Postgres byter ni
 `spring.datasource.*` i `application.yaml` och lägger till en
-`postgres`-tjänst. För hackathonet rekommenderas H2.
+`postgres`-tjänst.
 
 ### Validering = warn
 

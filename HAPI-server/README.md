@@ -6,7 +6,7 @@ hackathonet under Vitalis 2026.
 
 - Bas-URL: `http://localhost:8080/fhir`
 - FHIR-version: R4 (4.0.1)
-- Persistens: H2 i fil (volym `hapi-h2`); rensas med `scripts/reset.sh`
+- Persistens: H2 in-memory — datat finns kvar så länge containern lever, men nollställs vid restart. Återladda med `scripts/load-data.sh`.
 - Validering: **warn** — servern accepterar resurser som inte uppfyller
   profil­erna, men returnerar varningar i `OperationOutcome`
 
@@ -30,8 +30,15 @@ curl -s 'http://localhost:8080/fhir/Flag?subject=Patient/pat-johnbob'
 Stäng av:
 
 ```bash
-docker compose down            # behåller data
-docker compose down -v         # raderar H2-volymen
+docker compose down            # stoppar containern (in-memory-datat försvinner)
+```
+
+Återställ till nyladdat tillstånd utan omstart:
+
+```bash
+./scripts/reset.sh             # delete-expunge alla resurser och ladda om
+# eller bara:
+docker compose restart hapi && ./scripts/load-data.sh
 ```
 
 ## Innehåll
@@ -88,5 +95,4 @@ i [`docs/test-patients.md`](docs/test-patients.md).
   är ledig (`lsof -i :8080`) eller sätt `HAPI_PORT` i `.env`.
 - **`load-data.sh` får HTTP 500**: bilden behöver typiskt 30–60 s till
   databas-init. Skriptet pollar `metadata`-endpointen i upp till 120 s.
-- **Want to start om från noll**: `docker compose down -v && docker
-  compose up -d && ./scripts/load-data.sh`.
+- **Starta om från noll**: `docker compose restart hapi && ./scripts/load-data.sh`.
