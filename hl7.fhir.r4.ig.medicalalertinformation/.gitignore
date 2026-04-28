@@ -1,0 +1,10 @@
+.DS_Store
+.vscode
+.devcontainer
+Thumbs.db
+/fsh-generated
+/input-cache
+/output
+/temp
+/template
+/input/context
