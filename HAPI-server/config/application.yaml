@@ -62,12 +62,13 @@ hapi:
       allowed_origin:
         - '*'
 
-    # Subscriptions disabled to keep the demo simple.
+    # Subscriptions disabled to keep the demo simple. (Don't add an
+    # 'email:' subkey here unless you also set email.host — HAPI 8.x
+    # eagerly instantiates the SMTP sender and fails to start without
+    # a host.)
     subscription:
       resthook_enabled: false
       websocket_enabled: false
-      email:
-        from: noreply@example.org
 
     # Useful operations and search behavior.
     fhirpath_interceptor_enabled: false
