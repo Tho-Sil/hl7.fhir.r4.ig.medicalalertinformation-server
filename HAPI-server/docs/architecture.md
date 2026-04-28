@@ -20,9 +20,12 @@
 
 ### HAPI-version
 
-`hapiproject/hapi:v8.4.1` är vald som en stabil 8.x-release. HAPI 8.x
-stöder R4 och har förbättrad IG-laddning via NPM-paket. Bytet till
-nyare patch-version är säkert.
+`hapiproject/hapi:v8.8.0-1` är vald som senaste stabila 8.x-release.
+HAPI 8.x stöder R4 och har förbättrad IG-laddning via NPM-paket.
+Bytet till nyare patch-version är säkert.
+
+> Taggschemat på Docker Hub är `vX.Y.Z-N` (där `N` är build-nummer).
+> Det finns inga `vX.Y.Z`-taggar utan suffix från och med 8.0.
 
 ### Persistens
 

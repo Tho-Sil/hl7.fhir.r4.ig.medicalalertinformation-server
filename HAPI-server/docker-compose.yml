@@ -1,6 +1,6 @@
 services:
   hapi:
-    image: hapiproject/hapi:v8.4.1
+    image: hapiproject/hapi:v8.8.0-1
     container_name: hapi-medicalalertinformation
     restart: unless-stopped
     ports:

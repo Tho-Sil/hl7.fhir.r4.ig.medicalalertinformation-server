@@ -38,7 +38,7 @@ docker compose down -v         # raderar H2-volymen
 
 | Sökväg | Syfte |
 |---|---|
-| `docker-compose.yml` | Kör `hapiproject/hapi:v8.4.1` med monterad konfiguration |
+| `docker-compose.yml` | Kör `hapiproject/hapi:v8.8.0-1` med monterad konfiguration |
 | `config/application.yaml` | HAPI-konfiguration (R4, H2, validering=warn, IG-laddning förberedd) |
 | `ig/` | Plats för det byggda IG-paketet (`*.tgz`) |
 | `data/` | Transaction-bundles med exempeldata (`02-patients.json`, `10-flags-medical.json`, …) |
