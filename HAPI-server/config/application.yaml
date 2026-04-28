@@ -1,0 +1,81 @@
+spring:
+  main:
+    allow-circular-references: true
+  flyway:
+    enabled: false
+    baselineOnMigrate: true
+    fail-on-missing-locations: false
+  datasource:
+    url: 'jdbc:h2:file:/data/hapi/h2;MV_STORE=true;NON_KEYWORDS=VALUE,OFFSET'
+    username: sa
+    password: null
+    driverClassName: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    properties:
+      hibernate.format_sql: false
+      hibernate.show_sql: false
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirH2Dialect
+      hibernate.search.enabled: false
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info'
+
+hapi:
+  fhir:
+    fhir_version: R4
+    server_address: 'http://localhost:8080/fhir'
+    default_pretty_print: true
+    default_encoding: json
+    default_page_size: 50
+    max_page_size: 500
+
+    # Validation set to "warn" by request: server accepts non-conforming
+    # resources but reports issues in OperationOutcome.
+    validation:
+      requests_enabled: false
+      responses_enabled: false
+
+    # Optional: load the locally built IG package once available.
+    # The build-ig.sh script writes the tgz to ./ig/ which is mounted
+    # into the container at /hapi/ig. Uncomment after running build-ig.sh.
+    #
+    # implementationguides:
+    #   medicalalertinformation:
+    #     name: hl7.fhir.r4.ig.medicalalertinformation
+    #     version: 0.1.0
+    #     url: file:///hapi/ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz
+    #     reloadExisting: true
+    #     installMode: STORE_AND_INSTALL
+
+    # Convenience features useful at the hackathon.
+    cors:
+      allow_Credentials: true
+      allowed_origin:
+        - '*'
+
+    # Subscriptions disabled to keep the demo simple.
+    subscription:
+      resthook_enabled: false
+      websocket_enabled: false
+      email:
+        from: noreply@example.org
+
+    # Useful operations and search behavior.
+    fhirpath_interceptor_enabled: false
+    expunge_enabled: true
+    delete_expunge_enabled: true
+    allow_multiple_delete: true
+    allow_external_references: true
+    allow_placeholder_references: true
+    auto_create_placeholder_reference_targets: false
+    enable_index_missing_fields: false

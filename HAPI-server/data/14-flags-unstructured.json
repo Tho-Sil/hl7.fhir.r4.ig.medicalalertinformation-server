@@ -1,0 +1,94 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-flags-unstructured",
+  "type": "transaction",
+  "entry": [
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-berit-10" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-berit-10",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-10-UnstructuredFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "E1",
+                "display": "Historically recorded medical alert information"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Anteckning från journal 1998-04-12: Patienten reagerar starkt på vissa parfymerade salvor — ej närmare utrett."
+        },
+        "subject": { "reference": "Patient/pat-berit" },
+        "period": { "start": "1998-04-12" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-lova-10" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-lova-10",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-10-UnstructuredFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "E1",
+                "display": "Historically recorded medical alert information"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Allergi mot jordnötter enligt mor — ej formellt verifierad. Försiktighet vid födoämnesexponering rekommenderas."
+        },
+        "subject": { "reference": "Patient/pat-lova" },
+        "period": { "start": "2014-09-02" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-sara-10" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-sara-10",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-10-UnstructuredFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "E1",
+                "display": "Historically recorded medical alert information"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Övergripande anmärkning från äldre journalsystem: Patienten reagerar känsligt på opioider — ev. behov av reducerad dos."
+        },
+        "subject": { "reference": "Patient/pat-sara" },
+        "period": { "start": "2016-06-30" }
+      }
+    }
+  ]
+}

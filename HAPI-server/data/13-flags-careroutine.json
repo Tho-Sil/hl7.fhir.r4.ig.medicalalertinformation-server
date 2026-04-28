@@ -1,0 +1,151 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-flags-careroutine",
+  "type": "transaction",
+  "entry": [
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-berit-8" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-berit-8",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-8-SpecialCareRoutineFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "D1",
+                "display": "Information that can lead to special care routine"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "Z22.3",
+              "display": "Bärare av Staphylococcus aureus"
+            }
+          ],
+          "text": "Information om MRSA-bärarskap som kräver särskild vårdrutin"
+        },
+        "subject": { "reference": "Patient/pat-berit" },
+        "period": { "start": "2023-11-08" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-berit-9" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-berit-9",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-9-DecisionSpecialCareRoutineFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "D2",
+                "display": "Decision that can lead to special care routine"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "432415000",
+              "display": "bärare av meticillinresistent Staphylococcus aureus"
+            }
+          ],
+          "text": "Beslut: tillämpa MRSA-vårdrutin med isolering vid inneliggande vård"
+        },
+        "subject": { "reference": "Patient/pat-berit" },
+        "period": { "start": "2023-11-08" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-gunnar-8" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-gunnar-8",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-8-SpecialCareRoutineFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "D1",
+                "display": "Information that can lead to special care routine"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "Z22.4",
+              "display": "Bärare av multiresistenta bakterier"
+            }
+          ],
+          "text": "Information om bärarskap av ESBL"
+        },
+        "subject": { "reference": "Patient/pat-gunnar" },
+        "period": { "start": "2022-07-19" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-gunnar-9" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-gunnar-9",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-9-DecisionSpecialCareRoutineFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "D2",
+                "display": "Decision that can lead to special care routine"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "762988003",
+              "display": "bärare av ESBL-producerande bakterier"
+            }
+          ],
+          "text": "Beslut: tillämpa kontaktsmittesrutin vid inneliggande vård"
+        },
+        "subject": { "reference": "Patient/pat-gunnar" },
+        "period": { "start": "2022-07-19" }
+      }
+    }
+  ]
+}

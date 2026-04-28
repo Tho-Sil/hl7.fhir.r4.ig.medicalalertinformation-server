@@ -1,0 +1,475 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-flags-medical",
+  "type": "transaction",
+  "entry": [
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-tolvan-1" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-tolvan-1",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A1",
+                "display": "Other medical condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "9651007",
+              "display": "långt QT-syndrom"
+            }
+          ],
+          "text": "Långt QT-syndrom"
+        },
+        "subject": { "reference": "Patient/pat-tolvan", "display": "Tolvan Tolvansson" },
+        "period": { "start": "2018-04-12" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-johnbob-1" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-johnbob-1",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A1",
+                "display": "Other medical condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "70995007",
+              "display": "pulmonell hypertoni"
+            }
+          ],
+          "text": "Pulmonell hypertoni"
+        },
+        "subject": { "reference": "Patient/pat-johnbob", "display": "John Bob Goode Johansson" },
+        "period": { "start": "2014-11-03" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-johnbob-2" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-johnbob-2",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-2-TreatmentFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A2",
+                "display": "Treatment"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "243142003",
+              "display": "BiPAP-behandling"
+            }
+          ],
+          "text": "BiPAP-behandling, pågående"
+        },
+        "subject": { "reference": "Patient/pat-johnbob" },
+        "period": { "start": "2022-02-15" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-johnbob-4" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-johnbob-4",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-4-PresenceOfImplantFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A4",
+                "display": "Presence of implant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "72506001",
+              "display": "implanterbar defibrillator"
+            }
+          ],
+          "text": "Implanterbar defibrillator (ICD)"
+        },
+        "subject": { "reference": "Patient/pat-johnbob" },
+        "period": { "start": "2019-10-21" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-karlerik-1" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-karlerik-1",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A1",
+                "display": "Other medical condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "234467004",
+              "display": "trombofili"
+            }
+          ],
+          "text": "Trombofili"
+        },
+        "subject": { "reference": "Patient/pat-karlerik" },
+        "period": { "start": "2010-06-30" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-karlerik-2" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-karlerik-2",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-2-TreatmentFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A2",
+                "display": "Treatment"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.whocc.no/atc",
+              "code": "L04",
+              "display": "Immunsuppressiva medel"
+            }
+          ],
+          "text": "Pågående immunsuppressiv behandling efter hjärttransplantation"
+        },
+        "subject": { "reference": "Patient/pat-karlerik" },
+        "period": { "start": "2017-08-04" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-karlerik-3" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-karlerik-3",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-3-PresenceOfGraftsConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A3",
+                "display": "Presence of transplant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "739024006",
+              "display": "transplanterat hjärta föreligger"
+            }
+          ],
+          "text": "Hjärttransplantation utförd"
+        },
+        "subject": { "reference": "Patient/pat-karlerik" },
+        "period": { "start": "2017-08-02" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-astrid-1" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-astrid-1",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A1",
+                "display": "Other medical condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "405501007",
+              "display": "malign hypertermi"
+            }
+          ],
+          "text": "Malign hypertermi (livshotande vid anestesi)"
+        },
+        "subject": { "reference": "Patient/pat-astrid" },
+        "period": { "start": "2015-09-12" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-astrid-4" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-astrid-4",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-4-PresenceOfImplantFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A4",
+                "display": "Presence of implant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "69805005",
+              "display": "insulinpump"
+            }
+          ],
+          "text": "Insulinpump"
+        },
+        "subject": { "reference": "Patient/pat-astrid" },
+        "period": { "start": "2023-04-18" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-liam-1" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-liam-1",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-1-OtherMedicalConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A1",
+                "display": "Other medical condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "D67.9",
+              "display": "Ärftlig brist på faktor IX"
+            }
+          ],
+          "text": "Hemofili B (ärftlig faktor IX-brist)"
+        },
+        "subject": { "reference": "Patient/pat-liam" },
+        "period": { "start": "2002-03-15" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-lova-4" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-lova-4",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-4-PresenceOfImplantFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A4",
+                "display": "Presence of implant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "43252007",
+              "display": "kokleaimplantat"
+            }
+          ],
+          "text": "Kokleaimplantat"
+        },
+        "subject": { "reference": "Patient/pat-lova" },
+        "period": { "start": "2017-05-09" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-gunnar-2" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-gunnar-2",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-2-TreatmentFlag"
+          ]
+        },
+        "status": "inactive",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A2",
+                "display": "Treatment"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.whocc.no/atc",
+              "code": "B01AA03",
+              "display": "Warfarin"
+            }
+          ],
+          "text": "Warfarin (avslutad efter byte till DOAK)"
+        },
+        "subject": { "reference": "Patient/pat-gunnar" },
+        "period": { "start": "2011-01-04", "end": "2024-09-12" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-gunnar-3" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-gunnar-3",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-3-PresenceOfGraftsConditionFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "A3",
+                "display": "Presence of transplant"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "737297006",
+              "display": "transplanterad lever föreligger"
+            }
+          ],
+          "text": "Levertransplantation utförd"
+        },
+        "subject": { "reference": "Patient/pat-gunnar" },
+        "period": { "start": "2010-11-22" }
+      }
+    }
+  ]
+}

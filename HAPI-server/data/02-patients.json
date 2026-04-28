@@ -1,0 +1,347 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-patients",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:pat-tolvan",
+      "request": { "method": "PUT", "url": "Patient/pat-tolvan" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-tolvan",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "191212121212",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Tolvansson",
+            "given": ["Tolvan"],
+            "text": "Tolvan Tolvansson"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1912-12-12",
+        "address": [
+          { "use": "home", "city": "Stockholm", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-johnbob",
+      "request": { "method": "PUT", "url": "Patient/pat-johnbob" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-johnbob",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "195009072553",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Goode Johansson",
+            "given": ["John", "Bob"],
+            "text": "John Bob Goode Johansson"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1950-09-07",
+        "address": [
+          { "use": "home", "city": "Göteborg", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-berit",
+      "request": { "method": "PUT", "url": "Patient/pat-berit" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-berit",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "195401232380",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Andersson",
+            "given": ["Berit", "Fri"],
+            "text": "Berit Fri Andersson"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1954-01-23",
+        "address": [
+          { "use": "home", "city": "Malmö", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-karlerik",
+      "request": { "method": "PUT", "url": "Patient/pat-karlerik" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-karlerik",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "197109199289",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Sjöberg",
+            "given": ["Karl-Erik"],
+            "text": "Karl-Erik Sjöberg"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1971-09-19",
+        "address": [
+          { "use": "home", "city": "Uppsala", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-fatima",
+      "request": { "method": "PUT", "url": "Patient/pat-fatima" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-fatima",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "198405152364",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Al-Hassan",
+            "given": ["Fatima"],
+            "text": "Fatima Al-Hassan"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1984-05-15",
+        "address": [
+          { "use": "home", "city": "Linköping", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-astrid",
+      "request": { "method": "PUT", "url": "Patient/pat-astrid" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-astrid",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "199203049809",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Berg",
+            "given": ["Astrid"],
+            "text": "Astrid Berg"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1992-03-04",
+        "address": [
+          { "use": "home", "city": "Umeå", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-liam",
+      "request": { "method": "PUT", "url": "Patient/pat-liam" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-liam",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "200101012393",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Nordström",
+            "given": ["Liam"],
+            "text": "Liam Nordström"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "2001-01-01",
+        "address": [
+          { "use": "home", "city": "Lund", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-lova",
+      "request": { "method": "PUT", "url": "Patient/pat-lova" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-lova",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "201201013035",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Karlsson",
+            "given": ["Lova"],
+            "text": "Lova Karlsson"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "2012-01-01",
+        "address": [
+          { "use": "home", "city": "Örebro", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-gunnar",
+      "request": { "method": "PUT", "url": "Patient/pat-gunnar" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-gunnar",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "194506121518",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Lind",
+            "given": ["Gunnar"],
+            "text": "Gunnar Lind"
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1945-06-12",
+        "address": [
+          { "use": "home", "city": "Sundsvall", "country": "SE" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:pat-sara",
+      "request": { "method": "PUT", "url": "Patient/pat-sara" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-sara",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "value": "198808254736",
+            "use": "official"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Lindgren",
+            "given": ["Sara"],
+            "text": "Sara Lindgren"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1988-08-25",
+        "address": [
+          { "use": "home", "city": "Visby", "country": "SE" }
+        ]
+      }
+    }
+  ]
+}

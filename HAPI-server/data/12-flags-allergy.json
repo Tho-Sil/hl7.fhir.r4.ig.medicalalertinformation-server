@@ -1,0 +1,143 @@
+{
+  "resourceType": "Bundle",
+  "id": "se-alertinfo-flags-allergy",
+  "type": "transaction",
+  "entry": [
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-tolvan-7" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-tolvan-7",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-7-AllergyIntoleranceFlag"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/1",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCriticalityLevelCS",
+                  "code": "442452003",
+                  "display": "Life-threatening"
+                }
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "C1",
+                "display": "Hypersensitivity condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "111088007",
+              "display": "latex"
+            }
+          ],
+          "text": "Latex-allergi (livshotande)"
+        },
+        "subject": { "reference": "Patient/pat-tolvan" },
+        "period": { "start": "1995-06-01" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-fatima-7" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-fatima-7",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-7-AllergyIntoleranceFlag"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/1",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCriticalityLevelCS",
+                  "code": "59031000052109",
+                  "display": "Discomforting"
+                }
+              ]
+            }
+          }
+        ],
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "C1",
+                "display": "Hypersensitivity condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "373568007",
+              "display": "klorhexidin"
+            }
+          ],
+          "text": "Klorhexidin-överkänslighet (besvärande)"
+        },
+        "subject": { "reference": "Patient/pat-fatima" },
+        "period": { "start": "2019-08-30" }
+      }
+    },
+    {
+      "request": { "method": "PUT", "url": "Flag/flag-liam-7" },
+      "resource": {
+        "resourceType": "Flag",
+        "id": "flag-liam-7",
+        "meta": {
+          "profile": [
+            "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformation-7-AllergyIntoleranceFlag"
+          ]
+        },
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS",
+                "code": "C1",
+                "display": "Hypersensitivity condition"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "281000220103",
+              "display": "taurolidin"
+            }
+          ],
+          "text": "Taurolidin-överkänslighet"
+        },
+        "subject": { "reference": "Patient/pat-liam" },
+        "period": { "start": "2020-12-04" }
+      }
+    }
+  ]
+}
