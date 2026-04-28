@@ -15,9 +15,10 @@ Description: "Indicates a hypersensitivity to a specific chemical, active substa
 * extension[criticalityLevel] 0..0
 
 ValueSet: SEAlertInformationChemicalAllergySnomedVS
-Id: 59871000052102
 // Title: "Urval kemikalieöverkänsligheter, uppmärksamhetsinformation"
 Title: "Selection of chemical allergies, alert information"
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59871000052102"
 * include $SCT#373568007 "klorhexidin"
 * include $SCT#111088007 "latex"
 * include $SCT#281000220103 "taurolidin"

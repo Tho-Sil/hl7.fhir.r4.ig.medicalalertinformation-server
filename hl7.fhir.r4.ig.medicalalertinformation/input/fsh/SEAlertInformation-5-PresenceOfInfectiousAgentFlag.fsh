@@ -35,11 +35,12 @@ Description: "ICD-10 codes for presence of infectious agent."
 * include $ICD#Z22.8 "Barare av andra infektionssjukdomar"
 
 ValueSet: SESCTInfectiousAgentAlertInformationVS
-Id: 59851000052108
 // Title: "Urval smittämnen, uppmärksamhetsinformation"
 Title: "Selection of Infectious Agents, Alert Information"
 // Description: "Snomed CT-koder för smittämnen som används för uppmärksamhetsinformation."
 Description: "Snomed CT codes for infectious agents used for alert information."
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59851000052108"
 * include $SCT#432415000 "bärare av meticillinresistent Staphylococcus aureus"
 * include $SCT#431109006 "bärare av vankomycinresistenta enterokocker"
 * include $SCT#762988003 "bärare av ESBL-producerande bakterier"

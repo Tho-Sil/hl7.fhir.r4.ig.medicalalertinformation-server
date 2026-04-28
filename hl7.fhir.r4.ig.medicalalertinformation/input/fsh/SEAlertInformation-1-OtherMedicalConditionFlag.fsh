@@ -27,9 +27,10 @@ Description: "An example of the Swedish profile of the Flag resource."
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationMedicalConditionSnomedVS
-Id: 59821000052101
 Title: "Subset of medical conditions (attention information)"
 // Title: "Urval medicinska tillstånd, uppmärksamhetsinformation"
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59821000052101"
 * include $SCT#41291007 "angioödem"
 * include $SCT#9651007 "långt QT-syndrom"
 * include $SCT#70995007 "pulmonell hypertoni"

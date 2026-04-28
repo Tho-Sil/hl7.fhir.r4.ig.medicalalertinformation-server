@@ -39,9 +39,10 @@ Title: "Drug Product ICD-10-SE"
 * include $ICD#Z79.89 "Långtidsanvändning av andra specificerade läkemedel"
 
 ValueSet: SEAlertInformationDrugProductSnomedVS
-Id: 59841000052103
 //Title: "Urval läkemedel, uppmärksamhetsinformation"
 Title: "Subset of drug products (attention information)"
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59841000052103"
 * include $SCT#76300000052101 "opioidbehandling"
 * include $SCT#41980000052107 "antikoagulantia"
 

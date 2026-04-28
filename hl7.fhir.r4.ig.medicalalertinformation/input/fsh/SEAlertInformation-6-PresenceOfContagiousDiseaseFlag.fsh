@@ -25,11 +25,12 @@ Description: "Example of alert signal for presence of contagious disease"
 * subject = Reference(SEAlertInformationPatientExample)
 
 ValueSet: SEAlertInformationPresenceOfContagiousDiseaseSnomedCT
-Id: 60661000052106
 // Title: "Urval smittsamma sjukdomar, uppmärksamhetsinformation"
 Title: "Selection of contagious diseases, alert information"
 // Description: "Urval av Snomed CT koder relaterade till smittsamma sjukdomar."
 Description: "Selection of Snomed CT codes related to contagious diseases."
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "60661000052106"
 * include $SCT#64301000052105 "blodsmitta hos gravid"
 
 Mapping:  SEAlertInformation-6-PresenceOfContagiousDiseaseFlagToUMI

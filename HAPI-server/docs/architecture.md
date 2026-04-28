@@ -90,10 +90,6 @@ så fort IG-paketet laddas — utan att data behöver återladdas.
 
 ## Kända begränsningar
 
-- **`CriticalityLevelExtension` har URL `…/StructureDefinition/1`**
-  enligt FSH-källan (`Id: 1`). Datat följer det. Vid en framtida
-  städ-PR i IG:n bör id:t bytas till t.ex.
-  `criticality-level`.
 - **Profil 7 (Allergy) tillåter formellt inte `criticalityLevel`**
   (`extension[criticalityLevel] 0..0` i FSH:n) trots att exemplen
   refererar till allvarlighetsgrad. Demodatat lägger med

@@ -38,8 +38,9 @@ Title: "Presence of grafts ICD-10-SE"
 * include $ICD#Z94.8 "Andra specificerade transplantationstillstand"
 
 ValueSet: SEAlertInformationPresenceOfGraftsConditionSnomedVS
-Id: 59861000052106
 Title: "Selection of grafts, attention information"
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59861000052106"
 * include $SCT#739024006 "transplanterat hjarta foreligger"
 
 Mapping:  SEAlertInformation-3-PresenceOfGraftsConditionFlagToUMI

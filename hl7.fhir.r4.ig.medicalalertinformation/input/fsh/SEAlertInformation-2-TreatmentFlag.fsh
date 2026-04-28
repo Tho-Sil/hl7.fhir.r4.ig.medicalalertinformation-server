@@ -45,9 +45,10 @@ Title: "Treatment - ICD-10-SE"
 * include $ICD#Z99.2 "Beroende av njurdialys"
 
 ValueSet: SEAlertInformationTreatmentSnomedVS
-Id: 59831000052104
 Title: "Subset of treatments, attention information"
 //Title: "Urval behandlingar, uppmärksamhetsinformation"
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59831000052104"
 * include $SCT#243142003 "BiPAP-behandling"
 * include $SCT#385971003 "dialysbehandling"
 

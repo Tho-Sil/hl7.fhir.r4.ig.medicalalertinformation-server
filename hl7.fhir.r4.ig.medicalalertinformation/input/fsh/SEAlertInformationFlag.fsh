@@ -38,7 +38,6 @@ Description: "An example of the Swedish profile of the Flag resource."
 
 //CriticalityLevel
 Extension: CriticalityLevelExtension
-Id: 1
 // Title:  "SE AlertInformation Flag Criticality Level Extension"
 Title:  "SE AlertInformation Flag Criticality Level Extension"
 // Description: "En kod som klassificerar allvarlighetsgraden för en överkänslighet."
@@ -57,7 +56,6 @@ Context: SEAlertInformationFlag
 // VerificationStatusExtension
 
 ValueSet: SEAlertInformationVS
-Id: 1
 // Title: "Uppmärksamhetsinformation"
 Title: "Alert Information"
 // Description: "Koder som används för uppmärksamhetsinformation."

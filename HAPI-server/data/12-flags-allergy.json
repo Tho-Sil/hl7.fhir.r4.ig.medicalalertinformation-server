@@ -15,7 +15,7 @@
         },
         "extension": [
           {
-            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/1",
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/CriticalityLevelExtension",
             "valueCodeableConcept": {
               "coding": [
                 {
@@ -65,7 +65,7 @@
         },
         "extension": [
           {
-            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/1",
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/CriticalityLevelExtension",
             "valueCodeableConcept": {
               "coding": [
                 {

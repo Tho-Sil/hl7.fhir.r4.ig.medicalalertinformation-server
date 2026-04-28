@@ -20,12 +20,13 @@ Description: "An example of the Swedish profile for the observation of incidence
 * subject = Reference(SEAlertInformationPatientExample) "Patient example"
 
 ValueSet: SESCTInfectiousDiseaseAlertInformationVS
-Id: 59861000052107
 // Title: "Urval smittsamma sjukdomar, uppmärksamhetsinformation"
 Title: "Selection of infectious diseases, alert information"
 // Description: "Koder i Snomed CT som representerar smittsamma sjukdomar som används för uppmärksamhetsinformation."
 Description: "Codes in Snomed CT representing infectious diseases used for alert information."
 // url, status, purpose, and other metadata could be defined here using caret syntax (omitted)
+* ^identifier.system = "http://snomed.info/sct"
+* ^identifier.value = "59861000052107"
 * include $SCT#64301000052105 "blodsmitta hos gravid"
 
 ValueSet: SEICDIncidenceOfInfectiousDiseaseVS
