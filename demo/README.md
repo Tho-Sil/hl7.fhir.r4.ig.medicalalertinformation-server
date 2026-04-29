@@ -7,7 +7,18 @@ det skulle presenteras i ett journal­system eller i NPÖ.
 
 ## Snabbstart
 
-Servern måste köra och vara laddad med data:
+Default pekar på den publika demoservern `https://umi.infopeak.se/fhir`,
+så portalen fungerar direkt utan egen HAPI igång:
+
+```bash
+cd demo
+python3 -m http.server 8000
+# öppna http://localhost:8000
+```
+
+Vill du köra mot en lokal HAPI istället: starta servern och ladda data,
+ändra sen FHIR-bas-fältet uppe till höger till `http://localhost:8080/fhir`
+(värdet sparas i localStorage):
 
 ```bash
 cd ../HAPI-server
@@ -15,17 +26,7 @@ docker compose up -d
 ./scripts/load-data.sh
 ```
 
-Sen, från `demo/`:
-
-```bash
-python3 -m http.server 8000
-# öppna http://localhost:8000
-```
-
-(eller vilken statisk filserver som helst — det är bara HTML/CSS/JS).
-
-Justera FHIR-bas i fältet uppe till höger om servern inte ligger på
-`http://localhost:8080/fhir`.
+Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
 
 ## Innehåll
 

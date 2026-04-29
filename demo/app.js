@@ -40,8 +40,10 @@ const CRITICALITY = {
   "low": { label: "Låg", cls: "discomforting" },
 };
 
+const DEFAULT_BASE = "https://umi.infopeak.se/fhir";
+
 let state = {
-  base: localStorage.getItem("fhirBase") || "http://localhost:8080/fhir",
+  base: localStorage.getItem("fhirBase") || DEFAULT_BASE,
   patients: [],
   flagsByPatient: new Map(),
   selectedPatientId: null,
