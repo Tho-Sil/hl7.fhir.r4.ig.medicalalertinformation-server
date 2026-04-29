@@ -243,7 +243,7 @@ main {
 }
 .alert-symbol-mini {
   width: 26px;
-  height: 32px;
+  height: 36px;
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -287,8 +287,8 @@ main {
   gap: 4px;
 }
 .alert-symbol {
-  width: 84px;
-  height: 100px;
+  width: 88px;
+  height: 120px;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.12));
 }
 .alert-symbol-cap {
