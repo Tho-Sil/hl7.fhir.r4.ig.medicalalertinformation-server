@@ -300,35 +300,30 @@ function renderAlertSymbol(flags) {
   const tooltip = activeAreas(cats, allergySeverity);
 
   return `<div class="alert-symbol-wrap" title="${escapeHtml(tooltip)}">
-    <svg viewBox="0 0 110 150" class="alert-symbol" aria-label="Uppmärksamhetssymbol">
-      <!-- Top: 3-step allergy severity column (resembles thermometer) -->
-      <g stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round">
-        <rect x="46" y="5"  width="18" height="12" rx="2" fill="${aTop}"/>
-        <rect x="46" y="19" width="18" height="12" rx="2" fill="${aMid}"/>
-        <rect x="46" y="33" width="18" height="12" rx="2" fill="${aBot}"/>
-      </g>
+    <svg viewBox="0 0 90 110" class="alert-symbol" aria-label="Uppmärksamhetssymbol">
+      <!-- Top column: allergy severity (3 stacked dots) -->
+      <rect x="38" y="3"  width="14" height="10" rx="3" fill="${aTop}" stroke="#374151" stroke-width="1.2"/>
+      <rect x="38" y="15" width="14" height="10" rx="3" fill="${aMid}" stroke="#374151" stroke-width="1.2"/>
+      <rect x="38" y="27" width="14" height="10" rx="3" fill="${aBot}" stroke="#374151" stroke-width="1.2"/>
 
-      <!-- Four diagonal wings, each pointing outward at 45° -->
-      <g stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round">
-        <!-- NW: Ej strukturanpassad -->
-        <path d="M 32 58 L 14 42 L 4 56 L 24 74 Z" fill="${cUnstr}"/>
-        <!-- NE: Medicinskt tillstånd och behandling -->
-        <path d="M 78 58 L 96 42 L 106 56 L 86 74 Z" fill="${cMedical}"/>
-        <!-- SW: Smitta -->
-        <path d="M 24 86 L 4 104 L 14 118 L 32 102 Z" fill="${cInfection}"/>
-        <!-- SE: Vårdrutinavvikelse -->
-        <path d="M 86 86 L 106 104 L 96 118 L 78 102 Z" fill="${cCare}"/>
-      </g>
+      <!-- Upper-left: ej strukturanpassad -->
+      <polygon points="6,46 26,40 30,52 22,58 6,58" fill="${cUnstr}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Upper-right: medicinskt tillstånd och behandling -->
+      <polygon points="84,46 64,40 60,52 68,58 84,58" fill="${cMedical}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Lower-left: smitta -->
+      <polygon points="6,77 26,83 30,71 22,65 6,65" fill="${cInfection}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Lower-right: vårdrutinavvikelse -->
+      <polygon points="84,77 64,83 60,71 68,65 84,65" fill="${cCare}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
 
-      <!-- Central body: rounded rectangle that surrounds the glyph -->
-      <rect x="35" y="49" width="40" height="62" rx="8" fill="white" stroke="#1f2937" stroke-width="2"/>
+      <!-- Bottom: pedestal/foot -->
+      <rect x="35" y="92" width="20" height="10" rx="3" fill="white" stroke="#374151" stroke-width="1.2"/>
 
-      <!-- Foot / pedestal -->
-      <rect x="42" y="119" width="26" height="14" rx="2" fill="white" stroke="#1f2937" stroke-width="1.6"/>
+      <!-- Central body -->
+      <circle cx="45" cy="61" r="14" fill="white" stroke="#374151" stroke-width="1.4"/>
 
-      <!-- Lightning bar + dot (the alert glyph itself) -->
-      <rect x="51" y="60" width="8" height="26" rx="2" fill="#1f2937"/>
-      <circle cx="55" cy="98" r="4.5" fill="#1f2937"/>
+      <!-- Lightning + period (uppmärksamhetssignal-glyph) -->
+      <rect x="42.5" y="50" width="5" height="13" rx="1.5" fill="#1f2937"/>
+      <circle cx="45" cy="69" r="2.4" fill="#1f2937"/>
     </svg>
     ${activeAreasLabel(cats, allergySeverity)}
   </div>`;
@@ -357,20 +352,18 @@ function renderAlertSymbolMini(flags) {
   const OFF = "#e5e7eb";
   const sev = SR[allergySeverity] || 0;
 
-  return `<svg class="alert-symbol-mini" viewBox="0 0 110 150" aria-hidden="true">
-    <g stroke="#1f2937" stroke-width="1.6" stroke-linejoin="round">
-      <rect x="46" y="5"  width="18" height="12" rx="2" fill="${sev>=3 ? "#c11616" : OFF}"/>
-      <rect x="46" y="19" width="18" height="12" rx="2" fill="${sev>=2 ? "#c11616" : OFF}"/>
-      <rect x="46" y="33" width="18" height="12" rx="2" fill="${sev>=1 ? "#c11616" : OFF}"/>
-      <path d="M 32 58 L 14 42 L 4 56 L 24 74 Z" fill="${has("E") ? "#c14516" : OFF}"/>
-      <path d="M 78 58 L 96 42 L 106 56 L 86 74 Z" fill="${has("A") ? "#1f5f9e" : OFF}"/>
-      <path d="M 24 86 L 4 104 L 14 118 L 32 102 Z" fill="${has("B") ? "#f5b800" : OFF}"/>
-      <path d="M 86 86 L 106 104 L 96 118 L 78 102 Z" fill="${has("D") ? "#2563b3" : OFF}"/>
-    </g>
-    <rect x="35" y="49" width="40" height="62" rx="8" fill="white" stroke="#1f2937" stroke-width="2"/>
-    <rect x="42" y="119" width="26" height="14" rx="2" fill="white" stroke="#1f2937" stroke-width="1.6"/>
-    <rect x="51" y="60" width="8" height="26" rx="2" fill="#1f2937"/>
-    <circle cx="55" cy="98" r="4.5" fill="#1f2937"/>
+  return `<svg class="alert-symbol-mini" viewBox="0 0 90 110" aria-hidden="true">
+    <rect x="38" y="3"  width="14" height="10" rx="3" fill="${sev>=3 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <rect x="38" y="15" width="14" height="10" rx="3" fill="${sev>=2 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <rect x="38" y="27" width="14" height="10" rx="3" fill="${sev>=1 ? "#c11616" : OFF}" stroke="#374151" stroke-width="1.2"/>
+    <polygon points="6,46 26,40 30,52 22,58 6,58" fill="${has("E") ? "#c14516" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="84,46 64,40 60,52 68,58 84,58" fill="${has("A") ? "#1f5f9e" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="6,77 26,83 30,71 22,65 6,65" fill="${has("B") ? "#f5b800" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <polygon points="84,77 64,83 60,71 68,65 84,65" fill="${has("D") ? "#2563b3" : OFF}" stroke="#374151" stroke-width="1.2" stroke-linejoin="round"/>
+    <rect x="35" y="92" width="20" height="10" rx="3" fill="white" stroke="#374151" stroke-width="1.2"/>
+    <circle cx="45" cy="61" r="14" fill="white" stroke="#374151" stroke-width="1.4"/>
+    <rect x="42.5" y="50" width="5" height="13" rx="1.5" fill="#1f2937"/>
+    <circle cx="45" cy="69" r="2.4" fill="#1f2937"/>
   </svg>`;
 }
 
