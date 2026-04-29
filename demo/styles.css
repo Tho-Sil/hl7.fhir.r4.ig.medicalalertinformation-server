@@ -241,12 +241,6 @@ main {
   color: var(--text-subtle);
   font-family: var(--mono);
 }
-.alert-symbol-mini {
-  width: 26px;
-  height: 32px;
-  margin-left: auto;
-  flex-shrink: 0;
-}
 .patient-card-flagcount {
   background: var(--critical);
   color: white;
@@ -254,6 +248,7 @@ main {
   font-weight: 600;
   padding: 2px 7px;
   border-radius: 10px;
+  margin-left: auto;
 }
 .patient-card-flagcount.zero { background: var(--text-subtle); }
 
@@ -277,26 +272,6 @@ main {
   display: flex;
   align-items: center;
   gap: 20px;
-}
-
-.alert-symbol-wrap {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-.alert-symbol {
-  width: 84px;
-  height: 100px;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,.12));
-}
-.alert-symbol-cap {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .04em;
 }
 .patient-header-avatar {
   width: 64px;
@@ -511,24 +486,6 @@ main {
 }
 
 .profile-table { margin-bottom: 32px; }
-
-.symbol-legend {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 28px;
-  display: grid;
-  gap: 6px;
-}
-.symbol-legend li { display: flex; align-items: center; gap: 10px; font-size: 13px; }
-.symbol-legend .dot {
-  width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
-  border: 1px solid #374151;
-}
-.symbol-legend .c-C { background: #c11616; }
-.symbol-legend .c-A { background: #1f5f9e; }
-.symbol-legend .c-B { background: #f5b800; }
-.symbol-legend .c-D { background: #2563b3; }
-.symbol-legend .c-E { background: #c14516; }
 
 .patient-doc {
   margin-top: 28px;
