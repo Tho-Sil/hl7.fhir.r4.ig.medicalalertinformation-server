@@ -157,12 +157,14 @@ function renderPatientList() {
     const activeCount = flags.filter(f => f.status === "active").length;
     const initials = name.split(" ").filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
     const sel = id === state.selectedPatientId ? " selected" : "";
+    const mini = renderAlertSymbolMini(flags);
     return `<div class="patient-card${sel}" data-id="${id}">
       <div class="patient-avatar ${gender[0] || ""}">${escapeHtml(initials)}</div>
       <div class="patient-card-info">
         <div class="patient-card-name">${escapeHtml(name)}</div>
         <div class="patient-card-meta">${formatPnr(pnr)}</div>
       </div>
+      ${mini}
       <span class="patient-card-flagcount${activeCount === 0 ? " zero" : ""}">${activeCount}</span>
     </div>`;
   }).join("");
@@ -196,6 +198,7 @@ function renderPatientDetail(id) {
     return (a.category?.[0]?.coding?.[0]?.code || "").localeCompare(b.category?.[0]?.coding?.[0]?.code || "");
   });
   const activeCount = flags.filter(f => f.status === "active").length;
+  const symbol = renderAlertSymbol(flags);
 
   const header = `
     <div class="patient-header">
@@ -209,6 +212,7 @@ function renderPatientDetail(id) {
           <span>${birthDate ? "född " + birthDate : ""}</span>
         </div>
       </div>
+      ${symbol}
     </div>`;
 
   const banner = activeCount > 0
@@ -249,6 +253,124 @@ function renderPatientDetail(id) {
 
   detail.innerHTML = header + banner + (groups || `
     <div class="empty-state"><p>Inga uppmärksamhetssignaler för denna patient.</p></div>`);
+}
+
+/* ── Uppmärksamhetssymbol ─────────────────────────────────
+ * Geometry from oskthu2/uppmarksamhetssymbol (CC0).
+ * Field codes:
+ *   1 = top bar   |  0 = horizontal stripes  |  4 = bottom dot
+ *   2 = NE wedge  |  3 = SE wedge
+ *   5 = SW wedge  |  6 = NW wedge
+ * Mapping to alert categories:
+ *   C1 allergy   → 1 (livshotande) | 0 (skadlig) | 4 (besvärande)
+ *   A* medical   → 2 (NE)
+ *   B* infection → 5 (SW)
+ *   D* careroute → 3 (SE)
+ *   E* unstrukt. → 6 (NW)
+ * ────────────────────────────────────────────────────────── */
+const UMI_SVG = {
+  outlineOuter: "M 1627 991 L 2010 1204 L 1718 1733 L 1333 1519 L 1333 1983 L 677 1983 L 677 1519 L 292 1733 L 0 1204 L 383 991 L 0 778 L 292 248 L 677 463 L 677 0 L 1333 0 L 1333 463 L 1718 249 L 2010 778 Z",
+  outlineInner: "M 1556 991 L 1964 764 L 1704 295 L 1299 520 L 1299 34 L 711 34 L 711 520 L 305 295 L 46 764 L 453 991 L 46 1218 L 305 1687 L 711 1461 L 711 1949 L 1299 1949 L 1299 1461 L 1704 1687 L 1964 1217 Z",
+  fields: {
+    "1": "M 736 60 L 1274 60 L 1274 740 L 736 740 Z",
+    "0": "M 736 820 L 1274 820 L 1274 890 L 736 890 Z M 736 950 L 1274 950 L 1274 1020 L 736 1020 Z M 736 1080 L 1274 1080 L 1274 1150 L 736 1150 Z M 736 1210 L 1274 1210 L 1274 1280 L 736 1280 Z",
+    "4": "M 740 1640 a 265 265 0 1 0 530 0 a 265 265 0 1 0 -530 0 Z",
+    "2": "M 1310 545 L 1680 340 L 1920 770 L 1530 970 L 1310 880 Z",
+    "3": "M 1530 1012 L 1920 1212 L 1680 1642 L 1310 1437 L 1310 1102 Z",
+    "5": "M 480 1012 L 90 1212 L 330 1642 L 700 1437 L 700 1102 Z",
+    "6": "M 700 545 L 330 340 L 90 770 L 480 970 L 700 880 Z",
+  },
+  colors: {
+    "0": "#B60606", "1": "#B60606", "4": "#FA7070",
+    "2": "#B60606", "3": "#05598A", "5": "#E1A100", "6": "#B60606",
+  },
+  off: "#ffffff",
+  outline: "#1a1a1a",
+};
+
+function umiActiveFields(flags) {
+  const active = flags.filter(f => f.status === "active");
+  const fields = new Set();
+  let allergySev = null;
+  const SR = { "life-threatening": 3, "harmful": 2, "discomforting": 1 };
+
+  for (const f of active) {
+    const code = f.category?.[0]?.coding?.find(c => c.system === CATEGORY_CS)?.code
+              || f.category?.[0]?.coding?.[0]?.code;
+    if (!code) continue;
+    if (code.startsWith("A")) fields.add("2");
+    else if (code.startsWith("B")) fields.add("5");
+    else if (code.startsWith("D")) fields.add("3");
+    else if (code.startsWith("E")) fields.add("6");
+    else if (code === "C1") {
+      const ext = (f.extension || []).find(e => e.url === CRIT_LEVEL_EXT);
+      const cc = ext?.valueCodeableConcept?.coding?.[0]?.code;
+      const sev = CRITICALITY[cc]?.cls;
+      if (sev && (!allergySev || SR[sev] > SR[allergySev])) allergySev = sev;
+    }
+  }
+  if ([...active].some(f => (f.category?.[0]?.coding?.find(c => c.system === CATEGORY_CS)?.code) === "C1") && !allergySev) {
+    allergySev = "discomforting";
+  }
+  if (allergySev === "life-threatening") fields.add("1");
+  else if (allergySev === "harmful") fields.add("0");
+  else if (allergySev === "discomforting") fields.add("4");
+
+  return { fields, allergySev };
+}
+
+function umiSvg(activeFields, opts = {}) {
+  const cls = opts.className || "alert-symbol";
+  const aria = opts.ariaLabel || "Uppmärksamhetssignal";
+  const off = opts.off || UMI_SVG.off;
+  const fieldsHtml = Object.keys(UMI_SVG.fields).map(code => {
+    const fill = activeFields.has(code) ? UMI_SVG.colors[code] : off;
+    return `<path d="${UMI_SVG.fields[code]}" fill="${fill}" data-field="${code}"/>`;
+  }).join("");
+  // Outline: outer minus inner via evenodd
+  return `<svg class="${cls}" viewBox="0 0 2010 1983" xmlns="http://www.w3.org/2000/svg" aria-label="${aria}">
+    <path d="${UMI_SVG.outlineInner}" fill="#ffffff"/>
+    ${fieldsHtml}
+    <path d="${UMI_SVG.outlineOuter} ${UMI_SVG.outlineInner}" fill="${UMI_SVG.outline}" fill-rule="evenodd"/>
+  </svg>`;
+}
+
+function renderAlertSymbol(flags) {
+  const { fields, allergySev } = umiActiveFields(flags);
+  const tooltip = umiTooltip(fields, allergySev);
+  const caption = umiCaption(fields, allergySev);
+  return `<div class="alert-symbol-wrap" title="${escapeHtml(tooltip)}">
+    ${umiSvg(fields)}
+    ${caption}
+  </div>`;
+}
+
+function renderAlertSymbolMini(flags) {
+  const { fields } = umiActiveFields(flags);
+  return umiSvg(fields, { className: "alert-symbol-mini", ariaLabel: "" });
+}
+
+function umiTooltip(fields, allergySev) {
+  const parts = [];
+  if (allergySev) {
+    const label = ({ "life-threatening": "livshotande", "harmful": "skadlig", "discomforting": "besvärande" })[allergySev];
+    parts.push(`Överkänslighet (${label})`);
+  }
+  if (fields.has("2")) parts.push("Medicinskt tillstånd och behandling");
+  if (fields.has("5")) parts.push("Smitta");
+  if (fields.has("3")) parts.push("Vårdrutinavvikelse");
+  if (fields.has("6")) parts.push("Ej strukturanpassad uppmärksamhetsinformation");
+  return parts.length
+    ? "Aktiva signaler: " + parts.join(" · ")
+    : "Ingen aktuell uppmärksamhetsinformation";
+}
+
+function umiCaption(fields, allergySev) {
+  if (fields.size === 0) return `<div class="alert-symbol-cap">Ingen UMI</div>`;
+  const sev = allergySev
+    ? ({ "life-threatening": "Livshotande", "harmful": "Skadlig", "discomforting": "Besvärande" })[allergySev]
+    : null;
+  return sev ? `<div class="alert-symbol-cap">${sev} överkänslighet</div>` : "";
 }
 
 function renderFlag(flag) {

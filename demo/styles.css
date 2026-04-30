@@ -248,7 +248,6 @@ main {
   font-weight: 600;
   padding: 2px 7px;
   border-radius: 10px;
-  margin-left: auto;
 }
 .patient-card-flagcount.zero { background: var(--text-subtle); }
 
@@ -299,6 +298,33 @@ main {
   font-size: 13px;
 }
 .patient-header-meta .pnr { font-family: var(--mono); font-weight: 500; color: var(--text); }
+
+.alert-symbol-wrap {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.alert-symbol {
+  width: 84px;
+  height: 83px;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.12));
+}
+.alert-symbol-cap {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-align: center;
+}
+.alert-symbol-mini {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
 
 .alert-banner {
   background: linear-gradient(90deg, var(--critical-soft), #fdf3e1);
