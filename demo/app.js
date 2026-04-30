@@ -170,7 +170,7 @@ const TRANSLATIONS = {
     api_searchparams_d: "Vilka sökparametrar stöds av servern för Flag-resursen?",
 
     about_h1: "Om demoportalen",
-    about_intro: "Den här portalen är en del av <code>hl7.fhir.r4.ig.medicalalertinformation-server</code> — en demonstrationsmiljö för den svenska FHIR Implementation Guide:n för uppmärksamhetsinformation. Den visualiserar data från en lokalt körande HAPI FHIR-server.",
+    about_intro: "Den här portalen är en demonstrationsmiljö för den svenska FHIR Implementation Guide:n för uppmärksamhetsinformation. Den visualiserar data från en HAPI FHIR-server.",
 
     disclaimer_h2: "Friskrivning",
     disclaimer_li1: "<strong>Demomiljö, inte produktion.</strong> All patientdata är fiktiv och påhittad för demosyften. Personnummer och namn motsvarar inte verkliga personer.",
@@ -182,8 +182,6 @@ const TRANSLATIONS = {
     about_alert_p: "Uppmärksamhetsinformation är data om patientens särskilda behov, risker eller förhållanden som vården behöver känna till. Den gör vården säkrare genom att lyfta fram information som annars riskerar att missas — överkänslighet, smitta, implantat, transplantat, sällsynta diagnoser, pågående behandlingar med särskilda hänsyn, och beslut om särskilda vårdrutiner.",
     about_profile_h2: "Profilstruktur",
     about_profile_p: "FHIR-resursen <code>Flag</code> bär uppmärksamhetssignalen. Tio specialiserade profiler representerar de tio typerna i Socialstyrelsens informationsspecifikation. Vissa har tillhörande <code>Observation</code>-resurser med detaljerad klinisk information.",
-    about_source_h2: "Källkod",
-    about_source_p: "Repot finns på <a href=\"https://github.com/Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server\" target=\"_blank\" rel=\"noopener\">GitHub</a>.",
     about_contact_h2: "Kontakt",
     about_contact_p: "Frågor om IG:n: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, projektledare för arbetsgruppen för uppmärksamhetsinformation.",
   },
@@ -314,7 +312,7 @@ const TRANSLATIONS = {
     api_searchparams_d: "Which search parameters does the server support for the Flag resource?",
 
     about_h1: "About the demo portal",
-    about_intro: "This portal is part of <code>hl7.fhir.r4.ig.medicalalertinformation-server</code> — a demonstration environment for the Swedish FHIR Implementation Guide for alert information (uppmärksamhetsinformation). It visualises data from a locally running HAPI FHIR server.",
+    about_intro: "This portal is a demonstration environment for the Swedish FHIR Implementation Guide for alert information (uppmärksamhetsinformation). It visualises data from a HAPI FHIR server.",
 
     disclaimer_h2: "Disclaimer",
     disclaimer_li1: "<strong>Demo environment, not production.</strong> All patient data is fictional, fabricated for demonstration. The identity numbers and names do not correspond to real persons.",
@@ -326,8 +324,6 @@ const TRANSLATIONS = {
     about_alert_p: "Alert information represents data about a patient's special needs, risks, or circumstances that healthcare needs to be aware of. It makes care safer by surfacing information that would otherwise risk being missed — hypersensitivity, infection, implants, transplants, rare diagnoses, ongoing treatments requiring special precautions, and decisions about special care routines.",
     about_profile_h2: "Profile structure",
     about_profile_p: "The FHIR <code>Flag</code> resource carries the alert signal. Ten specialised profiles represent the ten types in the Swedish National Board of Health and Welfare's information specification. Some have associated <code>Observation</code> resources with detailed clinical content.",
-    about_source_h2: "Source code",
-    about_source_p: "The repository is on <a href=\"https://github.com/Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server\" target=\"_blank\" rel=\"noopener\">GitHub</a>.",
     about_contact_h2: "Contact",
     about_contact_p: "Questions about the IG: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, project manager for the alert information working group.",
   },
