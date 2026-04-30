@@ -312,14 +312,6 @@ main {
   height: 83px;
   filter: drop-shadow(0 1px 1px rgba(0,0,0,.12));
 }
-.alert-symbol-cap {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  text-align: center;
-}
 .alert-symbol-mini {
   width: 28px;
   height: 28px;

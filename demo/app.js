@@ -338,10 +338,8 @@ function umiSvg(activeFields, opts = {}) {
 function renderAlertSymbol(flags) {
   const { fields, allergySev } = umiActiveFields(flags);
   const tooltip = umiTooltip(fields, allergySev);
-  const caption = umiCaption(fields, allergySev);
   return `<div class="alert-symbol-wrap" title="${escapeHtml(tooltip)}">
     ${umiSvg(fields)}
-    ${caption}
   </div>`;
 }
 
@@ -363,14 +361,6 @@ function umiTooltip(fields, allergySev) {
   return parts.length
     ? "Aktiva signaler: " + parts.join(" · ")
     : "Ingen aktuell uppmärksamhetsinformation";
-}
-
-function umiCaption(fields, allergySev) {
-  if (fields.size === 0) return `<div class="alert-symbol-cap">Ingen UMI</div>`;
-  const sev = allergySev
-    ? ({ "life-threatening": "Livshotande", "harmful": "Skadlig", "discomforting": "Besvärande" })[allergySev]
-    : null;
-  return sev ? `<div class="alert-symbol-cap">${sev} överkänslighet</div>` : "";
 }
 
 function renderFlag(flag) {
