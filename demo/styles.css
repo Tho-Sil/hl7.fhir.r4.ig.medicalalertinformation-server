@@ -505,6 +505,18 @@ main {
 
 .profile-table { margin-bottom: 32px; }
 
+.disclaimer {
+  background: var(--warning-soft);
+  border: 1px solid #e7d18a;
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  margin: 18px 0 28px;
+}
+.disclaimer h2 { margin-top: 6px; color: #6b4c0c; }
+.disclaimer ul { margin: 8px 0 4px; padding-left: 20px; }
+.disclaimer li { margin: 6px 0; color: var(--text); }
+
 .patient-doc {
   margin-top: 28px;
   border-top: 1px solid var(--border);

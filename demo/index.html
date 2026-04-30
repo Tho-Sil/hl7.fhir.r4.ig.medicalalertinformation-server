@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="banner" class="banner">
-    <strong>Demodata</strong> — påhittad uppmärksamhetsinformation för testpersoner. Inte verklig patientdata.
+    <strong>Demo</strong> — påhittad uppmärksamhetsinformation för testpersoner. Får inte användas för klinisk bedömning. Felaktigheter kan förekomma i såväl data, profiler som visualisering.
   </div>
 
   <header class="topbar">
@@ -106,6 +106,23 @@
         <p>Den här portalen är en del av <code>hl7.fhir.r4.ig.medicalalertinformation-server</code>
           — en demonstrations­miljö för den svenska FHIR Implementation Guide:n för
           uppmärksamhetsinformation. Den visualiserar data från en lokalt körande HAPI FHIR-server.</p>
+
+        <div class="disclaimer">
+          <h2>Friskrivning</h2>
+          <ul>
+            <li><strong>Demo­miljö, inte produktion.</strong> All patient­data är fiktiv och påhittad
+              för demo­syften. Personnummer och namn motsvarar inte verkliga personer.</li>
+            <li><strong>Får inte användas för klinisk bedömning</strong> eller som beslutsstöd i
+              vården. Det här är en hackathon-prototyp.</li>
+            <li><strong>Felaktigheter kan förekomma</strong> — i exempel­datat, i profilerna, i
+              kodverk och värdemängder, i FHIR-anropen samt i visualiseringen. IG:n är under
+              aktiv utveckling och inte publicerad i normativ form.</li>
+            <li><strong>Symbolen</strong> bygger på <a href="https://github.com/oskthu2/uppmarksamhetssymbol"
+              target="_blank" rel="noopener">oskthu2/uppmarksamhetssymbol</a> (CC0). Hur fält tänds
+              utifrån FHIR-data är vår tolkning och kan skilja sig från hur Inera/NPÖ visar
+              motsvarande information.</li>
+          </ul>
+        </div>
 
         <h2>Uppmärksamhetsinformation</h2>
         <p>Uppmärksamhets­information är data om patientens särskilda behov, risker eller
