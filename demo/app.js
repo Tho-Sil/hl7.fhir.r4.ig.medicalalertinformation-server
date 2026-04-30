@@ -312,8 +312,9 @@ function umiActiveFields(flags) {
   if ([...active].some(f => (f.category?.[0]?.coding?.find(c => c.system === CATEGORY_CS)?.code) === "C1") && !allergySev) {
     allergySev = "discomforting";
   }
-  if (allergySev === "life-threatening") fields.add("1");
-  else if (allergySev === "harmful") fields.add("0");
+  // Allergy severity is cumulative (matches oskthu2 convention: Signal.014 = livshotande)
+  if (allergySev === "life-threatening") { fields.add("1"); fields.add("0"); fields.add("4"); }
+  else if (allergySev === "harmful")     { fields.add("0"); fields.add("4"); }
   else if (allergySev === "discomforting") fields.add("4");
 
   return { fields, allergySev };
