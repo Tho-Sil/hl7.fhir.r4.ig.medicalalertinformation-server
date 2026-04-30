@@ -131,6 +131,31 @@ code, pre { font-family: var(--mono); }
   font-weight: 600;
 }
 
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg);
+}
+.lang-btn {
+  background: transparent;
+  border: 0;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  min-width: 36px;
+}
+.lang-btn:hover { background: var(--bg-sunken); color: var(--text); }
+.lang-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
 .server {
   display: flex;
   align-items: center;
@@ -504,6 +529,18 @@ main {
 }
 
 .profile-table { margin-bottom: 32px; }
+
+.disclaimer {
+  background: var(--warning-soft);
+  border: 1px solid #e7d18a;
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  margin: 18px 0 28px;
+}
+.disclaimer h2 { margin-top: 6px; color: #6b4c0c; }
+.disclaimer ul { margin: 8px 0 4px; padding-left: 20px; }
+.disclaimer li { margin: 6px 0; color: var(--text); }
 
 .patient-doc {
   margin-top: 28px;
