@@ -2,18 +2,16 @@
 
 Detta repo innehåller **HAPI-demoserver**, **exempeldata** och **demoportal**
 (`demo/`). **IG-källkoden (FSH)** ligger i syskon-repot
-[**`HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation`**](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)
-(samma överordnade katalog som detta repo), inte under denna katalog.
+`**[HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)`**
 
-1. **Syskon: [`HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation`](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)**
-   (lokalt: `../hl7.fhir.r4.ig.medicalalertinformation/`) — FHIR
+1. **Syskon: `[HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)`**
+  (lokalt: `../hl7.fhir.r4.ig.medicalalertinformation/`) — FHIR
    Implementation Guide för *uppmärksamhetsinformation*, baserad på
    Socialstyrelsens informationsspecifikation
    [https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/](https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/).
    Publiceras av HL7 Sverige.
-2. **`HAPI-server/`** — en förkonfigurerad HAPI FHIR-server (R4) med
-  exempeldata enligt profilerna i guiden, framtagen för hackathonet
-   under **Vitalis 2026**.
+2. `**HAPI-server/*`* — en förkonfigurerad HAPI FHIR-server (R4) med
+  exempeldata enligt profilerna i guiden.
 
 ## Snabbstart för servern
 
@@ -63,10 +61,11 @@ ladda profilerna och göra profilvalidering.
 ## Licens
 
 - **Programvara** i detta repo (HAPI-konfiguration, skript, demoportalens
-  HTML/CSS/JS m.m.) omfattas av **MIT-licensen** — se [LICENSE](LICENSE).
+HTML/CSS/JS m.m.) omfattas av **MIT-licensen** — se [LICENSE](LICENSE).
 - **Uppmärksamhetssymbolens geometri** i demoportalen hämtas från
-  [oskthu2/uppmarksamhetssymbol](https://github.com/oskthu2/uppmarksamhetssymbol)
-  och licensieras där enligt **CC0 1.0 Universell** (public domain dedication).
-  Se [NOTICE](NOTICE) för avgränsning mot vårt MIT-material och länk till CC0.
+[oskthu2/uppmarksamhetssymbol](https://github.com/oskthu2/uppmarksamhetssymbol)
+och licensieras där enligt **CC0 1.0 Universell** (public domain dedication).
+Se [NOTICE](NOTICE) för avgränsning mot vårt MIT-material och länk till CC0.
 - **FHIR Implementation Guide-paketet** (NPM/tgz från syskon-repot) kan ha
-  **egna** villkor — följ det som anges i det paketet vid återanvändning.
+**egna** villkor — följ det som anges i det paketet vid återanvändning.
+
