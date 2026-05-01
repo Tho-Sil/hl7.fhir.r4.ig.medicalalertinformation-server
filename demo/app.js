@@ -53,6 +53,7 @@ const TRANSLATIONS = {
 
     tab_patients: "Patienter",
     tab_overview: "Översikt",
+    tab_symbol: "Symbolen",
     tab_api: "API-exempel",
     tab_about: "Om",
 
@@ -185,6 +186,46 @@ const TRANSLATIONS = {
     about_profile_p: "FHIR-resursen <code>Flag</code> bär uppmärksamhetssignalen. Tio specialiserade profiler representerar de tio typerna i Socialstyrelsens informationsspecifikation. Vissa har tillhörande <code>Observation</code>-resurser med detaljerad klinisk information.",
     about_contact_h2: "Kontakt",
     about_contact_p: "Frågor om IG:n: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, projektledare för arbetsgruppen för uppmärksamhetsinformation.",
+
+    symbol_h1: "Symbolen, fält för fält",
+    symbol_intro: "Den nationella uppmärksamhetssymbolen består av sju fält. Varje fält tänds när motsvarande typ av uppmärksamhetsinformation finns aktiv på patienten. Hovra eller klicka på ett kort i listan — eller direkt på symbolen — så lyser rätt fält upp. Klicka igen för att avmarkera.",
+    symbol_show_all: "Lys upp alla fält",
+    symbol_show_all_active: "Återställ",
+    symbol_aria: "Interaktiv uppmärksamhetssymbol",
+    symbol_position_ne: "Övre höger fält",
+    symbol_position_se: "Nedre höger fält",
+    symbol_position_sw: "Nedre vänster fält",
+    symbol_position_nw: "Övre vänster fält",
+    symbol_position_center: "Centrumfälten (topp · ränder · punkt)",
+    symbol_position_top_bar: "Toppfältet",
+    symbol_position_stripes: "De horisontella ränderna",
+    symbol_position_dot: "Den nedre punkten",
+
+    symbol_card_a_title: "Medicinska tillstånd och behandlingar",
+    symbol_card_a_desc: "Tänds vid aktiva flaggor i kategorierna A1–A4: annat medicinskt tillstånd, behandling, transplantat, implantat.",
+    symbol_card_a_profiles: "A1 · A2 · A3 · A4",
+    symbol_card_b_title: "Smitta",
+    symbol_card_b_desc: "Tänds vid aktiva flaggor i kategorierna B1–B2: smittämne eller smittsam sjukdom.",
+    symbol_card_b_profiles: "B1 · B2",
+    symbol_card_c_title: "Överkänslighet",
+    symbol_card_c_desc: "Hur många av de tre centrumfälten som tänds beror på allvarlighetsgraden i den allvarligaste aktiva C1-flaggan.",
+    symbol_card_c_profiles: "C1",
+    symbol_card_c_life: "Livshotande",
+    symbol_card_c_life_desc: "Toppfält + ränder + punkt tänds.",
+    symbol_card_c_harm: "Skadlig",
+    symbol_card_c_harm_desc: "Ränderna och punkten tänds.",
+    symbol_card_c_disc: "Besvärande",
+    symbol_card_c_disc_desc: "Endast den nedre punkten tänds.",
+    symbol_card_d_title: "Särskild vårdrutin",
+    symbol_card_d_desc: "Tänds vid aktiva flaggor i kategorierna D1–D2: information om eller beslut om särskild vårdrutin.",
+    symbol_card_d_profiles: "D1 · D2",
+    symbol_card_e_title: "Ostrukturerad uppmärksamhetsinformation",
+    symbol_card_e_desc: "Tänds vid aktiva flaggor i kategorin E1: historiskt registrerad eller ej strukturanpassad information.",
+    symbol_card_e_profiles: "E1",
+
+    symbol_info_idle_title: "Hovra över ett kort",
+    symbol_info_idle_desc: "Välj en signal-typ för att se vilket fält i symbolen den motsvarar.",
+    symbol_attribution: "Symbolens geometri kommer från <a href=\"https://github.com/oskthu2/uppmarksamhetssymbol\" target=\"_blank\" rel=\"noopener\">oskthu2/uppmarksamhetssymbol</a> (CC0). Hur fälten tänds utifrån FHIR-data är vår tolkning och kan skilja sig från hur Inera/NPÖ visar motsvarande information.",
   },
 
   en: {
@@ -195,6 +236,7 @@ const TRANSLATIONS = {
 
     tab_patients: "Patients",
     tab_overview: "Overview",
+    tab_symbol: "The symbol",
     tab_api: "API examples",
     tab_about: "About",
 
@@ -327,6 +369,46 @@ const TRANSLATIONS = {
     about_profile_p: "The FHIR <code>Flag</code> resource carries the alert signal. Ten specialised profiles represent the ten types in the Swedish National Board of Health and Welfare's information specification. Some have associated <code>Observation</code> resources with detailed clinical content.",
     about_contact_h2: "Contact",
     about_contact_p: "Questions about the IG: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, project manager for the alert information working group.",
+
+    symbol_h1: "The symbol, field by field",
+    symbol_intro: "The national alert-information symbol has seven fields. Each field lights up when the matching type of alert information is active for the patient. Hover or click a card in the list — or a field on the symbol itself — to highlight the matching field. Click again to clear.",
+    symbol_show_all: "Light all fields",
+    symbol_show_all_active: "Reset",
+    symbol_aria: "Interactive alert-information symbol",
+    symbol_position_ne: "Top-right field",
+    symbol_position_se: "Bottom-right field",
+    symbol_position_sw: "Bottom-left field",
+    symbol_position_nw: "Top-left field",
+    symbol_position_center: "Centre fields (top · stripes · dot)",
+    symbol_position_top_bar: "Top bar",
+    symbol_position_stripes: "Horizontal stripes",
+    symbol_position_dot: "Lower dot",
+
+    symbol_card_a_title: "Medical conditions and treatments",
+    symbol_card_a_desc: "Lights up for any active flag in categories A1–A4: other medical condition, treatment, transplant, implant.",
+    symbol_card_a_profiles: "A1 · A2 · A3 · A4",
+    symbol_card_b_title: "Infection",
+    symbol_card_b_desc: "Lights up for any active flag in categories B1–B2: infectious agent or contagious disease.",
+    symbol_card_b_profiles: "B1 · B2",
+    symbol_card_c_title: "Hypersensitivity",
+    symbol_card_c_desc: "How many of the three centre fields light up depends on the highest criticality among active C1 flags.",
+    symbol_card_c_profiles: "C1",
+    symbol_card_c_life: "Life-threatening",
+    symbol_card_c_life_desc: "Top bar + stripes + dot all light up.",
+    symbol_card_c_harm: "Harmful",
+    symbol_card_c_harm_desc: "Stripes and dot light up.",
+    symbol_card_c_disc: "Discomforting",
+    symbol_card_c_disc_desc: "Only the lower dot lights up.",
+    symbol_card_d_title: "Special care routine",
+    symbol_card_d_desc: "Lights up for any active flag in categories D1–D2: information about or decision regarding a special care routine.",
+    symbol_card_d_profiles: "D1 · D2",
+    symbol_card_e_title: "Unstructured alert information",
+    symbol_card_e_desc: "Lights up for any active flag in category E1: historically recorded or unstructured alert information.",
+    symbol_card_e_profiles: "E1",
+
+    symbol_info_idle_title: "Hover a card",
+    symbol_info_idle_desc: "Pick a signal type to see which field of the symbol it represents.",
+    symbol_attribution: "Symbol geometry from <a href=\"https://github.com/oskthu2/uppmarksamhetssymbol\" target=\"_blank\" rel=\"noopener\">oskthu2/uppmarksamhetssymbol</a> (CC0). How fields are lit based on the FHIR data is our interpretation and may differ from how Inera / NPÖ shows the corresponding information.",
   },
 };
 
@@ -376,6 +458,7 @@ function initTabs() {
       $$(".tab-panel").forEach(p => p.classList.toggle("active", p.id === "tab-" + target));
       if (target === "testpatients") renderTestPatientDocs();
       if (target === "api") renderApiExamples();
+      if (target === "symbol") renderSymbolExplorer();
     });
   });
 }
@@ -391,6 +474,7 @@ function initLang() {
       if (state.selectedPatientId) renderPatientDetail(state.selectedPatientId);
       if (state.patients.length) renderTestPatientDocs();
       renderApiExamples();
+      if ($("#tab-symbol")?.classList.contains("active")) renderSymbolExplorer();
       updateFooterStats();
     });
   });
@@ -686,6 +770,357 @@ function renderAlertSymbol(flags) {
 function renderAlertSymbolMini(flags) {
   const { fields } = umiActiveFields(flags);
   return umiSvg(fields, { className: "alert-symbol-mini", ariaLabel: "" });
+}
+
+/* ── Symbol explorer (interactive) ─────────────────────────
+ * Builds an oversized version of the umi symbol where every field is
+ * a focusable, hoverable target wired to a card legend. GSAP (loaded
+ * from CDN) provides the entrance and field activation tweens.
+ * ─────────────────────────────────────────────────────────── */
+
+const SYMBOL_CARDS = [
+  {
+    id: "A", icon: "🩺", colorVar: "--cat-A", fieldColor: "#B60606",
+    titleKey: "symbol_card_a_title", descKey: "symbol_card_a_desc",
+    profilesKey: "symbol_card_a_profiles", positionKey: "symbol_position_ne",
+    fields: ["2"],
+  },
+  {
+    id: "B", icon: "🦠", colorVar: "--cat-B", fieldColor: "#E1A100",
+    titleKey: "symbol_card_b_title", descKey: "symbol_card_b_desc",
+    profilesKey: "symbol_card_b_profiles", positionKey: "symbol_position_sw",
+    fields: ["5"],
+  },
+  {
+    id: "C", icon: "🚫", colorVar: "--cat-C", fieldColor: "#B60606",
+    titleKey: "symbol_card_c_title", descKey: "symbol_card_c_desc",
+    profilesKey: "symbol_card_c_profiles", positionKey: "symbol_position_center",
+    fields: ["1", "0", "4"],
+    levels: [
+      { key: "symbol_card_c_life", descKey: "symbol_card_c_life_desc",
+        positionKey: "symbol_position_top_bar", fields: ["1", "0", "4"], badge: "life-threatening" },
+      { key: "symbol_card_c_harm", descKey: "symbol_card_c_harm_desc",
+        positionKey: "symbol_position_stripes", fields: ["0", "4"], badge: "harmful" },
+      { key: "symbol_card_c_disc", descKey: "symbol_card_c_disc_desc",
+        positionKey: "symbol_position_dot", fields: ["4"], badge: "discomforting" },
+    ],
+  },
+  {
+    id: "D", icon: "📋", colorVar: "--cat-D", fieldColor: "#05598A",
+    titleKey: "symbol_card_d_title", descKey: "symbol_card_d_desc",
+    profilesKey: "symbol_card_d_profiles", positionKey: "symbol_position_se",
+    fields: ["3"],
+  },
+  {
+    id: "E", icon: "📝", colorVar: "--cat-E", fieldColor: "#B60606",
+    titleKey: "symbol_card_e_title", descKey: "symbol_card_e_desc",
+    profilesKey: "symbol_card_e_profiles", positionKey: "symbol_position_nw",
+    fields: ["6"],
+  },
+];
+
+function buildSymbolExplorerSvg() {
+  // Slightly enlarged viewBox so glow can spill outside the geometry.
+  const PAD = 120;
+  const VB = `${-PAD} ${-PAD} ${2010 + PAD * 2} ${1983 + PAD * 2}`;
+  const fieldPaths = Object.keys(UMI_SVG.fields).map(code =>
+    `<path class="symbol-field" data-field="${code}" data-color="${UMI_SVG.colors[code]}" d="${UMI_SVG.fields[code]}" fill="${UMI_SVG.colors[code]}" tabindex="0" role="img" aria-label="${escapeHtml(symbolFieldAria(code))}"/>`
+  ).join("");
+  return `<svg class="symbol-explorer-svg" viewBox="${VB}" xmlns="http://www.w3.org/2000/svg" aria-label="${escapeHtml(t("symbol_aria"))}">
+    <defs>
+      <radialGradient id="symbolStageBg" cx="50%" cy="42%" r="65%">
+        <stop offset="0%" stop-color="#1d3a73" stop-opacity="0.35"/>
+        <stop offset="55%" stop-color="#0e1f3d" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#04060c" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="symbolGlow" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="22" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <rect class="symbol-stage-bg" x="${-PAD}" y="${-PAD}" width="${2010 + PAD * 2}" height="${1983 + PAD * 2}" fill="url(#symbolStageBg)"/>
+    <path class="symbol-inside" d="${UMI_SVG.outlineInner}" fill="#ffffff"/>
+    <g class="symbol-fields">${fieldPaths}</g>
+    <path class="symbol-outline" d="${UMI_SVG.outlineOuter} ${UMI_SVG.outlineInner}" fill="${UMI_SVG.outline}" fill-rule="evenodd"/>
+  </svg>`;
+}
+
+function symbolFieldAria(code) {
+  const map = {
+    "1": "symbol_position_top_bar",
+    "0": "symbol_position_stripes",
+    "4": "symbol_position_dot",
+    "2": "symbol_position_ne",
+    "3": "symbol_position_se",
+    "5": "symbol_position_sw",
+    "6": "symbol_position_nw",
+  };
+  return t(map[code] || "symbol_aria");
+}
+
+function fieldToCardId(code) {
+  return ({ "1": "C", "0": "C", "4": "C", "2": "A", "3": "D", "5": "B", "6": "E" })[code];
+}
+
+function fieldToLevelKey(code) {
+  return ({ "1": "symbol_card_c_life", "0": "symbol_card_c_harm", "4": "symbol_card_c_disc" })[code];
+}
+
+function renderSymbolCard(card) {
+  const profileBadges = (t(card.profilesKey) || "").split(/\s*·\s*/).filter(Boolean)
+    .map(c => `<span class="symbol-card-badge cat-${c[0]}">${escapeHtml(c)}</span>`).join("");
+  const levels = (card.levels || []).map(lvl =>
+    `<li class="symbol-sub" tabindex="0"
+         data-fields="${lvl.fields.join(",")}"
+         data-level-key="${lvl.key}"
+         data-level-desc-key="${lvl.descKey}"
+         data-level-pos-key="${lvl.positionKey}">
+      <span class="symbol-sub-pill ${lvl.badge}">${escapeHtml(t(lvl.key))}</span>
+      <span class="symbol-sub-desc">${escapeHtml(t(lvl.descKey))}</span>
+    </li>`
+  ).join("");
+  return `<li class="symbol-card cat-${card.id}" tabindex="0"
+              data-card-id="${card.id}"
+              data-fields="${card.fields.join(",")}"
+              style="--card-color: var(${card.colorVar}); --field-color: ${card.fieldColor};">
+    <div class="symbol-card-head">
+      <span class="symbol-card-icon" aria-hidden="true">${card.icon}</span>
+      <div class="symbol-card-text">
+        <div class="symbol-card-title" data-i18n="${card.titleKey}"></div>
+        <div class="symbol-card-pos" data-i18n="${card.positionKey}"></div>
+      </div>
+      <div class="symbol-card-badges">${profileBadges}</div>
+    </div>
+    <p class="symbol-card-desc" data-i18n="${card.descKey}"></p>
+    ${levels ? `<ul class="symbol-sub-list">${levels}</ul>` : ""}
+  </li>`;
+}
+
+function renderSymbolExplorer() {
+  const root = $("#symbolExplorer");
+  if (!root) return;
+  root.innerHTML = `
+    <header class="symbol-explorer-header">
+      <h1 data-i18n="symbol_h1"></h1>
+      <p data-i18n="symbol_intro"></p>
+    </header>
+    <div class="symbol-explorer-stage">
+      <ol class="symbol-cards" role="list">
+        ${SYMBOL_CARDS.map(renderSymbolCard).join("")}
+      </ol>
+      <div class="symbol-canvas">
+        <div class="symbol-canvas-aurora" aria-hidden="true"></div>
+        ${buildSymbolExplorerSvg()}
+        <button class="symbol-toggle-all" type="button" id="symbolToggleAll" data-i18n="symbol_show_all"></button>
+        <div class="symbol-info" id="symbolInfo" role="status" aria-live="polite">
+          <div class="symbol-info-pos" data-i18n="symbol_info_idle_title"></div>
+          <div class="symbol-info-title">—</div>
+          <div class="symbol-info-desc" data-i18n="symbol_info_idle_desc"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="symbol-attribution" data-i18n-html="symbol_attribution"></footer>
+  `;
+  applyTranslations();
+  setupSymbolInteractions(root);
+}
+
+function setupSymbolInteractions(root) {
+  const svg = root.querySelector(".symbol-explorer-svg");
+  const cards = $$(".symbol-card", root);
+  const subRows = $$(".symbol-sub", root);
+  const fields = $$(".symbol-field", svg);
+  const info = root.querySelector("#symbolInfo");
+  const infoPos = info.querySelector(".symbol-info-pos");
+  const infoTitle = info.querySelector(".symbol-info-title");
+  const infoDesc = info.querySelector(".symbol-info-desc");
+  const toggleBtn = root.querySelector("#symbolToggleAll");
+  const allFields = ["0", "1", "2", "3", "4", "5", "6"];
+  let lockedFields = null;
+
+  const idleOpacity = 0.18;
+  const lockedOpacity = 0.62;
+  const activeOpacity = 1;
+
+  function tween(el, props) {
+    if (window.gsap) gsap.to(el, { duration: 0.32, ease: "power2.out", ...props });
+    else Object.entries(props).forEach(([k, v]) => { if (k === "opacity") el.style.opacity = v; });
+  }
+
+  function applyFieldState(activeSet) {
+    fields.forEach(f => {
+      const code = f.dataset.field;
+      const on = activeSet.has(code);
+      f.classList.toggle("active", on);
+      const target = on ? activeOpacity : (lockedFields ? lockedOpacity : idleOpacity);
+      tween(f, { opacity: target });
+    });
+  }
+
+  function setInfo({ pos, title, desc, color, badge }) {
+    infoPos.textContent = pos || "";
+    infoTitle.textContent = title || "—";
+    infoDesc.textContent = desc || "";
+    info.style.setProperty("--info-color", color || "var(--primary)");
+    info.classList.toggle("active", !!title);
+    info.dataset.badge = badge || "";
+  }
+
+  function clearInfo() {
+    setInfo({
+      pos: t("symbol_info_idle_title"),
+      title: lockedFields ? t("symbol_show_all_active") : "—",
+      desc: t("symbol_info_idle_desc"),
+      color: "var(--primary)",
+      badge: "",
+    });
+  }
+
+  function activateCard(card, opts = {}) {
+    cards.forEach(c => c.classList.toggle("hovered", c === card));
+    const fieldSet = new Set((card.dataset.fields || "").split(","));
+    applyFieldState(fieldSet);
+    setInfo({
+      pos: t(SYMBOL_CARDS.find(c => c.id === card.dataset.cardId)?.positionKey || "symbol_aria"),
+      title: card.querySelector(".symbol-card-title").textContent,
+      desc: card.querySelector(".symbol-card-desc").textContent,
+      color: getComputedStyle(card).getPropertyValue("--card-color").trim(),
+      badge: opts.badge || "",
+    });
+  }
+
+  function activateSub(sub) {
+    const fieldSet = new Set(sub.dataset.fields.split(","));
+    cards.forEach(c => c.classList.toggle("hovered", c.contains(sub)));
+    applyFieldState(fieldSet);
+    setInfo({
+      pos: t(sub.dataset.levelPosKey || "symbol_aria"),
+      title: t(sub.dataset.levelKey),
+      desc: t(sub.dataset.levelDescKey),
+      color: "var(--cat-C)",
+      badge: sub.querySelector(".symbol-sub-pill")?.classList[1] || "",
+    });
+  }
+
+  function deactivate() {
+    cards.forEach(c => c.classList.remove("hovered"));
+    if (lockedFields) {
+      applyFieldState(lockedFields);
+      clearInfo();
+    } else {
+      fields.forEach(f => {
+        f.classList.remove("active");
+        tween(f, { opacity: idleOpacity });
+      });
+      clearInfo();
+    }
+  }
+
+  let pinnedCard = null;
+  let pinnedSub = null;
+
+  function pinCard(card) {
+    pinnedCard = card === pinnedCard ? null : card;
+    pinnedSub = null;
+    cards.forEach(c => c.classList.toggle("pinned", c === pinnedCard));
+    subRows.forEach(s => s.classList.remove("pinned"));
+    if (pinnedCard) activateCard(pinnedCard);
+    else deactivate();
+  }
+
+  function pinSub(sub) {
+    pinnedSub = sub === pinnedSub ? null : sub;
+    pinnedCard = null;
+    cards.forEach(c => c.classList.remove("pinned"));
+    subRows.forEach(s => s.classList.toggle("pinned", s === pinnedSub));
+    if (pinnedSub) activateSub(pinnedSub);
+    else deactivate();
+  }
+
+  cards.forEach(card => {
+    card.addEventListener("mouseenter", () => { if (!pinnedCard && !pinnedSub) activateCard(card); });
+    card.addEventListener("mouseleave", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    card.addEventListener("focusin", () => { if (!pinnedCard && !pinnedSub) activateCard(card); });
+    card.addEventListener("focusout", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    card.addEventListener("click", e => {
+      if (e.target.closest(".symbol-sub")) return;
+      pinCard(card);
+    });
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pinCard(card); }
+    });
+  });
+
+  subRows.forEach(sub => {
+    const stop = (fn) => (e) => { e.stopPropagation(); fn(); };
+    sub.addEventListener("mouseenter", stop(() => { if (!pinnedCard && !pinnedSub) activateSub(sub); }));
+    sub.addEventListener("mouseleave", stop(() => { if (!pinnedCard && !pinnedSub) deactivate(); }));
+    sub.addEventListener("focusin", stop(() => { if (!pinnedCard && !pinnedSub) activateSub(sub); }));
+    sub.addEventListener("focusout", stop(() => { if (!pinnedCard && !pinnedSub) deactivate(); }));
+    sub.addEventListener("click", e => { e.stopPropagation(); pinSub(sub); });
+    sub.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); pinSub(sub); }
+    });
+  });
+
+  function resolveFieldTarget(code) {
+    const cardId = fieldToCardId(code);
+    if (cardId === "C") {
+      const levelKey = fieldToLevelKey(code);
+      const sub = subRows.find(s => s.dataset.levelKey === levelKey);
+      if (sub) return { sub };
+    }
+    const card = cards.find(c => c.dataset.cardId === cardId);
+    return card ? { card } : null;
+  }
+
+  fields.forEach(f => {
+    const handler = () => {
+      if (pinnedCard || pinnedSub) return;
+      const target = resolveFieldTarget(f.dataset.field);
+      if (!target) return;
+      if (target.sub) activateSub(target.sub);
+      else activateCard(target.card);
+    };
+    f.addEventListener("mouseenter", handler);
+    f.addEventListener("mouseleave", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    f.addEventListener("focus", handler);
+    f.addEventListener("blur", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    f.addEventListener("click", () => {
+      const target = resolveFieldTarget(f.dataset.field);
+      if (!target) return;
+      if (target.sub) pinSub(target.sub);
+      else pinCard(target.card);
+    });
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    if (lockedFields) {
+      lockedFields = null;
+      toggleBtn.classList.remove("active");
+      toggleBtn.textContent = t("symbol_show_all");
+      deactivate();
+    } else {
+      lockedFields = new Set(allFields);
+      toggleBtn.classList.add("active");
+      toggleBtn.textContent = t("symbol_show_all_active");
+      applyFieldState(lockedFields);
+      clearInfo();
+    }
+  });
+
+  deactivate();
+
+  if (window.gsap) {
+    gsap.from(cards,
+      { y: 14, opacity: 0, duration: 0.55, ease: "power3.out", stagger: 0.07 });
+    gsap.from(svg,
+      { scale: 0.96, opacity: 0.4, duration: 0.7, ease: "power3.out", transformOrigin: "50% 50%" });
+  }
 }
 
 function umiTooltip(fields, allergySev) {

@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 </head>
 <body>
   <div id="banner" class="banner" data-i18n-html="banner"></div>
@@ -27,6 +28,7 @@
     <nav class="tabs" role="tablist">
       <button class="tab active" data-tab="patients" data-i18n="tab_patients" role="tab">Patienter</button>
       <button class="tab" data-tab="testpatients" data-i18n="tab_overview" role="tab">Översikt</button>
+      <button class="tab" data-tab="symbol" data-i18n="tab_symbol" role="tab">Symbolen</button>
       <button class="tab" data-tab="api" data-i18n="tab_api" role="tab">API-exempel</button>
       <button class="tab" data-tab="about" data-i18n="tab_about" role="tab">Om</button>
     </nav>
@@ -86,6 +88,11 @@
 
         <div id="patientDocs" class="patient-docs"></div>
       </div>
+    </section>
+
+    <!-- TAB: Symbol explorer -->
+    <section id="tab-symbol" class="tab-panel">
+      <div class="symbol-explorer" id="symbolExplorer"></div>
     </section>
 
     <!-- TAB: API examples -->
