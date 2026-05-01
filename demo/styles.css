@@ -26,16 +26,17 @@
   --neutral: #475569;
   --neutral-soft: #eef0f3;
 
-  --cat-A: #1e3a8a;          /* medical, blue */
-  --cat-A-soft: #e6ebf7;
-  --cat-B: #b45309;          /* infection, orange */
-  --cat-B-soft: #fdf3e1;
-  --cat-C: #b91c1c;          /* allergy, red */
-  --cat-C-soft: #fdecec;
-  --cat-D: #6d28d9;          /* care routine, purple */
-  --cat-D-soft: #f0e8fb;
-  --cat-E: #475569;          /* unstructured, slate */
-  --cat-E-soft: #eef0f3;
+  /* category colors aligned with the field colors in the alert symbol */
+  --cat-A: #B60606;          /* medical conditions — NE wedge (red) */
+  --cat-A-soft: color-mix(in srgb, var(--cat-A) 12%, #fff);
+  --cat-B: #E1A100;          /* infection — SW wedge (yellow) */
+  --cat-B-soft: color-mix(in srgb, var(--cat-B) 14%, #fff);
+  --cat-C: #B60606;          /* hypersensitivity — center fields (red) */
+  --cat-C-soft: color-mix(in srgb, var(--cat-C) 12%, #fff);
+  --cat-D: #05598A;          /* care routine — SE wedge (blue) */
+  --cat-D-soft: color-mix(in srgb, var(--cat-D) 14%, #fff);
+  --cat-E: #B60606;          /* unstructured — NW wedge (red) */
+  --cat-E-soft: color-mix(in srgb, var(--cat-E) 12%, #fff);
 
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, .04), 0 1px 3px rgba(15, 23, 42, .06);
   --shadow: 0 2px 4px rgba(15, 23, 42, .04), 0 4px 12px rgba(15, 23, 42, .06);
@@ -732,11 +733,10 @@ main {
 }
 .symbol-card {
   --card-color: var(--primary);
-  --field-color: var(--text-subtle);
   position: relative;
   background: var(--bg-elev);
   border: 1px solid var(--border);
-  border-left: 4px solid var(--field-color);
+  border-left: 4px solid var(--card-color);
   border-radius: var(--radius-lg);
   padding: 14px 16px 16px;
   box-shadow: var(--shadow-sm);

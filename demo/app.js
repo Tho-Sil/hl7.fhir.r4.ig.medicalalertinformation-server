@@ -121,7 +121,7 @@ const TRANSLATIONS = {
     tooltip_unstructured: "Ej strukturanpassad uppmärksamhetsinformation",
 
     overview_h1: "Översikt",
-    overview_intro: "Sammanställning av profilkoder och en tabellvy av samtliga laddade flaggor per testperson. Tio fiktiva patienter täcker alla tio uppmärksamhetsprofiler. Demodatat finns i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>. I portalen visas endast <strong>Alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>) som huvudrad samt <strong>terminologi</strong> från <code>Flag.code.coding</code> som sekundär rad — inte fri text i <code>code.text</code>. Kör <code>python3 scripts/sync-demo-flags-with-ig.py</code> i server-repot om du återgenererar bundles från äldre exports.",
+    overview_intro: "Sammanställning av profilkoder och en tabellvy av samtliga laddade flaggor per testperson. Tio fiktiva patienter täcker alla tio uppmärksamhetsprofiler. Demodatat finns i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>. Varje flagga i bundle-JSON har <strong>Alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>); portalen visar den som huvudrad och <strong>terminologi</strong> från <code>Flag.code.coding</code> som sekundär rad — inte fri text i <code>code.text</code>.",
 
     profilecodes_h2: "Profilkoder",
     th_code: "Kod",
@@ -304,7 +304,7 @@ const TRANSLATIONS = {
     tooltip_unstructured: "Unstructured alert information",
 
     overview_h1: "Overview",
-    overview_intro: "Profile-code reference and a tabular view of every loaded flag per test person. Ten fictional patients cover all ten alert-information profiles. The demo data lives in <code>HAPI-server/data/</code> and is loaded via <code>./scripts/load-data.sh</code>. The portal shows only the <strong>alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>) as the headline plus <strong>terminology</strong> from <code>Flag.code.coding</code> as a secondary line — not free-text <code>code.text</code>. Run <code>python3 scripts/sync-demo-flags-with-ig.py</code> in the server repo if you regenerate bundles from older exports.",
+    overview_intro: "Profile-code reference and a tabular view of every loaded flag per test person. Ten fictional patients cover all ten alert-information profiles. The demo data lives in <code>HAPI-server/data/</code> and is loaded via <code>./scripts/load-data.sh</code>. Each flag in the bundle JSON carries the <strong>alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>); the portal shows it as the headline plus <strong>terminology</strong> from <code>Flag.code.coding</code> as a secondary line — not free-text <code>code.text</code>.",
 
     profilecodes_h2: "Profile codes",
     th_code: "Code",
@@ -780,19 +780,19 @@ function renderAlertSymbolMini(flags) {
 
 const SYMBOL_CARDS = [
   {
-    id: "A", icon: "🩺", colorVar: "--cat-A", fieldColor: "#B60606",
+    id: "A", icon: "🩺", colorVar: "--cat-A",
     titleKey: "symbol_card_a_title", descKey: "symbol_card_a_desc",
     profilesKey: "symbol_card_a_profiles", positionKey: "symbol_position_ne",
     fields: ["2"],
   },
   {
-    id: "B", icon: "🦠", colorVar: "--cat-B", fieldColor: "#E1A100",
+    id: "B", icon: "🦠", colorVar: "--cat-B",
     titleKey: "symbol_card_b_title", descKey: "symbol_card_b_desc",
     profilesKey: "symbol_card_b_profiles", positionKey: "symbol_position_sw",
     fields: ["5"],
   },
   {
-    id: "C", icon: "🚫", colorVar: "--cat-C", fieldColor: "#B60606",
+    id: "C", icon: "🚫", colorVar: "--cat-C",
     titleKey: "symbol_card_c_title", descKey: "symbol_card_c_desc",
     profilesKey: "symbol_card_c_profiles", positionKey: "symbol_position_center",
     fields: ["1", "0", "4"],
@@ -806,13 +806,13 @@ const SYMBOL_CARDS = [
     ],
   },
   {
-    id: "D", icon: "📋", colorVar: "--cat-D", fieldColor: "#05598A",
+    id: "D", icon: "📋", colorVar: "--cat-D",
     titleKey: "symbol_card_d_title", descKey: "symbol_card_d_desc",
     profilesKey: "symbol_card_d_profiles", positionKey: "symbol_position_se",
     fields: ["3"],
   },
   {
-    id: "E", icon: "📝", colorVar: "--cat-E", fieldColor: "#B60606",
+    id: "E", icon: "📝", colorVar: "--cat-E",
     titleKey: "symbol_card_e_title", descKey: "symbol_card_e_desc",
     profilesKey: "symbol_card_e_profiles", positionKey: "symbol_position_nw",
     fields: ["6"],
@@ -886,7 +886,7 @@ function renderSymbolCard(card) {
   return `<li class="symbol-card cat-${card.id}" tabindex="0"
               data-card-id="${card.id}"
               data-fields="${card.fields.join(",")}"
-              style="--card-color: var(${card.colorVar}); --field-color: ${card.fieldColor};">
+              style="--card-color: var(${card.colorVar});">
     <div class="symbol-card-head">
       <span class="symbol-card-icon" aria-hidden="true">${card.icon}</span>
       <div class="symbol-card-text">

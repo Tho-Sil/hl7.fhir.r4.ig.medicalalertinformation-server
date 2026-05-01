@@ -1,7 +1,9 @@
 # API-exempel
 
 Alla exempel använder bas-URL:en `http://localhost:8080/fhir`. Sätt
-en miljövariabel om du vill kunna kopiera dem rakt av:
+en miljövariabel om du vill kunna kopiera dem rakt av. Exempel som
+refererar till `@data/...` förutsätter att du kör kommandona från
+katalogen **`HAPI-server`** (samma som `./scripts/load-data.sh`).
 
 ```bash
 export FHIR=http://localhost:8080/fhir

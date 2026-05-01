@@ -6,7 +6,7 @@ hackathonet under Vitalis 2026.
 
 - Bas-URL: `http://localhost:8080/fhir`
 - FHIR-version: R4 (4.0.1)
-- Persistens: H2 in-memory — datat finns kvar så länge containern lever, men nollställs vid restart. Återladda med `scripts/load-data.sh`.
+- Persistens: H2 in-memory — datat finns kvar så länge containern lever, men nollställs vid restart. Återladda med `./scripts/load-data.sh` (från katalogen `HAPI-server`).
 - Validering: **warn** — servern accepterar resurser som inte uppfyller
   profil­erna, men returnerar varningar i `OperationOutcome`
 
@@ -54,10 +54,9 @@ docker compose restart hapi && ./scripts/load-data.sh
 | `docker-compose.yml` | Kör `hapiproject/hapi:v8.8.0-1` med monterad konfiguration |
 | `config/application.yaml` | HAPI-konfiguration (R4, H2, validering=warn, IG-laddning förberedd) |
 | `ig/` | Plats för det byggda IG-paketet (`*.tgz`) |
-| `data/` | Transaction-bundles med exempeldata (`02-patients.json`, `10-flags-medical.json`, …) |
+| `data/` | Transaction-bundles med exempeldata (`02-patients.json`, `10-flags-medical.json`, …). Flagg-JSON innehåller `SEAlertLabelExtension` per flagga. |
 | `scripts/build-ig.sh` | Bygger IG-paketet med SUSHI (+ valfritt IG Publisher) |
 | `scripts/load-data.sh` | Laddar alla bundles till en körande server |
-| `scripts/sync-demo-flags-with-ig.py` | Uppdaterar flagg-bundles med `SEAlertLabelExtension`, E1 ICD-10-SE-kod m.m. i linje med IG (kör vid behov före commit/laddning) |
 | `scripts/load-ig.sh` | PUTar profiler/value sets/code systems från IG-tgz:en |
 | `scripts/reset.sh` | Rensar Flag/Observation/Patient och laddar om |
 | `docs/test-patients.md` | Vilka testpersoner som finns och deras uppmärksamhetsinformation |

@@ -1,17 +1,17 @@
-# hl7.fhir.r4.ig.medicalalertinformation — server och IG-källkod
+# hl7.fhir.r4.ig.medicalalertinformation — server och demo
 
-Detta repo innehåller server och demo. **IG-källkoden (FSH)** ligger i
-syskon-repot **`hl7.fhir.r4.ig.medicalalertinformation`** (samma
-överordnade katalog som detta repo), inte under denna katalog.
+Detta repo innehåller **HAPI-demoserver**, **exempeldata** och **demoportal**
+(`demo/`). **IG-källkoden (FSH)** ligger i syskon-repot
+**`hl7.fhir.r4.ig.medicalalertinformation`** (samma överordnade katalog som
+detta repo), inte under denna katalog.
 
 1. **Syskon: `../hl7.fhir.r4.ig.medicalalertinformation/`** — FHIR
-   Implementation Guide för *uppmärksamhetsinformation*, baserad på
+  Implementation Guide för *uppmärksamhetsinformation*, baserad på
    Socialstyrelsens informationsspecifikation
-   <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
+   [https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/](https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/).
    Publiceras av HL7 Sverige.
-
 2. **`HAPI-server/`** — en förkonfigurerad HAPI FHIR-server (R4) med
-   exempeldata enligt profilerna i guiden, framtagen för hackathonet
+  exempeldata enligt profilerna i guiden, framtagen för hackathonet
    under **Vitalis 2026**.
 
 ## Snabbstart för servern
@@ -36,11 +36,12 @@ python3 -m http.server 8000
 
 Detaljerad dokumentation, testpatienter och API-exempel:
 
-- [`HAPI-server/README.md`](HAPI-server/README.md) — snabbstart och översikt
-- [`HAPI-server/docs/test-patients.md`](HAPI-server/docs/test-patients.md) — alla testpersoner och deras uppmärksamhetsinformation
-- [`HAPI-server/docs/api-examples.md`](HAPI-server/docs/api-examples.md) — klippa-och-klistra-anrop
-- [`HAPI-server/docs/architecture.md`](HAPI-server/docs/architecture.md) — designval och kända begränsningar
-- [`demo/README.md`](demo/README.md) — om demoportalen
+- [CHANGELOG.md](CHANGELOG.md) — versionshistorik
+- [HAPI-server/README.md](HAPI-server/README.md) — snabbstart och översikt
+- [HAPI-server/docs/test-patients.md](HAPI-server/docs/test-patients.md) — alla testpersoner och deras uppmärksamhetsinformation
+- [HAPI-server/docs/api-examples.md](HAPI-server/docs/api-examples.md) — klippa-och-klistra-anrop
+- [HAPI-server/docs/architecture.md](HAPI-server/docs/architecture.md) — designval och kända begränsningar
+- [demo/README.md](demo/README.md) — om demoportalen
 
 ## Bygga IG:n
 
@@ -52,12 +53,6 @@ sushi .            # FSH → fsh-generated/
 ./_genonce.sh      # IG Publisher → output/
 ```
 
-`HAPI-server/scripts/build-ig.sh` gör båda stegen och kopierar in det
-färdiga NPM-paketet i `HAPI-server/ig/` så att HAPI-servern kan
+`HAPI-server/scripts/build-ig.sh` gör båda stegen och kopierar in det  
+färdiga NPM-paketet i `HAPI-server/ig/` så att HAPI-servern kan  
 ladda profilerna och göra profilvalidering.
-
-## Kontakt
-
-Frågor om uppmärksamhetsinformation: [Claudia
-Ehrentraut](mailto:claudia.ehrentraut@regionstockholm.se),
-projektledare för arbetsgruppen.

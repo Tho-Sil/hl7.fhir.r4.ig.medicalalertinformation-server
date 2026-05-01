@@ -4,7 +4,7 @@
 
 ```
 ┌──────────────────────────────┐
-│  HAPI FHIR JPA Server (R4)   │  hapiproject/hapi:v8.4.1
+│  HAPI FHIR JPA Server (R4)   │  hapiproject/hapi:v8.8.0-1
 │  port 8080                   │  + config/application.yaml (volume)
 │  H2-databas i fil-volym      │  + ig/*.tgz (volume, valfritt)
 └──────────────────────────────┘
@@ -12,7 +12,7 @@
               │  HTTP/JSON, FHIR R4
               ▼
 ┌──────────────────────────────┐
-│  scripts/load-data.sh        │  POSTar transaction-bundles från data/
+│  ./scripts/load-data.sh      │  POSTar transaction-bundles från data/
 └──────────────────────────────┘
 ```
 
@@ -32,8 +32,8 @@ Bytet till nyare patch-version är säkert.
 H2 in-memory (`jdbc:h2:mem:hapi;DB_CLOSE_DELAY=-1`) ger:
 - Inga externa beroenden, inga filsystemspermissions att hantera.
 - Datat lever så länge containern är igång; försvinner vid restart.
-- Enkel reset: `docker compose restart hapi && scripts/load-data.sh`,
-  alternativt `scripts/reset.sh` mot körande server.
+- Enkel reset: `docker compose restart hapi && ./scripts/load-data.sh`,
+  alternativt `./scripts/reset.sh` mot körande server (arbetskatalog `HAPI-server`).
 
 Skälet att inte använda H2 i fil med en namngiven volym: HAPI-bilden
 kör som non-root och Docker-volymer skapas som root, vilket ger
@@ -61,9 +61,9 @@ använda den för att validera ett utkast manuellt.
 Servern startar utan IG-paketet. Profil-validering (om aktiverad)
 behöver paketet. Vi laddar det i två steg:
 
-1. `scripts/build-ig.sh --sushi` kör SUSHI och paketerar resultatet
+1. `./scripts/build-ig.sh --sushi` kör SUSHI och paketerar resultatet
    som ett NPM-format­paket (`package/package.json` + FHIR-JSON).
-2. `scripts/load-ig.sh` packar upp och PUTar varje canonical-resurs
+2. `./scripts/load-ig.sh` packar upp och PUTar varje canonical-resurs
    (StructureDefinition, ValueSet, CodeSystem, NamingSystem,
    ConceptMap) till servern.
 
@@ -118,6 +118,7 @@ HAPI-server/
 ├── ig/
 │   └── .gitkeep                  # Plats för det byggda IG-paketet
 ├── data/
+│   ├── 01-search-parameters.json
 │   ├── 02-patients.json
 │   ├── 10-flags-medical.json     # Profil 1, 2, 3, 4
 │   ├── 11-flags-infection.json   # Profil 5, 6 + Observation
@@ -127,6 +128,7 @@ HAPI-server/
 ├── scripts/
 │   ├── build-ig.sh
 │   ├── load-data.sh
+│   ├── load-ig.sh
 │   └── reset.sh
 └── docs/
     ├── architecture.md           # (det här dokumentet)

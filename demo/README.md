@@ -40,9 +40,11 @@ Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
     **terminologi** från `Flag.code.coding` diskret under — inte `code.text`
   - Allvarlighetsgrad markerad med färg där den finns
   - Inaktiva flaggor visas dämpat
-- **Testpersoner**: tabellförklaring av alla 10 profiler plus
+- **Översikt**: tabellförklaring av alla 10 profiler plus
   detaljerad lista per patient med koder, status och period —
   hämtas live från servern.
+- **Symbolen**: interaktiv förklaring av den nationella
+  uppmärksamhetssymbolen (koppling mellan fält och signaltyper).
 - **API-exempel**: tolv klippa-och-klistra-färdiga FHIR-anrop med
   knappen *Kör* som skickar dem mot den körande servern och visar
   svaret.
@@ -57,5 +59,5 @@ Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
 | `app.js` | Tab-routing, FHIR-anrop, rendering |
 | `README.md` | Detta dokument |
 
-Inga byggsteg, inga npm-paket — öppna en statisk filserver så funkar
-det.
+Inga byggsteg och inga npm-paket i repot — öppna en statisk filserver så funkar
+det. Symbol-fliken laddar [GSAP](https://greensock.com/gsap/) från CDN för animationer.
