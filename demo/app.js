@@ -213,6 +213,9 @@ const TRANSLATIONS = {
     about_alert_p: "Uppmärksamhetsinformation är data om patientens särskilda behov, risker eller förhållanden som vården behöver känna till. Den gör vården säkrare genom att lyfta fram information som annars riskerar att missas — överkänslighet, smitta, implantat, transplantat, sällsynta diagnoser, pågående behandlingar med särskilda hänsyn, och beslut om särskilda vårdrutiner.",
     about_profile_h2: "Profilstruktur",
     about_profile_p: "FHIR-resursen <code>Flag</code> bär uppmärksamhetssignalen. Tio specialiserade profiler representerar de tio typerna i Socialstyrelsens informationsspecifikation. Vissa har tillhörande <code>Observation</code>-resurser med detaljerad klinisk information.",
+    about_source_h2: "Källkod",
+    about_source_p: "<strong>Genererad IG (utvecklingsbygge):</strong> <a href=\"https://build.fhir.org/ig/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/branches/develop/index.html\" target=\"_blank\" rel=\"noopener\">build.fhir.org/.../develop</a> — kontinuerligt bygge av Implementation Guide:n.<br><strong>IG-källkoden</strong> (FSH-profiler, kodverk, exempel) finns i syskon-repot på GitHub: <a href=\"https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop\" target=\"_blank\" rel=\"noopener\">HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation</a> (branch <code>develop</code>).<br><strong>HAPI-servern, exempeldata och denna demoportal</strong> finns i <a href=\"https://github.com/Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server\" target=\"_blank\" rel=\"noopener\">Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server</a>.",
+
     about_contact_h2: "Kontakt",
     about_contact_p: "Frågor om demoportalen, kontakta <a href=\"mailto:thomas.siltberg@inera.se\">Thomas Siltberg</a>.",
 
@@ -396,6 +399,9 @@ const TRANSLATIONS = {
     about_alert_p: "Alert information represents data about a patient's special needs, risks, or circumstances that healthcare needs to be aware of. It makes care safer by surfacing information that would otherwise risk being missed — hypersensitivity, infection, implants, transplants, rare diagnoses, ongoing treatments requiring special precautions, and decisions about special care routines.",
     about_profile_h2: "Profile structure",
     about_profile_p: "The FHIR <code>Flag</code> resource carries the alert signal. Ten specialised profiles represent the ten types in the Swedish National Board of Health and Welfare's information specification. Some have associated <code>Observation</code> resources with detailed clinical content.",
+    about_source_h2: "Source code",
+    about_source_p: "<strong>Generated IG (continuous build):</strong> <a href=\"https://build.fhir.org/ig/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/branches/develop/index.html\" target=\"_blank\" rel=\"noopener\">build.fhir.org/.../develop</a> — continuous build of the Implementation Guide.<br><strong>IG source</strong> (FSH profiles, code systems, examples) lives in the sibling repository on GitHub: <a href=\"https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop\" target=\"_blank\" rel=\"noopener\">HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation</a> (branch <code>develop</code>).<br><strong>The HAPI server, sample data and this demo portal</strong> live in <a href=\"https://github.com/Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server\" target=\"_blank\" rel=\"noopener\">Tho-Sil/hl7.fhir.r4.ig.medicalalertinformation-server</a>.",
+
     about_contact_h2: "Contact",
     about_contact_p: "For questions about the demo portal, contact <a href=\"mailto:thomas.siltberg@inera.se\">Thomas Siltberg</a>.",
 
