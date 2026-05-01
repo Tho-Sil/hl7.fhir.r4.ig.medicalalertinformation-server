@@ -4,7 +4,10 @@
   "type": "transaction",
   "entry": [
     {
-      "request": { "method": "PUT", "url": "Flag/flag-tolvan-7" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-tolvan-7"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-tolvan-7",
@@ -15,7 +18,19 @@
         },
         "extension": [
           {
-            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/CriticalityLevelExtension",
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "latex",
+                  "display": "Latex"
+                }
+              ]
+            }
+          },
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SECriticalityLevelExtension",
             "valueCodeableConcept": {
               "coding": [
                 {
@@ -44,17 +59,23 @@
             {
               "system": "http://snomed.info/sct",
               "code": "111088007",
-              "display": "latex"
+              "display": "Latex"
             }
-          ],
-          "text": "Latex-allergi (livshotande)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-tolvan" },
-        "period": { "start": "1995-06-01" }
+        "subject": {
+          "reference": "Patient/pat-tolvan"
+        },
+        "period": {
+          "start": "1995-06-01"
+        }
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-fatima-7" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-fatima-7"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-fatima-7",
@@ -65,7 +86,19 @@
         },
         "extension": [
           {
-            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/CriticalityLevelExtension",
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "klorhexidin",
+                  "display": "Klorhexidin"
+                }
+              ]
+            }
+          },
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SECriticalityLevelExtension",
             "valueCodeableConcept": {
               "coding": [
                 {
@@ -94,17 +127,23 @@
             {
               "system": "http://snomed.info/sct",
               "code": "373568007",
-              "display": "klorhexidin"
+              "display": "Chlorhexidine"
             }
-          ],
-          "text": "Klorhexidin-överkänslighet (besvärande)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-fatima" },
-        "period": { "start": "2019-08-30" }
+        "subject": {
+          "reference": "Patient/pat-fatima"
+        },
+        "period": {
+          "start": "2019-08-30"
+        }
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-liam-7" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-liam-7"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-liam-7",
@@ -130,13 +169,30 @@
             {
               "system": "http://snomed.info/sct",
               "code": "281000220103",
-              "display": "taurolidin"
+              "display": "Taurolidin"
             }
-          ],
-          "text": "Taurolidin-överkänslighet"
+          ]
         },
-        "subject": { "reference": "Patient/pat-liam" },
-        "period": { "start": "2020-12-04" }
+        "subject": {
+          "reference": "Patient/pat-liam"
+        },
+        "period": {
+          "start": "2020-12-04"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "taurolidin",
+                  "display": "Taurolidin"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]

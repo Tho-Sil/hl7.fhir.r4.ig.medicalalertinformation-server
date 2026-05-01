@@ -1,6 +1,18 @@
 spring:
   main:
     allow-circular-references: true
+  # Without Elasticsearch/OpenSearch in docker-compose, Spring Boot 3.5+ would
+  # still auto-configure the REST client and the Sniffer polls localhost:9200
+  # (Connection refused spam in logs). Same pattern as hapi-fhir-jpaserver-starter
+  # for H2-only / Lucene demos — see application.yaml there under spring.autoconfigure.
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchClientAutoConfiguration
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
+      - org.springframework.boot.autoconfigure.elasticsearch.ReactiveElasticsearchClientAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.elasticsearch.ReactiveElasticsearchRepositoriesAutoConfiguration
   flyway:
     enabled: false
     baselineOnMigrate: true

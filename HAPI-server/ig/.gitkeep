@@ -1,3 +1,3 @@
 Run ../scripts/build-ig.sh to populate this directory with the
-hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz package built from
+hl7se.fhir.r4.ig.medicalalertinformation-0.1.0.tgz package built from
 the FSH sources.

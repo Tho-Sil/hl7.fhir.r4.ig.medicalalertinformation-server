@@ -4,7 +4,10 @@
   "type": "transaction",
   "entry": [
     {
-      "request": { "method": "PUT", "url": "Flag/flag-berit-8" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-berit-8"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-berit-8",
@@ -28,19 +31,39 @@
         "code": {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/sid/icd-10",
-              "code": "Z22.3",
-              "display": "Bärare av Staphylococcus aureus"
+              "system": "http://snomed.info/sct",
+              "code": "699128009",
+              "display": "Blood transfusion declined"
             }
-          ],
-          "text": "Information om MRSA-bärarskap som kräver särskild vårdrutin"
+          ]
         },
-        "subject": { "reference": "Patient/pat-berit" },
-        "period": { "start": "2023-11-08" }
+        "subject": {
+          "reference": "Patient/pat-berit"
+        },
+        "period": {
+          "start": "2023-11-08"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "patienten-accepterar-ej-blod-eller-plasmatransfusion",
+                  "display": "Patienten accepterar ej blod- eller plasmatransfusion"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-berit-9" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-berit-9"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-berit-9",
@@ -65,18 +88,38 @@
           "coding": [
             {
               "system": "http://snomed.info/sct",
-              "code": "432415000",
-              "display": "bärare av meticillinresistent Staphylococcus aureus"
+              "code": "306103005",
+              "display": "Referral to department"
             }
-          ],
-          "text": "Beslut: tillämpa MRSA-vårdrutin med isolering vid inneliggande vård"
+          ]
         },
-        "subject": { "reference": "Patient/pat-berit" },
-        "period": { "start": "2023-11-08" }
+        "subject": {
+          "reference": "Patient/pat-berit"
+        },
+        "period": {
+          "start": "2023-11-08"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "hanvisning-finns-till-en-specifik-vardenhet",
+                  "display": "Hänvisning finns till en specifik vårdenhet"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-gunnar-8" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-gunnar-8"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-gunnar-8",
@@ -100,19 +143,39 @@
         "code": {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/sid/icd-10",
-              "code": "Z22.4",
-              "display": "Bärare av multiresistenta bakterier"
+              "system": "http://snomed.info/sct",
+              "code": "713670002",
+              "display": "deltar i klinisk läkemedelsprövning"
             }
-          ],
-          "text": "Information om bärarskap av ESBL"
+          ]
         },
-        "subject": { "reference": "Patient/pat-gunnar" },
-        "period": { "start": "2022-07-19" }
+        "subject": {
+          "reference": "Patient/pat-gunnar"
+        },
+        "period": {
+          "start": "2022-07-19"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "deltagare-i-klinisk-lakemedelsprovning",
+                  "display": "Deltagare i klinisk läkemedelsprövning"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-gunnar-9" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-gunnar-9"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-gunnar-9",
@@ -137,14 +200,31 @@
           "coding": [
             {
               "system": "http://snomed.info/sct",
-              "code": "762988003",
-              "display": "bärare av ESBL-producerande bakterier"
+              "code": "306103005",
+              "display": "Referral to department"
             }
-          ],
-          "text": "Beslut: tillämpa kontaktsmittesrutin vid inneliggande vård"
+          ]
         },
-        "subject": { "reference": "Patient/pat-gunnar" },
-        "period": { "start": "2022-07-19" }
+        "subject": {
+          "reference": "Patient/pat-gunnar"
+        },
+        "period": {
+          "start": "2022-07-19"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "hanvisning-finns-till-en-specifik-vardenhet",
+                  "display": "Hänvisning finns till en specifik vårdenhet"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]

@@ -8,8 +8,9 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 const PROFILE_BASE = "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/";
 const CATEGORY_CS = "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCategoryCS";
-const PNR_SYSTEM = "urn:oid:1.2.752.129.2.1.3.1";
-const CRIT_LEVEL_EXT = PROFILE_BASE + "CriticalityLevelExtension";
+const PNR_SYSTEM = "http://electronichealth.se/identifier/personnummer";
+const CRIT_LEVEL_EXT = PROFILE_BASE + "SECriticalityLevelExtension";
+const ALERT_LABEL_EXT = PROFILE_BASE + "SEAlertLabelExtension";
 
 const CATEGORIES = {
   A1: { group: "A", icon: "🩺" },
@@ -119,7 +120,7 @@ const TRANSLATIONS = {
     tooltip_unstructured: "Ej strukturanpassad uppmärksamhetsinformation",
 
     overview_h1: "Översikt",
-    overview_intro: "Sammanställning av profilkoder och en tabellvy av samtliga laddade flaggor per testperson. Tio fiktiva patienter täcker alla tio uppmärksamhetsprofiler. Demodatat finns i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>.",
+    overview_intro: "Sammanställning av profilkoder och en tabellvy av samtliga laddade flaggor per testperson. Tio fiktiva patienter täcker alla tio uppmärksamhetsprofiler. Demodatat finns i <code>HAPI-server/data/</code> och laddas via <code>./scripts/load-data.sh</code>. I portalen visas endast <strong>Alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>) som huvudrad samt <strong>terminologi</strong> från <code>Flag.code.coding</code> som sekundär rad — inte fri text i <code>code.text</code>. Kör <code>python3 scripts/sync-demo-flags-with-ig.py</code> i server-repot om du återgenererar bundles från äldre exports.",
 
     profilecodes_h2: "Profilkoder",
     th_code: "Kod",
@@ -149,7 +150,7 @@ const TRANSLATIONS = {
     api_patients_t: "Alla patienter",
     api_patients_d: "Hämta de första 20 patienterna.",
     api_patient_pnr_t: "Sök patient på personnummer",
-    api_patient_pnr_d: "Identifierare med Inera-OID 1.2.752.129.2.1.3.1.",
+    api_patient_pnr_d: "Identifierare enligt SEBasePatient: <code>http://electronichealth.se/identifier/personnummer</code> (samma som i IG-patientexemplet).",
     api_active_flags_t: "Aktiva flaggor för en patient",
     api_active_flags_d: "Filtrera på subject och status.",
     api_allergies_t: "Alla allergier (kategori C1)",
@@ -261,7 +262,7 @@ const TRANSLATIONS = {
     tooltip_unstructured: "Unstructured alert information",
 
     overview_h1: "Overview",
-    overview_intro: "Profile-code reference and a tabular view of every loaded flag per test person. Ten fictional patients cover all ten alert-information profiles. The demo data lives in <code>HAPI-server/data/</code> and is loaded via <code>./scripts/load-data.sh</code>.",
+    overview_intro: "Profile-code reference and a tabular view of every loaded flag per test person. Ten fictional patients cover all ten alert-information profiles. The demo data lives in <code>HAPI-server/data/</code> and is loaded via <code>./scripts/load-data.sh</code>. The portal shows only the <strong>alert label</strong> (<code>SEAlertLabelExtension</code> / <code>SEAlertLabelCS</code>) as the headline plus <strong>terminology</strong> from <code>Flag.code.coding</code> as a secondary line — not free-text <code>code.text</code>. Run <code>python3 scripts/sync-demo-flags-with-ig.py</code> in the server repo if you regenerate bundles from older exports.",
 
     profilecodes_h2: "Profile codes",
     th_code: "Code",
@@ -291,7 +292,7 @@ const TRANSLATIONS = {
     api_patients_t: "All patients",
     api_patients_d: "Fetch the first 20 patients.",
     api_patient_pnr_t: "Search patient by personal-identity number",
-    api_patient_pnr_d: "Identifier with the Inera OID 1.2.752.129.2.1.3.1.",
+    api_patient_pnr_d: "Identifier per SEBasePatient: <code>http://electronichealth.se/identifier/personnummer</code> (same as the IG patient example).",
     api_active_flags_t: "Active flags for a patient",
     api_active_flags_d: "Filter by subject and status.",
     api_allergies_t: "All allergies (category C1)",
@@ -704,11 +705,75 @@ function umiTooltip(fields, allergySev) {
     : t("tooltip_none");
 }
 
+function getAlertLabelDisplay(flag) {
+  const ext = (flag.extension || []).find(e => e.url === ALERT_LABEL_EXT);
+  const c = ext?.valueCodeableConcept?.coding?.[0];
+  return (c?.display || "").trim();
+}
+
+function flagCodings(flag) {
+  return flag.code?.coding || [];
+}
+
+function formatCodingTerminologyLine(c) {
+  const sys = shortSystem(c.system || "");
+  const code = c.code || "";
+  const disp = (c.display || "").trim();
+  if (disp && code) return `${sys} · ${code} · ${disp}`;
+  if (code) return `${sys} · ${code}`;
+  return sys || "?";
+}
+
+/** Headline: alert label when present; otherwise first coding display (or system+code). */
+function getFlagPrimaryTitle(flag) {
+  const label = getAlertLabelDisplay(flag);
+  if (label) return label;
+  const codings = flagCodings(flag);
+  if (!codings.length) return t("no_code_description");
+  const c0 = codings[0];
+  const d = (c0.display || "").trim();
+  return d || `${shortSystem(c0.system)} ${c0.code}`;
+}
+
+function terminologyLineForCoding(flag, c) {
+  const label = getAlertLabelDisplay(flag);
+  const codings = flagCodings(flag);
+  let line = formatCodingTerminologyLine(c);
+  if (!label && codings.length === 1) {
+    const d = (c.display || "").trim();
+    if (d && getFlagPrimaryTitle(flag) === d)
+      line = `${shortSystem(c.system)} · ${c.code}`;
+  }
+  return line;
+}
+
+function renderFlagTerminology(flag) {
+  const codings = flagCodings(flag);
+  if (!codings.length) return "";
+  const inner = codings.map(c =>
+    `<div class="flag-terminology-line">${escapeHtml(terminologyLineForCoding(flag, c))}</div>`
+  ).join("");
+  return `<div class="flag-terminology">${inner}</div>`;
+}
+
+function htmlFlagDescriptionForTable(flag) {
+  const hasLabel = !!getAlertLabelDisplay(flag);
+  const titleCls = hasLabel ? "doc-flag-title" : "doc-flag-title doc-flag-title--fallback";
+  const title = escapeHtml(getFlagPrimaryTitle(flag));
+  const codings = flagCodings(flag);
+  if (!codings.length) return `<div class="${titleCls}">${title}</div>`;
+  const lines = codings.map(c =>
+    `<div>${escapeHtml(terminologyLineForCoding(flag, c))}</div>`
+  ).join("");
+  return `<div class="${titleCls}">${title}</div><div class="doc-flag-term">${lines}</div>`;
+}
+
 function renderFlag(flag) {
   const status = flag.status || "active";
-  const text = flag.code?.text || flag.code?.coding?.[0]?.display || t("no_code_description");
-  const codings = flag.code?.coding || [];
+  const primaryTitle = getFlagPrimaryTitle(flag);
+  const terminologyHtml = renderFlagTerminology(flag);
   const inactiveCls = status !== "active" ? " inactive" : "";
+  const hasLabel = !!getAlertLabelDisplay(flag);
 
   const crit = (flag.extension || []).find(e => e.url === CRIT_LEVEL_EXT);
   const critCode = crit?.valueCodeableConcept?.coding?.[0]?.code;
@@ -718,20 +783,14 @@ function renderFlag(flag) {
     : "";
 
   const period = formatPeriod(flag.period);
-  const codeChips = codings.map(c =>
-    `<span class="flag-code-chip">${escapeHtml(shortSystem(c.system))} · ${escapeHtml(c.code)}</span>`).join("");
-  const display = codings[0]?.display && codings[0].display !== text
-    ? `<div class="flag-display">${escapeHtml(codings[0].display)}</div>`
-    : "";
-
   const statusLabel = status === "active" ? t("flag_status_active") : t("flag_status_inactive");
+  const titleCls = hasLabel ? "flag-alert-title" : "flag-alert-title flag-alert-title--fallback";
   return `<div class="flag-item${inactiveCls}">
     <div class="flag-status-pill ${status}">${escapeHtml(statusLabel)}</div>
     <div class="flag-body">
-      <div class="flag-text">${escapeHtml(text)}</div>
-      ${display}
+      <div class="${titleCls}">${escapeHtml(primaryTitle)}</div>
+      ${terminologyHtml}
       <div class="flag-meta">
-        ${codeChips}
         ${period ? `<span>${escapeHtml(period)}</span>` : ""}
       </div>
     </div>
@@ -770,7 +829,7 @@ function renderTestPatientDocs() {
                   <td><span class="flag-status-pill ${f.status}">${escapeHtml(statusLabel)}</span></td>
                   <td><span class="badge cat-${catLetter}">${cat}</span></td>
                   <td><code>${escapeHtml(codeStr)}</code></td>
-                  <td>${escapeHtml(f.code?.text || c?.display || "")}</td>
+                  <td class="doc-flag-desc">${htmlFlagDescriptionForTable(f)}</td>
                   <td>${escapeHtml(formatPeriod(f.period))}</td>
                 </tr>`;
               }).join("")}
@@ -784,7 +843,7 @@ function renderTestPatientDocs() {
 const API_EXAMPLES = [
   { titleKey: "api_metadata_t",     descKey: "api_metadata_d",     method: "GET", path: "/metadata" },
   { titleKey: "api_patients_t",     descKey: "api_patients_d",     method: "GET", path: "/Patient?_count=20" },
-  { titleKey: "api_patient_pnr_t",  descKey: "api_patient_pnr_d",  method: "GET", path: "/Patient?identifier=urn:oid:1.2.752.129.2.1.3.1%7C194506121518" },
+  { titleKey: "api_patient_pnr_t",  descKey: "api_patient_pnr_d",  method: "GET", path: "/Patient?identifier=http%3A%2F%2Felectronichealth.se%2Fidentifier%2Fpersonnummer%7C194506121518" },
   { titleKey: "api_active_flags_t", descKey: "api_active_flags_d", method: "GET", path: "/Flag?subject=Patient/pat-johnbob&status=active" },
   { titleKey: "api_allergies_t",    descKey: "api_allergies_d",    method: "GET", path: "/Flag?category=C1" },
   { titleKey: "api_infection_t",    descKey: "api_infection_d",    method: "GET", path: "/Flag?category=B1,B2&status=active" },

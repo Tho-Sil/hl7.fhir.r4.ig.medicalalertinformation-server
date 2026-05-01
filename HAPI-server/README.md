@@ -1,7 +1,7 @@
 # HAPI FHIR-server för uppmärksamhetsinformation
 
 En förkonfigurerad HAPI FHIR JPA-server (R4) med exempeldata enligt
-profilerna i `hl7.fhir.r4.ig.medicalalertinformation`. Avsedd för
+profilerna i IG-repot `hl7.fhir.r4.ig.medicalalertinformation` (syskon till detta repo). Avsedd för
 hackathonet under Vitalis 2026.
 
 - Bas-URL: `http://localhost:8080/fhir`
@@ -33,6 +33,12 @@ Stäng av:
 docker compose down            # stoppar containern (in-memory-datat försvinner)
 ```
 
+### Elasticsearch / `Connection refused` i loggen
+
+Om du ser **`ElasticsearchNodesSniffer`** / **`Connection refused`** mot port **9200** beror det på att Spring Boot annars auto-konfigurerar Elasticsearch-klienten trots att denna demo **inte** kör OpenSearch/Elasticsearch. I `config/application.yaml` är därför Elasticsearch-relaterad auto-konfiguration **avstängd** (samma idé som i [hapi-fhir-jpaserver-starter](https://github.com/hapifhir/hapi-fhir-jpaserver-starter)).
+
+Efter ändring i YAML: **`docker compose restart hapi`** (eller `down` + `up`) så den nya konfigurationen laddas.
+
 Återställ till nyladdat tillstånd utan omstart:
 
 ```bash
@@ -51,6 +57,7 @@ docker compose restart hapi && ./scripts/load-data.sh
 | `data/` | Transaction-bundles med exempeldata (`02-patients.json`, `10-flags-medical.json`, …) |
 | `scripts/build-ig.sh` | Bygger IG-paketet med SUSHI (+ valfritt IG Publisher) |
 | `scripts/load-data.sh` | Laddar alla bundles till en körande server |
+| `scripts/sync-demo-flags-with-ig.py` | Uppdaterar flagg-bundles med `SEAlertLabelExtension`, E1 ICD-10-SE-kod m.m. i linje med IG (kör vid behov före commit/laddning) |
 | `scripts/load-ig.sh` | PUTar profiler/value sets/code systems från IG-tgz:en |
 | `scripts/reset.sh` | Rensar Flag/Observation/Patient och laddar om |
 | `docs/test-patients.md` | Vilka testpersoner som finns och deras uppmärksamhetsinformation |
@@ -74,7 +81,7 @@ opålitligt med lokala `file://`-URL:er.
 
 `build-ig.sh --sushi` kräver SUSHI (`npm install -g fsh-sushi`) och
 nät­access till `packages.fhir.org` för core-paketen. Resultatet
-hamnar som `ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz`.
+hamnar som `ig/hl7se.fhir.r4.ig.medicalalertinformation-0.1.0.tgz`.
 
 ## Testpatienter — kort översikt
 

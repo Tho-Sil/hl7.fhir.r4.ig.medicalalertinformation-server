@@ -4,7 +4,10 @@
   "type": "transaction",
   "entry": [
     {
-      "request": { "method": "PUT", "url": "Flag/flag-berit-5" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-berit-5"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-berit-5",
@@ -30,17 +33,38 @@
             {
               "system": "http://snomed.info/sct",
               "code": "432415000",
-              "display": "bärare av meticillinresistent Staphylococcus aureus"
+              "display": "MRSA (methicillin resistant Staphylococcus aureus) carrier"
             }
-          ],
-          "text": "MRSA-bärare"
+          ]
         },
-        "subject": { "reference": "Patient/pat-berit", "display": "Berit Fri Andersson" },
-        "period": { "start": "2023-11-08" }
+        "subject": {
+          "reference": "Patient/pat-berit",
+          "display": "Berit Fri Andersson"
+        },
+        "period": {
+          "start": "2023-11-08"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "mrsa-meticillinresistenta-staphylococcus-aureus",
+                  "display": "MRSA (meticillinresistenta Staphylococcus aureus)"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-gunnar-5" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-gunnar-5"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-gunnar-5",
@@ -66,17 +90,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "762988003",
-              "display": "bärare av ESBL-producerande bakterier"
+              "display": "Carrier of extended spectrum beta-lactamase producing bacteria"
             }
-          ],
-          "text": "ESBL-bärare"
+          ]
         },
-        "subject": { "reference": "Patient/pat-gunnar" },
-        "period": { "start": "2022-07-19" }
+        "subject": {
+          "reference": "Patient/pat-gunnar"
+        },
+        "period": {
+          "start": "2022-07-19"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "tarmbakterier-som-bildar-esbl-extended-spectrum-beta-lactamase",
+                  "display": "Tarmbakterier som bildar ESBL (Extended Spectrum Beta-Lactamase)"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-fatima-6" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-fatima-6"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-fatima-6",
@@ -100,19 +144,40 @@
         "code": {
           "coding": [
             {
-              "system": "http://snomed.info/sct",
+              "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationNationalSnomedCS",
               "code": "64301000052105",
               "display": "blodsmitta hos gravid"
             }
-          ],
-          "text": "Blodsmitta hos gravid"
+          ]
         },
-        "subject": { "reference": "Patient/pat-fatima", "display": "Fatima Al-Hassan" },
-        "period": { "start": "2025-01-22" }
+        "subject": {
+          "reference": "Patient/pat-fatima",
+          "display": "Fatima Al-Hassan"
+        },
+        "period": {
+          "start": "2025-01-22"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "blodsmitta-hos-gravid",
+                  "display": "Blodsmitta hos gravid"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Observation/obs-fatima-blodsmitta" },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/obs-fatima-blodsmitta"
+      },
       "resource": {
         "resourceType": "Observation",
         "id": "obs-fatima-blodsmitta",
@@ -125,18 +190,23 @@
         "code": {
           "coding": [
             {
-              "system": "http://snomed.info/sct",
+              "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationNationalSnomedCS",
               "code": "64301000052105",
               "display": "blodsmitta hos gravid"
             }
           ]
         },
-        "subject": { "reference": "Patient/pat-fatima" },
+        "subject": {
+          "reference": "Patient/pat-fatima"
+        },
         "effectiveDateTime": "2025-01-22"
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-sara-6" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-sara-6"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-sara-6",
@@ -160,15 +230,34 @@
         "code": {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/sid/icd-10",
+              "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationICD10SECS",
               "code": "A49.9",
               "display": "Bakteriell infektion, ospecificerad"
             }
-          ],
-          "text": "Tidigare bakteriell infektion (utläkt)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-sara", "display": "Sara Lindgren" },
-        "period": { "start": "2024-02-10", "end": "2024-04-03" }
+        "subject": {
+          "reference": "Patient/pat-sara",
+          "display": "Sara Lindgren"
+        },
+        "period": {
+          "start": "2024-02-10",
+          "end": "2024-04-03"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "annat",
+                  "display": "Annat"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]

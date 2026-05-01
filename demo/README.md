@@ -2,7 +2,7 @@
 
 En självstående webbsida som visualiserar uppmärksamhets­information
 från den lokala HAPI-servern. Bygger på samma profiler som finns i
-`hl7.fhir.r4.ig.medicalalertinformation/` och visar datat ungefär som
+Implementation Guide-repot `hl7.fhir.r4.ig.medicalalertinformation` och visar datat ungefär som
 det skulle presenteras i ett journal­system eller i NPÖ.
 
 ## Snabbstart
@@ -35,7 +35,9 @@ Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
   - Patient­huvud (namn, personnummer, kön, ålder)
   - Varningsbanner vid aktiva signaler
   - Grupperad uppmärksamhets­information (medicinska tillstånd,
-    smitta, överkänslighet, vårdrutiner, ostrukturerat)
+    smitta, överkänslighet, vårdrutiner, ostrukturerat), där varje rad
+    visar **alert label** (`SEAlertLabelExtension`) tydligast och
+    **terminologi** från `Flag.code.coding` diskret under — inte `code.text`
   - Allvarlighetsgrad markerad med färg där den finns
   - Inaktiva flaggor visas dämpat
 - **Testpersoner**: tabellförklaring av alla 10 profiler plus

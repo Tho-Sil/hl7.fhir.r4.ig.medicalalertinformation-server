@@ -16,7 +16,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVER_DIR="$(dirname "$SCRIPT_DIR")"
 REPO_ROOT="$(dirname "$SERVER_DIR")"
-IG_DIR="$REPO_ROOT/hl7.fhir.r4.ig.medicalalertinformation"
+# IG is a sibling repo (same parent as this server repo), not a copy under REPO_ROOT.
+IG_DIR="$(cd "$REPO_ROOT/../hl7.fhir.r4.ig.medicalalertinformation" && pwd)"
 OUT_DIR="$SERVER_DIR/ig"
 
 if [[ ! -d "$IG_DIR" ]]; then
@@ -49,7 +50,7 @@ if [[ "${1:-}" == "--sushi" ]]; then
   cp "$RES_DIR"/*.json "$STAGE/package/"
   cat >"$STAGE/package/package.json" <<'JSON'
 {
-  "name": "hl7.fhir.r4.ig.medicalalertinformation",
+  "name": "hl7se.fhir.r4.ig.medicalalertinformation",
   "version": "0.1.0",
   "canonical": "http://hl7.se/fhir/r4/ig/medicalalertinformation",
   "fhirVersions": ["4.0.1"],
@@ -75,7 +76,7 @@ if [[ ! -f "$PKG_TGZ" ]]; then
   exit 1
 fi
 
-DEST="$OUT_DIR/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz"
+DEST="$OUT_DIR/hl7se.fhir.r4.ig.medicalalertinformation-0.1.0.tgz"
 cp "$PKG_TGZ" "$DEST"
 echo "[build-ig] wrote $DEST"
 echo

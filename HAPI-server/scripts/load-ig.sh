@@ -12,7 +12,7 @@ set -euo pipefail
 BASE="${1:-${FHIR_BASE:-http://localhost:8080/fhir}}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SERVER_DIR="$(dirname "$SCRIPT_DIR")"
-TGZ="$SERVER_DIR/ig/hl7.fhir.r4.ig.medicalalertinformation-0.1.0.tgz"
+TGZ="$SERVER_DIR/ig/hl7se.fhir.r4.ig.medicalalertinformation-0.1.0.tgz"
 
 if [[ ! -f "$TGZ" ]]; then
   echo "error: $TGZ not found." >&2

@@ -12,11 +12,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "191212121212",
             "use": "official"
           }
@@ -46,11 +49,18 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" },
+            {
+              "code": "sekretessmarkering",
+              "system": "http://hl7.se/fhir/ig/base/CodeSystem/SecurityLabel"
+            }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "195009072553",
             "use": "official"
           }
@@ -80,11 +90,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "195401232380",
             "use": "official"
           }
@@ -114,11 +127,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "197109199289",
             "use": "official"
           }
@@ -148,11 +164,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "198405152364",
             "use": "official"
           }
@@ -182,11 +201,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "199203049809",
             "use": "official"
           }
@@ -216,11 +238,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "200101012393",
             "use": "official"
           }
@@ -250,11 +275,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "201201013035",
             "use": "official"
           }
@@ -284,11 +312,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "194506121518",
             "use": "official"
           }
@@ -318,11 +349,14 @@
         "meta": {
           "profile": [
             "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertInformationPatient"
+          ],
+          "security": [
+            { "code": "DEMO" }
           ]
         },
         "identifier": [
           {
-            "system": "urn:oid:1.2.752.129.2.1.3.1",
+            "system": "http://electronichealth.se/identifier/personnummer",
             "value": "198808254736",
             "use": "official"
           }

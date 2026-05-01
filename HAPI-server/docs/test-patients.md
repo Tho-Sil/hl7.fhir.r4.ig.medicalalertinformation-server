@@ -1,7 +1,7 @@
 # Testpatienter och uppmärksamhetsinformation
 
 Tio testpatienter har laddats med exempeldata enligt profilerna i
-`hl7.fhir.r4.ig.medicalalertinformation`. Varje uppmärksamhetstyp
+IG-repot `hl7.fhir.r4.ig.medicalalertinformation`. Varje uppmärksamhetstyp
 (profil 1 till 10) finns representerad minst en gång.
 
 Profilförkortningar i tabellen nedan:
@@ -59,9 +59,9 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
 | `flag-berit-5` | B1 | active | SCT 432415000 *MRSA-bärare* | |
-| `flag-berit-8` | D1 | active | ICD Z22.3 *Bärare av Staphylococcus aureus* | Information om bärarskap |
-| `flag-berit-9` | D2 | active | SCT 432415000 *MRSA-bärare* | Beslut: tillämpa MRSA-vårdrutin |
-| `flag-berit-10` | E1 | active | (fritext) | Ostrukturerad anteckning från 1998 |
+| `flag-berit-8` | D1 | active | SCT 699128009 *Blood transfusion declined* | Kod från IG VS; demoportalen visar alert label + `code.coding` |
+| `flag-berit-9` | D2 | active | SCT 306103005 *Referral to department* | Kod från IG VS; demoportalen visar alert label + `code.coding` |
+| `flag-berit-10` | E1 | active | ICD-10-SE A49.9 | Alert label enligt `SEAlertLabelCS`; demodata utan fri `code.text` |
 
 ### `pat-karlerik` — Karl-Erik Sjöberg (19710919-9289)
 
@@ -75,9 +75,9 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
-| `flag-fatima-6` | B2 | active | SCT 64301000052105 *blodsmitta hos gravid* | |
-| `flag-fatima-7` | C1 | active | SCT 373568007 *klorhexidin* | Allvarlighetsgrad: besvärande (`59031000052109`) |
-| `obs-fatima-blodsmitta` | (Observation) | final | SCT 64301000052105 | `SEAlertInformationIncidenceOfInfectiousDiseaseObservation` |
+| `flag-fatima-6` | B2 | active | Nationellt SNOMED 64301000052105 *blodsmitta hos gravid* | `SEAlertInformationNationalSnomedCS` |
+| `flag-fatima-7` | C1 | active | SCT 373568007 *Chlorhexidine* | Allvarlighetsgrad: besvärande (`59031000052109`) |
+| `obs-fatima-blodsmitta` | (Observation) | final | Nationellt SNOMED 64301000052105 | `SEAlertInformationIncidenceOfInfectiousDiseaseObservation` |
 
 ### `pat-astrid` — Astrid Berg (19920304-9809)
 
@@ -86,16 +86,13 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 | `flag-astrid-1` | A1 | active | SCT 405501007 *malign hypertermi* | Risk vid anestesi |
 | `flag-astrid-4` | A4 | active | SCT 69805005 *insulinpump* | |
 
-> Notera: profil **D2** (Beslut om särskild vårdrutin) är begränsad
-> till bärarskapskoder i sitt value set och kan därför inte användas
-> direkt för en patient utan dokumenterad bakteriell bärarstatus.
-> Demo-fall för D2 finns hos Berit och Gunnar.
+> **D1/D2:** Koderna följer IG:s value sets (`SEAlertInformationSpecialCareRoutineSnomedCT` / `…DecisionSpecialCareRoutineSnomedCT`). Demobundles har ingen fri `code.text`; demoportalen visar **alert label** och **terminologi** (`code.coding`) enligt samma princip som för övriga profiler.
 
 ### `pat-liam` — Liam Nordström (20010101-2393)
 
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
-| `flag-liam-1` | A1 | active | ICD D67.9 *Ärftlig brist på faktor IX* | Hemofili B |
+| `flag-liam-1` | A1 | active | ICD-10-SE D67.9 *Ärftlig brist på faktor IX* | Hemofili B |
 | `flag-liam-7` | C1 | active | SCT 281000220103 *taurolidin* | |
 
 ### `pat-lova` — Lova Karlsson (20120101-3035)
@@ -103,7 +100,7 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
 | `flag-lova-4` | A4 | active | SCT 43252007 *kokleaimplantat* | |
-| `flag-lova-10` | E1 | active | (fritext) | "Allergi mot jordnötter enligt mor — ej verifierad" |
+| `flag-lova-10` | E1 | active | ICD-10-SE A49.9 | Alert label + kod enligt ovan (ingen `code.text` i demodata) |
 
 ### `pat-gunnar` — Gunnar Lind (19450612-1518)
 
@@ -112,15 +109,15 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 | `flag-gunnar-2` | A2 | **inactive** | ATC B01AA03 *Warfarin* | Avslutad 2024 efter byte till DOAK |
 | `flag-gunnar-3` | A3 | active | SCT 737297006 *transplanterad lever föreligger* | Levertransplantation 2010 |
 | `flag-gunnar-5` | B1 | active | SCT 762988003 *ESBL-bärare* | |
-| `flag-gunnar-8` | D1 | active | ICD Z22.4 *Bärare av multiresistenta bakterier* | |
-| `flag-gunnar-9` | D2 | active | SCT 762988003 *ESBL-bärare* | Beslut: kontaktsmittesrutin |
+| `flag-gunnar-8` | D1 | active | SCT 713670002 *deltar i klinisk läkemedelsprövning* | Kod från IG VS; demoportalen visar alert label + `code.coding` |
+| `flag-gunnar-9` | D2 | active | SCT 306103005 *Referral to department* | Kod från IG VS; demoportalen visar alert label + `code.coding` |
 
 ### `pat-sara` — Sara Lindgren (19880825-4736)
 
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
-| `flag-sara-6` | B2 | **inactive** | ICD A49.9 *Bakteriell infektion, ospecificerad* | Utläkt; `period.end = 2024-04-03` |
-| `flag-sara-10` | E1 | active | (fritext) | Ostrukturerad anmärkning om opioidkänslighet |
+| `flag-sara-6` | B2 | **inactive** | ICD-10-SE A49.9 *Bakteriell infektion, ospecificerad* | Utläkt; `period.end = 2024-04-03` |
+| `flag-sara-10` | E1 | active | ICD-10-SE A49.9 | Alert label + kod enligt ovan (ingen `code.text` i demodata) |
 
 ## Demoscenarier
 

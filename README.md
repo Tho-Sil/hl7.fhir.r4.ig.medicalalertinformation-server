@@ -1,11 +1,12 @@
 # hl7.fhir.r4.ig.medicalalertinformation — server och IG-källkod
 
-Detta repo innehåller två saker:
+Detta repo innehåller server och demo. **IG-källkoden (FSH)** ligger i
+syskon-repot **`hl7.fhir.r4.ig.medicalalertinformation`** (samma
+överordnade katalog som detta repo), inte under denna katalog.
 
-1. **`hl7.fhir.r4.ig.medicalalertinformation/`** — källkoden (FSH) för
-   den svenska FHIR Implementation Guide:n för
-   *uppmärksamhetsinformation*, baserad på Socialstyrelsens
-   informationsspecifikation
+1. **Syskon: `../hl7.fhir.r4.ig.medicalalertinformation/`** — FHIR
+   Implementation Guide för *uppmärksamhetsinformation*, baserad på
+   Socialstyrelsens informationsspecifikation
    <https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/>.
    Publiceras av HL7 Sverige.
 
@@ -43,8 +44,10 @@ Detaljerad dokumentation, testpatienter och API-exempel:
 
 ## Bygga IG:n
 
+Från roten av *detta* repo, gå till syskon-mappen med IG-källkoden:
+
 ```bash
-cd hl7.fhir.r4.ig.medicalalertinformation
+cd ../hl7.fhir.r4.ig.medicalalertinformation
 sushi .            # FSH → fsh-generated/
 ./_genonce.sh      # IG Publisher → output/
 ```

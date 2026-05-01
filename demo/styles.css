@@ -434,15 +434,28 @@ main {
 .flag-status-pill.inactive { background: var(--neutral-soft); color: var(--neutral); }
 
 .flag-body { min-width: 0; }
-.flag-text {
-  font-weight: 600;
-  margin-bottom: 4px;
+/* Alert label (or terminology-only headline) — primary */
+.flag-alert-title {
+  font-size: 15px;
+  font-weight: 700;
   line-height: 1.35;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
 }
-.flag-display {
-  color: var(--text-muted);
-  font-size: 12px;
-  margin-bottom: 4px;
+.flag-alert-title--fallback {
+  color: var(--text);
+  font-weight: 600;
+}
+.flag-terminology {
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+.flag-terminology-line {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-subtle);
+  font-family: var(--mono);
 }
 .flag-meta {
   display: flex;
@@ -451,12 +464,7 @@ main {
   font-size: 11px;
   color: var(--text-subtle);
   font-family: var(--mono);
-}
-.flag-code-chip {
-  background: var(--bg-sunken);
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 .criticality-pill {
@@ -555,6 +563,22 @@ main {
 }
 .patient-doc-header h3 { margin: 0; }
 .patient-doc-pnr { font-family: var(--mono); color: var(--text-subtle); font-size: 12px; }
+
+.patient-doc .doc-flag-desc { vertical-align: top; min-width: 12rem; }
+.patient-doc .doc-flag-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--primary);
+  line-height: 1.35;
+  margin-bottom: 2px;
+}
+.patient-doc .doc-flag-title--fallback { color: var(--text); }
+.patient-doc .doc-flag-term {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-subtle);
+  line-height: 1.4;
+}
 
 /* ── API examples ─────────────────────────────────────────── */
 .api-examples { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }

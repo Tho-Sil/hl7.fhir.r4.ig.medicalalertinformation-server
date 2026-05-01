@@ -31,7 +31,7 @@ curl -s "$FHIR/Patient?_count=20" \
 Sök på personnummer:
 
 ```bash
-curl -s "$FHIR/Patient?identifier=urn:oid:1.2.752.129.2.1.3.1|194506121518" | jq
+curl -s "$FHIR/Patient?identifier=http://electronichealth.se/identifier/personnummer|194506121518" | jq
 ```
 
 Hämta en patient:

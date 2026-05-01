@@ -4,7 +4,10 @@
   "type": "transaction",
   "entry": [
     {
-      "request": { "method": "PUT", "url": "Flag/flag-tolvan-1" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-tolvan-1"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-tolvan-1",
@@ -30,17 +33,38 @@
             {
               "system": "http://snomed.info/sct",
               "code": "9651007",
-              "display": "långt QT-syndrom"
+              "display": "Long QT syndrome"
             }
-          ],
-          "text": "Långt QT-syndrom"
+          ]
         },
-        "subject": { "reference": "Patient/pat-tolvan", "display": "Tolvan Tolvansson" },
-        "period": { "start": "2018-04-12" }
+        "subject": {
+          "reference": "Patient/pat-tolvan",
+          "display": "Tolvan Tolvansson"
+        },
+        "period": {
+          "start": "2018-04-12"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "langt-qt-syndrom-lqts",
+                  "display": "Långt QT-syndrom (LQTS)"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-johnbob-1" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-johnbob-1"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-johnbob-1",
@@ -66,17 +90,38 @@
             {
               "system": "http://snomed.info/sct",
               "code": "70995007",
-              "display": "pulmonell hypertoni"
+              "display": "Pulmonary hypertension"
             }
-          ],
-          "text": "Pulmonell hypertoni"
+          ]
         },
-        "subject": { "reference": "Patient/pat-johnbob", "display": "John Bob Goode Johansson" },
-        "period": { "start": "2014-11-03" }
+        "subject": {
+          "reference": "Patient/pat-johnbob",
+          "display": "John Bob Goode Johansson"
+        },
+        "period": {
+          "start": "2014-11-03"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "pulmonell-hypertension",
+                  "display": "Pulmonell hypertension"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-johnbob-2" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-johnbob-2"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-johnbob-2",
@@ -102,17 +147,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "243142003",
-              "display": "BiPAP-behandling"
+              "display": "Bilevel positive airway pressure treatment"
             }
-          ],
-          "text": "BiPAP-behandling, pågående"
+          ]
         },
-        "subject": { "reference": "Patient/pat-johnbob" },
-        "period": { "start": "2022-02-15" }
+        "subject": {
+          "reference": "Patient/pat-johnbob"
+        },
+        "period": {
+          "start": "2022-02-15"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "beroende-av-icke-invasiv-ventilation",
+                  "display": "Beroende av icke-invasiv ventilation"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-johnbob-4" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-johnbob-4"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-johnbob-4",
@@ -138,17 +203,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "72506001",
-              "display": "implanterbar defibrillator"
+              "display": "Implantable cardioverter defibrillator"
             }
-          ],
-          "text": "Implanterbar defibrillator (ICD)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-johnbob" },
-        "period": { "start": "2019-10-21" }
+        "subject": {
+          "reference": "Patient/pat-johnbob"
+        },
+        "period": {
+          "start": "2019-10-21"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "implanterbar-defibrillator-icd-implantable-cardioverter-defibrillator",
+                  "display": "Implanterbar defibrillator (ICD – implantable cardioverter-defibrillator)"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-karlerik-1" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-karlerik-1"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-karlerik-1",
@@ -174,17 +259,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "234467004",
-              "display": "trombofili"
+              "display": "Thrombophilia"
             }
-          ],
-          "text": "Trombofili"
+          ]
         },
-        "subject": { "reference": "Patient/pat-karlerik" },
-        "period": { "start": "2010-06-30" }
+        "subject": {
+          "reference": "Patient/pat-karlerik"
+        },
+        "period": {
+          "start": "2010-06-30"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "trombofili",
+                  "display": "Trombofili"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-karlerik-2" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-karlerik-2"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-karlerik-2",
@@ -212,15 +317,35 @@
               "code": "L04",
               "display": "Immunsuppressiva medel"
             }
-          ],
-          "text": "Pågående immunsuppressiv behandling efter hjärttransplantation"
+          ]
         },
-        "subject": { "reference": "Patient/pat-karlerik" },
-        "period": { "start": "2017-08-04" }
+        "subject": {
+          "reference": "Patient/pat-karlerik"
+        },
+        "period": {
+          "start": "2017-08-04"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "immunmodulerande-behandling",
+                  "display": "Immunmodulerande behandling"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-karlerik-3" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-karlerik-3"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-karlerik-3",
@@ -246,17 +371,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "739024006",
-              "display": "transplanterat hjärta föreligger"
+              "display": "Heart transplanted"
             }
-          ],
-          "text": "Hjärttransplantation utförd"
+          ]
         },
-        "subject": { "reference": "Patient/pat-karlerik" },
-        "period": { "start": "2017-08-02" }
+        "subject": {
+          "reference": "Patient/pat-karlerik"
+        },
+        "period": {
+          "start": "2017-08-02"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "hjarttransplanterad",
+                  "display": "Hjärttransplanterad"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-astrid-1" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-astrid-1"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-astrid-1",
@@ -282,17 +427,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "405501007",
-              "display": "malign hypertermi"
+              "display": "Malignant hyperthermia susceptibility"
             }
-          ],
-          "text": "Malign hypertermi (livshotande vid anestesi)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-astrid" },
-        "period": { "start": "2015-09-12" }
+        "subject": {
+          "reference": "Patient/pat-astrid"
+        },
+        "period": {
+          "start": "2015-09-12"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "malign-hypertermikanslighet",
+                  "display": "Malign hypertermikänslighet"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-astrid-4" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-astrid-4"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-astrid-4",
@@ -318,17 +483,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "69805005",
-              "display": "insulinpump"
+              "display": "Insulin pump device"
             }
-          ],
-          "text": "Insulinpump"
+          ]
         },
-        "subject": { "reference": "Patient/pat-astrid" },
-        "period": { "start": "2023-04-18" }
+        "subject": {
+          "reference": "Patient/pat-astrid"
+        },
+        "period": {
+          "start": "2023-04-18"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "insulinpump",
+                  "display": "Insulinpump"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-liam-1" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-liam-1"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-liam-1",
@@ -352,19 +537,39 @@
         "code": {
           "coding": [
             {
-              "system": "http://hl7.org/fhir/sid/icd-10",
+              "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationICD10SECS",
               "code": "D67.9",
               "display": "Ärftlig brist på faktor IX"
             }
-          ],
-          "text": "Hemofili B (ärftlig faktor IX-brist)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-liam" },
-        "period": { "start": "2002-03-15" }
+        "subject": {
+          "reference": "Patient/pat-liam"
+        },
+        "period": {
+          "start": "2002-03-15"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "koagulationsrubbningar",
+                  "display": "Koagulationsrubbningar"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-lova-4" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-lova-4"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-lova-4",
@@ -390,17 +595,37 @@
             {
               "system": "http://snomed.info/sct",
               "code": "43252007",
-              "display": "kokleaimplantat"
+              "display": "Cochlear implant"
             }
-          ],
-          "text": "Kokleaimplantat"
+          ]
         },
-        "subject": { "reference": "Patient/pat-lova" },
-        "period": { "start": "2017-05-09" }
+        "subject": {
+          "reference": "Patient/pat-lova"
+        },
+        "period": {
+          "start": "2017-05-09"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "cochleaimplantat",
+                  "display": "Cochleaimplantat"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-gunnar-2" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-gunnar-2"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-gunnar-2",
@@ -428,15 +653,36 @@
               "code": "B01AA03",
               "display": "Warfarin"
             }
-          ],
-          "text": "Warfarin (avslutad efter byte till DOAK)"
+          ]
         },
-        "subject": { "reference": "Patient/pat-gunnar" },
-        "period": { "start": "2011-01-04", "end": "2024-09-12" }
+        "subject": {
+          "reference": "Patient/pat-gunnar"
+        },
+        "period": {
+          "start": "2011-01-04",
+          "end": "2024-09-12"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "warfarinbehandling",
+                  "display": "Warfarinbehandling"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     {
-      "request": { "method": "PUT", "url": "Flag/flag-gunnar-3" },
+      "request": {
+        "method": "PUT",
+        "url": "Flag/flag-gunnar-3"
+      },
       "resource": {
         "resourceType": "Flag",
         "id": "flag-gunnar-3",
@@ -462,13 +708,30 @@
             {
               "system": "http://snomed.info/sct",
               "code": "737297006",
-              "display": "transplanterad lever föreligger"
+              "display": "Liver transplanted"
             }
-          ],
-          "text": "Levertransplantation utförd"
+          ]
         },
-        "subject": { "reference": "Patient/pat-gunnar" },
-        "period": { "start": "2010-11-22" }
+        "subject": {
+          "reference": "Patient/pat-gunnar"
+        },
+        "period": {
+          "start": "2010-11-22"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SEAlertLabelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS",
+                  "code": "levertransplanterad",
+                  "display": "Levertransplanterad"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]
