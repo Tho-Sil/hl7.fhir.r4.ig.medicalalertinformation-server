@@ -61,3 +61,8 @@ Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
 
 Inga byggsteg och inga npm-paket i repot — öppna en statisk filserver så funkar
 det. Symbol-fliken laddar [GSAP](https://greensock.com/gsap/) från CDN för animationer.
+
+**Licens:** den här katalogens kod omfattas av MIT (se repo-roten
+[`LICENSE`](../LICENSE)). Symbolens SVG-geometri följer
+[oskthu2/uppmarksamhetssymbol](https://github.com/oskthu2/uppmarksamhetssymbol)
+(CC0 1.0); se [`NOTICE`](../NOTICE) i repo-roten.

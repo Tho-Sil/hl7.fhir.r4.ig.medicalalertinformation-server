@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `NOTICE` clarifying CC0 symbol geometry vs MIT-licensed project code; README and `demo/README.md` updated accordingly.
+
 ## [0.1.0] - 2026-05-01
 
 ### Added

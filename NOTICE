@@ -1,0 +1,14 @@
+Third-party material
+====================
+
+National alert symbol (geometry)
+--------------------------------
+The SVG path geometry used in the demo portal’s “Symbolen” view is derived
+from the repository https://github.com/oskthu2/uppmarksamhetssymbol , which
+is dedicated to the public domain under Creative Commons CC0 1.0 Universal:
+
+  https://creativecommons.org/publicdomain/zero/1.0/
+
+Interactive behaviour, styling, and mapping from FHIR data to highlighted
+fields in this project are separate works licensed under the MIT License
+(see LICENSE).
