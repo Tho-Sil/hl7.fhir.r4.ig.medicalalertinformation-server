@@ -13,17 +13,46 @@ const CRIT_LEVEL_EXT = PROFILE_BASE + "SECriticalityLevelExtension";
 const ALERT_LABEL_EXT = PROFILE_BASE + "SEAlertLabelExtension";
 
 const CATEGORIES = {
-  A1: { group: "A", icon: "🩺" },
-  A2: { group: "A", icon: "💊" },
-  A3: { group: "A", icon: "🫀" },
-  A4: { group: "A", icon: "🔧" },
-  B1: { group: "B", icon: "🦠" },
-  B2: { group: "B", icon: "⚠️" },
-  C1: { group: "C", icon: "🚫" },
-  D1: { group: "D", icon: "📋" },
-  D2: { group: "D", icon: "✅" },
-  E1: { group: "E", icon: "📝" },
+  A1: { group: "A" },
+  A2: { group: "A" },
+  A3: { group: "A" },
+  A4: { group: "A" },
+  B1: { group: "B" },
+  B2: { group: "B" },
+  C1: { group: "C" },
+  D1: { group: "D" },
+  D2: { group: "D" },
+  E1: { group: "E" },
 };
+
+/** Stroke line icons (24×24), currentColor — NPÖ-liknande kategoriikoner utan emoji */
+function signalIconSvg(inner, size = 20) {
+  return `<svg class="signal-icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+}
+
+const PROFILE_ICON_PATHS = {
+  A1: `<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>`,
+  A2: `<rect x="5" y="9" width="14" height="6" rx="3" ry="3"/><path d="M9 12h6"/>`,
+  A3: `<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>`,
+  A4: `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/>`,
+  B1: `<rect x="2.5" y="9" width="13" height="6" rx="3" ry="3"/><path d="M15.5 12c1.2-1.2 2.3 1.2 3.5 0s2-1 3-.6"/><circle cx="6" cy="12" r=".9" fill="currentColor" stroke="none"/><circle cx="9.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="12.5" cy="13" r=".9" fill="currentColor" stroke="none"/>`,
+  B2: `<circle cx="12" cy="12" r="3"/><path d="M12 9V5"/><path d="M12 15v4"/><path d="M9 12H5"/><path d="M15 12h4"/><path d="m9.9 9.9-2.8-2.8"/><path d="m14.1 9.9 2.8-2.8"/><path d="m9.9 14.1-2.8 2.8"/><path d="m14.1 14.1 2.8 2.8"/><circle cx="12" cy="3.5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="20.5" r="1" fill="currentColor" stroke="none"/><circle cx="3.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="20.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="6" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="6" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="18" r="1" fill="currentColor" stroke="none"/>`,
+  C1: `<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>`,
+  D1: `<rect width="8" height="4" x="8" y="2" rx="1" ry="1" fill="none"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/>`,
+  D2: `<rect width="8" height="4" x="8" y="2" rx="1" ry="1" fill="none"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>`,
+  E1: `<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>`,
+};
+
+function profileSignalIcon(profileCode, size = 20) {
+  const paths = PROFILE_ICON_PATHS[profileCode] || PROFILE_ICON_PATHS.E1;
+  return signalIconSvg(paths, size);
+}
+
+const BANNER_ICON_WARNING = signalIconSvg(
+  `<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>`,
+  22
+);
+const BANNER_ICON_OK = signalIconSvg(`<path d="M20 6 9 17l-5-5"/>`, 22);
 
 const PROFILE_GROUPS = [
   ["cat_group_medical",      ["A1", "A2", "A3", "A4"]],
@@ -185,7 +214,7 @@ const TRANSLATIONS = {
     about_profile_h2: "Profilstruktur",
     about_profile_p: "FHIR-resursen <code>Flag</code> bär uppmärksamhetssignalen. Tio specialiserade profiler representerar de tio typerna i Socialstyrelsens informationsspecifikation. Vissa har tillhörande <code>Observation</code>-resurser med detaljerad klinisk information.",
     about_contact_h2: "Kontakt",
-    about_contact_p: "Frågor om IG:n: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, projektledare för arbetsgruppen för uppmärksamhetsinformation.",
+    about_contact_p: "Frågor om demoportalen, kontakta <a href=\"mailto:thomas.siltberg@inera.se\">Thomas Siltberg</a>.",
 
     symbol_h1: "Symbolen, fält för fält",
     symbol_intro: "Den nationella uppmärksamhetssymbolen består av sju fält. Varje fält tänds när motsvarande typ av uppmärksamhetsinformation finns aktiv på patienten. Hovra eller klicka på ett kort i listan — eller direkt på symbolen — så lyser rätt fält upp. Klicka igen för att avmarkera.",
@@ -368,7 +397,7 @@ const TRANSLATIONS = {
     about_profile_h2: "Profile structure",
     about_profile_p: "The FHIR <code>Flag</code> resource carries the alert signal. Ten specialised profiles represent the ten types in the Swedish National Board of Health and Welfare's information specification. Some have associated <code>Observation</code> resources with detailed clinical content.",
     about_contact_h2: "Contact",
-    about_contact_p: "Questions about the IG: <a href=\"mailto:claudia.ehrentraut@regionstockholm.se\">Claudia Ehrentraut</a>, project manager for the alert information working group.",
+    about_contact_p: "For questions about the demo portal, contact <a href=\"mailto:thomas.siltberg@inera.se\">Thomas Siltberg</a>.",
 
     symbol_h1: "The symbol, field by field",
     symbol_intro: "The national alert-information symbol has seven fields. Each field lights up when the matching type of alert information is active for the patient. Hover or click a card in the list — or a field on the symbol itself — to highlight the matching field. Click again to clear.",
@@ -640,11 +669,11 @@ function renderPatientDetail(id) {
 
   const banner = activeCount > 0
     ? `<div class="alert-banner">
-        <span class="alert-banner-icon">⚠️</span>
+        <span class="alert-banner-icon" aria-hidden="true">${BANNER_ICON_WARNING}</span>
         <span>${t(activeCount === 1 ? "alert_banner_active_one" : "alert_banner_active_many", { count: activeCount })}</span>
       </div>`
     : `<div class="alert-banner empty">
-        <span class="alert-banner-icon">✓</span>
+        <span class="alert-banner-icon" aria-hidden="true">${BANNER_ICON_OK}</span>
         <span>${escapeHtml(t("alert_banner_empty"))}</span>
       </div>`;
 
@@ -664,7 +693,7 @@ function renderPatientDetail(id) {
     return `
       <div class="category-group category-${groupLetter}">
         <div class="category-header">
-          <div class="category-icon">${CATEGORIES[codes[0]].icon}</div>
+          <div class="category-icon">${profileSignalIcon(codes[0], 18)}</div>
           <div class="category-title">${escapeHtml(t(groupKey))}</div>
           <div class="category-count">${groupFlags.length}</div>
         </div>
@@ -680,6 +709,8 @@ function renderPatientDetail(id) {
 
 /* ── Uppmärksamhetssymbol ─────────────────────────────────
  * Geometry from oskthu2/uppmarksamhetssymbol (CC0).
+ * Field fills for fält 4 (prick) m.m. följer UMI.zip publish/symbol-v2.jsx
+ * (Socialstyrelsens anvisning v2), inte den äldre inbäddade #FA7070 i repots index.html.
  * Field codes:
  *   1 = top bar   |  0 = horizontal stripes  |  4 = bottom dot
  *   2 = NE wedge  |  3 = SE wedge
@@ -704,7 +735,7 @@ const UMI_SVG = {
     "6": "M 700 545 L 330 340 L 90 770 L 480 970 L 700 880 Z",
   },
   colors: {
-    "0": "#B60606", "1": "#B60606", "4": "#FA7070",
+    "0": "#B60606", "1": "#B60606", "4": "#B60606",
     "2": "#B60606", "3": "#05598A", "5": "#E1A100", "6": "#B60606",
   },
   off: "#ffffff",
@@ -780,19 +811,19 @@ function renderAlertSymbolMini(flags) {
 
 const SYMBOL_CARDS = [
   {
-    id: "A", icon: "🩺", colorVar: "--cat-A",
+    id: "A", colorVar: "--cat-A",
     titleKey: "symbol_card_a_title", descKey: "symbol_card_a_desc",
     profilesKey: "symbol_card_a_profiles", positionKey: "symbol_position_ne",
     fields: ["2"],
   },
   {
-    id: "B", icon: "🦠", colorVar: "--cat-B",
+    id: "B", colorVar: "--cat-B",
     titleKey: "symbol_card_b_title", descKey: "symbol_card_b_desc",
     profilesKey: "symbol_card_b_profiles", positionKey: "symbol_position_sw",
     fields: ["5"],
   },
   {
-    id: "C", icon: "🚫", colorVar: "--cat-C",
+    id: "C", colorVar: "--cat-C",
     titleKey: "symbol_card_c_title", descKey: "symbol_card_c_desc",
     profilesKey: "symbol_card_c_profiles", positionKey: "symbol_position_center",
     fields: ["1", "0", "4"],
@@ -806,13 +837,13 @@ const SYMBOL_CARDS = [
     ],
   },
   {
-    id: "D", icon: "📋", colorVar: "--cat-D",
+    id: "D", colorVar: "--cat-D",
     titleKey: "symbol_card_d_title", descKey: "symbol_card_d_desc",
     profilesKey: "symbol_card_d_profiles", positionKey: "symbol_position_se",
     fields: ["3"],
   },
   {
-    id: "E", icon: "📝", colorVar: "--cat-E",
+    id: "E", colorVar: "--cat-E",
     titleKey: "symbol_card_e_title", descKey: "symbol_card_e_desc",
     profilesKey: "symbol_card_e_profiles", positionKey: "symbol_position_nw",
     fields: ["6"],
@@ -820,31 +851,27 @@ const SYMBOL_CARDS = [
 ];
 
 function buildSymbolExplorerSvg() {
-  // Slightly enlarged viewBox so glow can spill outside the geometry.
-  const PAD = 120;
-  const VB = `${-PAD} ${-PAD} ${2010 + PAD * 2} ${1983 + PAD * 2}`;
-  const fieldPaths = Object.keys(UMI_SVG.fields).map(code =>
-    `<path class="symbol-field" data-field="${code}" data-color="${UMI_SVG.colors[code]}" d="${UMI_SVG.fields[code]}" fill="${UMI_SVG.colors[code]}" tabindex="0" role="img" aria-label="${escapeHtml(symbolFieldAria(code))}"/>`
-  ).join("");
-  return `<svg class="symbol-explorer-svg" viewBox="${VB}" xmlns="http://www.w3.org/2000/svg" aria-label="${escapeHtml(t("symbol_aria"))}">
+  const pathEl = (code) =>
+    `<path class="symbol-field" data-field="${code}" data-color="${UMI_SVG.colors[code]}" d="${UMI_SVG.fields[code]}" fill="${UMI_SVG.colors[code]}" tabindex="0" role="img" aria-label="${escapeHtml(symbolFieldAria(code))}"/>`;
+  /* Osynlig träffyta under topp/ränder/prick så mellanrummen vit mellan ränderna håller hover (kort C, fält 1+0+4). */
+  const centerHitRect =
+    `<rect class="symbol-center-hit" x="726" y="45" width="558" height="1885" fill="transparent" pointer-events="all" aria-hidden="true"/>`;
+  const centerPaths = ["1", "0", "4"].map(pathEl).join("");
+  const outerPaths = ["2", "3", "5", "6"].map(pathEl).join("");
+  return `<svg class="symbol-explorer-svg" viewBox="0 0 2010 1983" xmlns="http://www.w3.org/2000/svg" aria-label="${escapeHtml(t("symbol_aria"))}">
     <defs>
       <radialGradient id="symbolStageBg" cx="50%" cy="42%" r="65%">
-        <stop offset="0%" stop-color="#1d3a73" stop-opacity="0.35"/>
-        <stop offset="55%" stop-color="#0e1f3d" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#04060c" stop-opacity="0"/>
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+        <stop offset="50%" stop-color="#eef2f8" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#e2e8f0" stop-opacity="0"/>
       </radialGradient>
-      <filter id="symbolGlow" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="22" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
     </defs>
-    <rect class="symbol-stage-bg" x="${-PAD}" y="${-PAD}" width="${2010 + PAD * 2}" height="${1983 + PAD * 2}" fill="url(#symbolStageBg)"/>
+    <rect class="symbol-stage-bg" x="0" y="0" width="2010" height="1983" fill="url(#symbolStageBg)"/>
     <path class="symbol-inside" d="${UMI_SVG.outlineInner}" fill="#ffffff"/>
-    <g class="symbol-fields">${fieldPaths}</g>
+    <g class="symbol-fields">
+      <g class="symbol-center-cluster">${centerHitRect}${centerPaths}</g>
+      <g class="symbol-outer-fields">${outerPaths}</g>
+    </g>
     <path class="symbol-outline" d="${UMI_SVG.outlineOuter} ${UMI_SVG.outlineInner}" fill="${UMI_SVG.outline}" fill-rule="evenodd"/>
   </svg>`;
 }
@@ -888,7 +915,7 @@ function renderSymbolCard(card) {
               data-fields="${card.fields.join(",")}"
               style="--card-color: var(${card.colorVar});">
     <div class="symbol-card-head">
-      <span class="symbol-card-icon" aria-hidden="true">${card.icon}</span>
+      <span class="symbol-card-icon" aria-hidden="true">${profileSignalIcon(`${card.id}1`, 22)}</span>
       <div class="symbol-card-text">
         <div class="symbol-card-title" data-i18n="${card.titleKey}"></div>
         <div class="symbol-card-pos" data-i18n="${card.positionKey}"></div>
@@ -941,6 +968,9 @@ function setupSymbolInteractions(root) {
   const toggleBtn = root.querySelector("#symbolToggleAll");
   const allFields = ["0", "1", "2", "3", "4", "5", "6"];
   let lockedFields = null;
+
+  const isInsideSymbolCenterCluster = (el) =>
+    !!(el && typeof el.closest === "function" && el.closest(".symbol-center-cluster"));
 
   const idleOpacity = 0.18;
   const lockedOpacity = 0.62;
@@ -1067,6 +1097,20 @@ function setupSymbolInteractions(root) {
     });
   });
 
+  const centerHit = svg.querySelector(".symbol-center-hit");
+  const cardC = cards.find(c => c.dataset.cardId === "C");
+  if (centerHit && cardC) {
+    centerHit.addEventListener("mouseenter", () => {
+      if (!pinnedCard && !pinnedSub) activateCard(cardC);
+    });
+    centerHit.addEventListener("mouseleave", (e) => {
+      if (pinnedCard || pinnedSub) return;
+      if (isInsideSymbolCenterCluster(e.relatedTarget)) return;
+      deactivate();
+    });
+    centerHit.addEventListener("click", () => { pinCard(cardC); });
+  }
+
   function resolveFieldTarget(code) {
     const cardId = fieldToCardId(code);
     if (cardId === "C") {
@@ -1087,9 +1131,17 @@ function setupSymbolInteractions(root) {
       else activateCard(target.card);
     };
     f.addEventListener("mouseenter", handler);
-    f.addEventListener("mouseleave", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    f.addEventListener("mouseleave", (e) => {
+      if (pinnedCard || pinnedSub) return;
+      if (isInsideSymbolCenterCluster(e.relatedTarget)) return;
+      deactivate();
+    });
     f.addEventListener("focus", handler);
-    f.addEventListener("blur", () => { if (!pinnedCard && !pinnedSub) deactivate(); });
+    f.addEventListener("blur", (e) => {
+      if (pinnedCard || pinnedSub) return;
+      if (isInsideSymbolCenterCluster(e.relatedTarget)) return;
+      deactivate();
+    });
     f.addEventListener("click", () => {
       const target = resolveFieldTarget(f.dataset.field);
       if (!target) return;

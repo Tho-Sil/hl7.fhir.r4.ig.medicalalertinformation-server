@@ -94,8 +94,9 @@ code, pre { font-family: var(--mono); }
   min-width: 280px;
 }
 .brand-mark {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
 }
 .brand-title {
   font-weight: 700;
@@ -356,7 +357,14 @@ main {
   gap: 14px;
   font-weight: 500;
 }
-.alert-banner-icon { font-size: 22px; }
+.alert-banner-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.alert-banner:not(.empty) .alert-banner-icon { color: var(--critical); }
+.alert-banner.empty .alert-banner-icon { color: var(--success); }
 .alert-banner.empty {
   background: var(--success-soft);
   border-color: #c2dfca;
@@ -387,6 +395,7 @@ main {
   place-items: center;
   flex-shrink: 0;
 }
+.category-icon .signal-icon { display: block; }
 .category-A .category-icon { background: var(--cat-A-soft); color: var(--cat-A); }
 .category-B .category-icon { background: var(--cat-B-soft); color: var(--cat-B); }
 .category-C .category-icon { background: var(--cat-C-soft); color: var(--cat-C); }
@@ -693,9 +702,10 @@ main {
 
 /* ── Symbol explorer ──────────────────────────────────────── */
 .symbol-explorer {
-  --canvas-bg-1: #060b1a;
-  --canvas-bg-2: #0c1f3d;
-  --canvas-bg-3: #1d3a73;
+  /* Ljus canvas — samma familj som --bg / --bg-elev */
+  --canvas-bg-1: #f0f2f6;
+  --canvas-bg-2: #e8ecf2;
+  --canvas-bg-3: #dce3ee;
   padding: 28px clamp(16px, 4vw, 48px) 64px;
   max-width: 1400px;
   margin: 0 auto;
@@ -782,8 +792,8 @@ main {
   margin-bottom: 6px;
 }
 .symbol-card-icon {
-  font-size: 22px;
-  line-height: 1;
+  color: var(--card-color);
+  line-height: 0;
   width: 38px;
   height: 38px;
   border-radius: 10px;
@@ -792,6 +802,7 @@ main {
   place-items: center;
   flex-shrink: 0;
 }
+.symbol-card-icon .signal-icon { display: block; }
 .symbol-card-text { flex: 1; min-width: 0; }
 .symbol-card-title {
   font-weight: 700;
@@ -875,24 +886,27 @@ main {
   position: sticky;
   top: 88px;
   border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
   background:
-    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--canvas-bg-3) 75%, transparent), transparent 65%),
-    linear-gradient(160deg, var(--canvas-bg-2), var(--canvas-bg-1));
+    radial-gradient(ellipse at 50% 12%, rgba(255, 255, 255, 0.92), transparent 55%),
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--canvas-bg-3) 55%, transparent), transparent 62%),
+    linear-gradient(168deg, var(--canvas-bg-2), var(--canvas-bg-1));
   padding: 18px;
   overflow: hidden;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--canvas-bg-3) 40%, transparent),
-    0 30px 60px -30px rgba(6, 11, 26, 0.6);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 14px 36px -20px rgba(15, 23, 42, 0.1);
   isolation: isolate;
 }
 .symbol-canvas-aurora {
   position: absolute;
-  inset: -40%;
+  inset: -35%;
+  opacity: 0.65;
   background:
-    radial-gradient(40% 40% at 30% 30%, rgba(80, 160, 255, .25), transparent 70%),
-    radial-gradient(35% 35% at 75% 25%, rgba(255, 130, 150, .18), transparent 70%),
-    radial-gradient(45% 45% at 50% 80%, rgba(120, 220, 200, .18), transparent 70%);
-  filter: blur(40px);
+    radial-gradient(40% 40% at 32% 32%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 72%),
+    radial-gradient(38% 38% at 72% 28%, color-mix(in srgb, var(--cat-C) 10%, transparent), transparent 72%),
+    radial-gradient(42% 42% at 50% 78%, color-mix(in srgb, var(--cat-D) 12%, transparent), transparent 72%);
+  filter: blur(52px);
   z-index: 0;
   pointer-events: none;
   animation: symbolAurora 18s ease-in-out infinite alternate;
@@ -908,7 +922,6 @@ main {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
   transform-origin: 50% 50%;
 }
 .symbol-explorer-svg .symbol-stage-bg { pointer-events: none; }
@@ -919,31 +932,17 @@ main {
   outline: none;
   transform-box: fill-box;
   transform-origin: 50% 50%;
-  transition: filter .3s ease;
 }
-.symbol-explorer-svg .symbol-field.active {
-  filter: drop-shadow(0 0 14px var(--field-glow, rgba(255,255,255,.8)))
-          drop-shadow(0 0 28px var(--field-glow, rgba(255,255,255,.8)));
-}
-/* Field-specific glow colors */
-.symbol-explorer-svg .symbol-field[data-field="0"].active,
-.symbol-explorer-svg .symbol-field[data-field="1"].active,
-.symbol-explorer-svg .symbol-field[data-field="2"].active,
-.symbol-explorer-svg .symbol-field[data-field="6"].active {
-  --field-glow: #ff5a5a;
-}
-.symbol-explorer-svg .symbol-field[data-field="4"].active { --field-glow: #ff9aa0; }
-.symbol-explorer-svg .symbol-field[data-field="3"].active { --field-glow: #2db2e8; }
-.symbol-explorer-svg .symbol-field[data-field="5"].active { --field-glow: #ffc34d; }
 
 .symbol-toggle-all {
   position: absolute;
   top: 18px;
   right: 18px;
   z-index: 2;
-  background: rgba(255, 255, 255, .08);
-  color: #f1f5f9;
-  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 7px 14px;
@@ -952,13 +951,18 @@ main {
   font-weight: 600;
   letter-spacing: .02em;
   cursor: pointer;
-  transition: background .25s, transform .2s;
+  transition: background .25s, transform .2s, border-color .2s;
 }
-.symbol-toggle-all:hover { background: rgba(255, 255, 255, .16); transform: translateY(-1px); }
+.symbol-toggle-all:hover {
+  background: var(--bg-elev);
+  border-color: color-mix(in srgb, var(--primary) 22%, var(--border));
+  transform: translateY(-1px);
+}
 .symbol-toggle-all.active {
-  background: linear-gradient(135deg, #2dabd5, #1e3a8a);
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep));
   border-color: transparent;
   color: #fff;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--primary) 35%, transparent);
 }
 
 .symbol-info {
@@ -967,19 +971,20 @@ main {
   right: 18px;
   bottom: 18px;
   z-index: 2;
-  background: rgba(15, 23, 42, .55);
+  background: rgba(255, 255, 255, 0.52);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, .12);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 12px 16px;
-  color: #e2e8f0;
+  color: var(--text);
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 14px;
   row-gap: 2px;
   align-items: baseline;
   border-left: 3px solid var(--info-color, var(--primary));
+  box-shadow: var(--shadow-sm);
   transition: opacity .25s, transform .25s, border-color .25s;
 }
 .symbol-info-pos {
@@ -989,7 +994,7 @@ main {
   font-size: 10.5px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: rgba(226, 232, 240, .65);
+  color: var(--text-subtle);
   align-self: center;
   max-width: 140px;
 }
@@ -1002,7 +1007,7 @@ main {
 .symbol-info-desc {
   grid-column: 2 / 3;
   font-size: 12.5px;
-  color: rgba(226, 232, 240, .8);
+  color: var(--text-muted);
   line-height: 1.45;
 }
 
