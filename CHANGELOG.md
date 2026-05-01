@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - First tagged release: HAPI FHIR demo stack (`HAPI-server/`), sample bundles (`HAPI-server/data/`), and static demo portal (`demo/`).
+- `LICENSE` (MIT) and README section describing license scope versus the IG package.

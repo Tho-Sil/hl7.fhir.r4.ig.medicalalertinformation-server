@@ -36,6 +36,7 @@ python3 -m http.server 8000
 
 Detaljerad dokumentation, testpatienter och API-exempel:
 
+- [LICENSE](LICENSE) — MIT-licens för källkod och demoportal i detta repo
 - [CHANGELOG.md](CHANGELOG.md) — versionshistorik
 - [HAPI-server/README.md](HAPI-server/README.md) — snabbstart och översikt
 - [HAPI-server/docs/test-patients.md](HAPI-server/docs/test-patients.md) — alla testpersoner och deras uppmärksamhetsinformation
@@ -56,3 +57,10 @@ sushi .            # FSH → fsh-generated/
 `HAPI-server/scripts/build-ig.sh` gör båda stegen och kopierar in det  
 färdiga NPM-paketet i `HAPI-server/ig/` så att HAPI-servern kan  
 ladda profilerna och göra profilvalidering.
+
+## Licens
+
+Källkod, skript och demoportal i detta repo omfattas av **MIT-licensen**, se
+[LICENSE](LICENSE). *Det byggda FHIR Implementation Guide-paketet* (NPM/tgz
+från syskon-repot) kan ha **egna** licensvillkor — följ det som anges i det
+paketet när du återanvänder det.
