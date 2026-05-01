@@ -2,11 +2,12 @@
 
 Detta repo innehåller **HAPI-demoserver**, **exempeldata** och **demoportal**
 (`demo/`). **IG-källkoden (FSH)** ligger i syskon-repot
-**`hl7.fhir.r4.ig.medicalalertinformation`** (samma överordnade katalog som
-detta repo), inte under denna katalog.
+[**`HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation`**](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)
+(samma överordnade katalog som detta repo), inte under denna katalog.
 
-1. **Syskon: `../hl7.fhir.r4.ig.medicalalertinformation/`** — FHIR
-  Implementation Guide för *uppmärksamhetsinformation*, baserad på
+1. **Syskon: [`HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation`](https://github.com/HL7Sweden/hl7.fhir.r4.ig.medicalalertinformation/tree/develop)**
+   (lokalt: `../hl7.fhir.r4.ig.medicalalertinformation/`) — FHIR
+   Implementation Guide för *uppmärksamhetsinformation*, baserad på
    Socialstyrelsens informationsspecifikation
    [https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/](https://www.socialstyrelsen.se/kunskapsstod-och-regler/omraden/e-halsa/tillampning/uppmarksamhetsinformation/).
    Publiceras av HL7 Sverige.
