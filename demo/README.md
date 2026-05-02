@@ -57,7 +57,31 @@ Demon är ren statisk HTML/CSS/JS — vilken filserver som helst funkar.
 | `index.html` | Sidans struktur |
 | `styles.css` | All styling |
 | `app.js` | Tab-routing, FHIR-anrop, rendering |
+| `data/alert-label-definitions.json` | Motivering per `SEAlertLabelCS`-kod (tooltip); genereras från kodverkslistan |
+| `scripts/build_alert_label_definitions.py` | Bygger om JSON från xlsx + `SEAlertInformationAlertLabel.fsh` |
 | `README.md` | Detta dokument |
+
+### Motivering (alert label)
+
+Motivering visas i en **egen flytande tooltip** (ca 60 ms efter att musen
+stannat) över **hela signalraden** i patientvyn och **hela tabellraden** i
+översikten, när `data-motivation` finns. Texten hämtas från
+`data/alert-label-definitions.json` (kodverkslistan, matchad mot FSH per kod).
+
+Uppdatera efter ändring i bilagan eller i `SEAlertLabelCS`:
+
+```bash
+# från repo-roten hl7.fhir.r4.ig.medicalalertinformation-server
+python3 demo/scripts/build_alert_label_definitions.py \
+  --xlsx ../hl7.fhir.r4.ig.medicalalertinformation/input/context/2025-12-9984-bilaga-kodverkslista.xlsx \
+  --fsh ../hl7.fhir.r4.ig.medicalalertinformation/input/fsh/SEAlertInformationAlertLabel.fsh \
+  --out demo/data/alert-label-definitions.json
+```
+
+Vissa rader i Excel saknar egen motiveringskolumn (t.ex. vissa
+överkänslighetsblad); då blir det ingen tooltip för den koden tills
+listan kompletterats. Skriptet skriver ut varningar för FSH-koder som
+inte kunde matchas.
 
 Inga byggsteg och inga npm-paket i repot — öppna en statisk filserver så funkar
 det. Symbol-fliken laddar [GSAP](https://greensock.com/gsap/) från CDN för animationer.

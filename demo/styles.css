@@ -426,6 +426,7 @@ main {
   gap: 14px;
   align-items: start;
 }
+.flag-item[data-motivation] { cursor: help; }
 .flag-item:hover { background: var(--bg-sunken); }
 .flag-item + .flag-item { border-top: 1px solid var(--border); }
 .flag-item.inactive { opacity: .55; }
@@ -573,6 +574,25 @@ main {
 }
 .patient-doc-header h3 { margin: 0; }
 .patient-doc-pnr { font-family: var(--mono); color: var(--text-subtle); font-size: 12px; }
+
+.patient-doc tbody tr[data-motivation] { cursor: help; }
+
+.motivation-tooltip {
+  position: fixed;
+  z-index: 10050;
+  max-width: min(440px, calc(100vw - 24px));
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 
 .patient-doc .doc-flag-desc { vertical-align: top; min-width: 12rem; }
 .patient-doc .doc-flag-title {

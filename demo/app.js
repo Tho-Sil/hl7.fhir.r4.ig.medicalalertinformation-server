@@ -11,6 +11,7 @@ const CATEGORY_CS = "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem
 const PNR_SYSTEM = "http://electronichealth.se/identifier/personnummer";
 const CRIT_LEVEL_EXT = PROFILE_BASE + "SECriticalityLevelExtension";
 const ALERT_LABEL_EXT = PROFILE_BASE + "SEAlertLabelExtension";
+const SE_ALERT_LABEL_CS = "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertLabelCS";
 
 const CATEGORIES = {
   A1: { group: "A" },
@@ -482,6 +483,8 @@ let state = {
   patients: [],
   flagsByPatient: new Map(),
   selectedPatientId: null,
+  /** Kod → motiveringstext från kodverkslista (demo/data/alert-label-definitions.json) */
+  alertLabelMotivation: {},
 };
 
 /* ── Tab routing ──────────────────────────────────────────── */
@@ -570,6 +573,15 @@ async function loadAllResources(resourceType, params = "_count=200") {
   return out;
 }
 
+async function loadAlertLabelMotivationMap() {
+  try {
+    const r = await fetch("data/alert-label-definitions.json", { cache: "no-store" });
+    if (r.ok) state.alertLabelMotivation = await r.json();
+  } catch {
+    state.alertLabelMotivation = {};
+  }
+}
+
 async function bootstrap() {
   $("#patientList").innerHTML = `<div class="loading"><span class="spinner"></span>${escapeHtml(t("loading_patients"))}</div>`;
   $("#footerStats").textContent = "";
@@ -577,6 +589,7 @@ async function bootstrap() {
     const [patients, flags] = await Promise.all([
       loadAllResources("Patient"),
       loadAllResources("Flag"),
+      loadAlertLabelMotivationMap(),
     ]);
     state.patients = patients.sort((a, b) => (a.name?.[0]?.family || "").localeCompare(b.name?.[0]?.family || ""));
     state.flagsByPatient = new Map();
@@ -1204,6 +1217,29 @@ function getAlertLabelDisplay(flag) {
   return (c?.display || "").trim();
 }
 
+function getAlertLabelCoding(flag) {
+  const ext = (flag.extension || []).find(e => e.url === ALERT_LABEL_EXT);
+  const codings = ext?.valueCodeableConcept?.coding || [];
+  const c = codings.find(x => x.code && (!x.system || x.system === SE_ALERT_LABEL_CS)) || codings[0];
+  if (!c?.code) return null;
+  return { code: c.code, display: (c.display || "").trim() };
+}
+
+/** Motivering från kodverkslista (JSON), keyed by SEAlertLabelCS code */
+function getAlertLabelMotivation(flag) {
+  const c = getAlertLabelCoding(flag);
+  if (!c) return "";
+  const text = state.alertLabelMotivation[c.code];
+  return typeof text === "string" ? text : "";
+}
+
+/** `data-motivation="…"` (URI-kodad) för delegarad tooltip på hel rad/panel */
+function alertMotivationDataAttr(flag) {
+  const m = getAlertLabelMotivation(flag).replace(/\s+/g, " ").trim();
+  if (!m) return "";
+  return ` data-motivation="${encodeURIComponent(m)}"`;
+}
+
 function flagCodings(flag) {
   return flag.code?.coding || [];
 }
@@ -1278,7 +1314,8 @@ function renderFlag(flag) {
   const period = formatPeriod(flag.period);
   const statusLabel = status === "active" ? t("flag_status_active") : t("flag_status_inactive");
   const titleCls = hasLabel ? "flag-alert-title" : "flag-alert-title flag-alert-title--fallback";
-  return `<div class="flag-item${inactiveCls}">
+  const motData = alertMotivationDataAttr(flag);
+  return `<div class="flag-item${inactiveCls}"${motData}>
     <div class="flag-status-pill ${status}">${escapeHtml(statusLabel)}</div>
     <div class="flag-body">
       <div class="${titleCls}">${escapeHtml(primaryTitle)}</div>
@@ -1318,7 +1355,8 @@ function renderTestPatientDocs() {
                 const c = f.code?.coding?.[0];
                 const codeStr = c ? `${shortSystem(c.system)} ${c.code}` : t("free_text");
                 const statusLabel = f.status === "active" ? t("flag_status_active") : t("flag_status_inactive");
-                return `<tr>
+                const motData = alertMotivationDataAttr(f);
+                return `<tr${motData}>
                   <td><span class="flag-status-pill ${f.status}">${escapeHtml(statusLabel)}</span></td>
                   <td><span class="badge cat-${catLetter}">${cat}</span></td>
                   <td><code>${escapeHtml(codeStr)}</code></td>
@@ -1445,4 +1483,109 @@ applyTranslations();
 initTabs();
 initLang();
 initServer();
+initMotivationTooltip();
 bootstrap();
+
+/* ── Motivering (kodverkslista): snabb tooltip över hel rad / flag-panel ─ */
+const MOTIVATION_SHOW_MS = 60;
+let motivationTipEl = null;
+let motivationShowTimer = null;
+let motivationHideTimer = null;
+/** Flaggrad / tabellrad musen antas vara kvar på (för att inte starta om timern vid rörelse barn→barn) */
+let motivationHoverHost = null;
+let motivationMoveBound = false;
+
+function ensureMotivationTooltipEl() {
+  if (motivationTipEl) return motivationTipEl;
+  motivationTipEl = document.createElement("div");
+  motivationTipEl.className = "motivation-tooltip";
+  motivationTipEl.setAttribute("role", "tooltip");
+  motivationTipEl.hidden = true;
+  document.body.appendChild(motivationTipEl);
+  return motivationTipEl;
+}
+
+function positionMotivationTooltip(el, clientX, clientY) {
+  const pad = 14;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  el.hidden = false;
+  const w = el.offsetWidth || 320;
+  const h = el.offsetHeight || 80;
+  let left = clientX + pad;
+  let top = clientY + pad;
+  if (left + w > vw - 8) left = clientX - w - pad;
+  if (top + h > vh - 8) top = clientY - h - pad;
+  left = Math.max(8, Math.min(left, vw - w - 8));
+  top = Math.max(8, Math.min(top, vh - h - 8));
+  el.style.left = `${left}px`;
+  el.style.top = `${top}px`;
+}
+
+function hideMotivationTooltip() {
+  clearTimeout(motivationShowTimer);
+  clearTimeout(motivationHideTimer);
+  motivationShowTimer = null;
+  motivationHideTimer = null;
+  motivationHoverHost = null;
+  if (motivationTipEl) motivationTipEl.hidden = true;
+  if (motivationMoveBound) {
+    document.removeEventListener("mousemove", onMotivationMouseMove);
+    motivationMoveBound = false;
+  }
+}
+
+function onMotivationMouseMove(ev) {
+  if (!motivationTipEl || motivationTipEl.hidden) return;
+  positionMotivationTooltip(motivationTipEl, ev.clientX, ev.clientY);
+}
+
+function initMotivationTooltip() {
+  const selector = ".flag-item[data-motivation], tr[data-motivation]";
+
+  document.addEventListener("mouseover", ev => {
+    const host = ev.target?.closest?.(selector);
+    if (!host?.dataset?.motivation) return;
+    clearTimeout(motivationHideTimer);
+    motivationHideTimer = null;
+    if (motivationHoverHost === host && motivationShowTimer != null) return;
+    if (motivationHoverHost === host && motivationTipEl && !motivationTipEl.hidden) return;
+    motivationHoverHost = host;
+    clearTimeout(motivationShowTimer);
+    const cx = ev.clientX;
+    const cy = ev.clientY;
+    motivationShowTimer = setTimeout(() => {
+      motivationShowTimer = null;
+      if (motivationHoverHost !== host) return;
+      let text;
+      try {
+        text = decodeURIComponent(host.dataset.motivation);
+      } catch {
+        return;
+      }
+      if (!text.trim()) return;
+      const tip = ensureMotivationTooltipEl();
+      tip.textContent = text;
+      tip.hidden = false;
+      positionMotivationTooltip(tip, cx, cy);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => positionMotivationTooltip(tip, cx, cy));
+      });
+      if (!motivationMoveBound) {
+        document.addEventListener("mousemove", onMotivationMouseMove);
+        motivationMoveBound = true;
+      }
+    }, MOTIVATION_SHOW_MS);
+  });
+
+  document.addEventListener("mouseout", ev => {
+    const host = ev.target?.closest?.(selector);
+    if (!host?.dataset?.motivation) return;
+    const rel = ev.relatedTarget;
+    if (rel && host.contains(rel)) return;
+    clearTimeout(motivationShowTimer);
+    motivationShowTimer = null;
+    motivationHoverHost = null;
+    motivationHideTimer = setTimeout(hideMotivationTooltip, 40);
+  });
+}
