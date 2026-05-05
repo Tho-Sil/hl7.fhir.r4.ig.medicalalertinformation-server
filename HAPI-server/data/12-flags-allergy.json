@@ -191,6 +191,18 @@
                 }
               ]
             }
+          },
+          {
+            "url": "http://hl7.se/fhir/r4/ig/medicalalertinformation/StructureDefinition/SECriticalityLevelExtension",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.se/fhir/r4/ig/medicalalertinformation/CodeSystem/SEAlertInformationCriticalityLevelCS",
+                  "code": "59031000052109",
+                  "display": "Discomforting"
+                }
+              ]
+            }
           }
         ]
       }

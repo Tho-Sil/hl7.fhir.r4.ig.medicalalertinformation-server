@@ -93,7 +93,7 @@ Patient-id används som referens (`Patient/<id>`) och som URL-parameter
 | Flagga | Profil | Status | Kod | Kommentar |
 |---|---|---|---|---|
 | `flag-liam-1` | A1 | active | ICD-10-SE D67.9 *Ärftlig brist på faktor IX* | Hemofili B |
-| `flag-liam-7` | C1 | active | SCT 281000220103 *taurolidin* | |
+| `flag-liam-7` | C1 | active | SCT 281000220103 *taurolidin* | Allvarlighetsgrad: besvärande (`59031000052109`) |
 
 ### `pat-lova` — Lova Karlsson (20120101-3035)
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- HAPI demo data: `flag-liam-7` i `HAPI-server/data/12-flags-allergy.json` kompletterad med `SECriticalityLevelExtension` (kod `59031000052109`, `Discomforting`) så att allvarlighetsgrad visas konsekvent för Liam, i linje med Fatima och Tolvan.
+- Dokumentation: `HAPI-server/docs/test-patients.md` uppdaterad för Liam (`flag-liam-7`) med kommentar om allvarlighetsgrad: besvärande (`59031000052109`).
+
 ## [1.1.0] - 2026-05-01
 
 ### Added
