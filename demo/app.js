@@ -487,17 +487,50 @@ let state = {
   alertLabelMotivation: {},
 };
 
+/* ── Deeplink (URL state) ─────────────────────────────────── */
+const VALID_TABS = ["patients", "testpatients", "symbol", "api", "about"];
+
+function readUrlState() {
+  const p = new URLSearchParams(location.search);
+  let tab = p.get("tab");
+  if (!VALID_TABS.includes(tab)) tab = "patients";
+  return { tab, patient: p.get("patient") || null };
+}
+
+function writeUrl({ tab, patient }, { push = false } = {}) {
+  const p = new URLSearchParams();
+  if (tab && tab !== "patients") p.set("tab", tab);
+  if (tab === "patients" && patient) p.set("patient", patient);
+  const qs = p.toString();
+  if (location.search.replace(/^\?/, "") === qs) return;
+  history[push ? "pushState" : "replaceState"]({}, "", qs ? `?${qs}` : location.pathname);
+}
+
 /* ── Tab routing ──────────────────────────────────────────── */
+function activateTab(target) {
+  $$(".tab").forEach(b => b.classList.toggle("active", b.dataset.tab === target));
+  $$(".tab-panel").forEach(p => p.classList.toggle("active", p.id === "tab-" + target));
+  if (target === "testpatients") renderTestPatientDocs();
+  if (target === "api") renderApiExamples();
+  if (target === "symbol") renderSymbolExplorer();
+}
+
 function initTabs() {
   $$(".tab").forEach(btn => {
     btn.addEventListener("click", () => {
       const target = btn.dataset.tab;
-      $$(".tab").forEach(b => b.classList.toggle("active", b === btn));
-      $$(".tab-panel").forEach(p => p.classList.toggle("active", p.id === "tab-" + target));
-      if (target === "testpatients") renderTestPatientDocs();
-      if (target === "api") renderApiExamples();
-      if (target === "symbol") renderSymbolExplorer();
+      activateTab(target);
+      writeUrl({ tab: target, patient: state.selectedPatientId }, { push: true });
     });
+  });
+  window.addEventListener("popstate", () => {
+    const s = readUrlState();
+    activateTab(s.tab);
+    if (s.tab === "patients" && state.patients.length) {
+      const id = state.patients.some(p => p.id === s.patient)
+        ? s.patient : state.patients[0].id;
+      selectPatient(id, { push: false });
+    }
   });
 }
 
@@ -601,11 +634,19 @@ async function bootstrap() {
     }
     renderPatientList();
     updateFooterStats();
-    if (state.patients.length && !state.selectedPatientId) {
-      selectPatient(state.patients[0].id);
-    } else if (state.selectedPatientId) {
-      selectPatient(state.selectedPatientId);
+    if (state.patients.length) {
+      // first load honours a ?patient= deeplink; later bootstraps keep the selection
+      const dl = state.initialUrl;
+      state.initialUrl = null;
+      let id = state.selectedPatientId;
+      if (dl && dl.tab === "patients" && state.patients.some(p => p.id === dl.patient)) {
+        id = dl.patient;
+      }
+      if (!id || !state.patients.some(p => p.id === id)) id = state.patients[0].id;
+      selectPatient(id, { push: false });
     }
+    // ?tab=testpatients deeplink: tab was activated before data arrived, refresh it
+    if ($("#tab-testpatients")?.classList.contains("active")) renderTestPatientDocs();
   } catch (e) {
     $("#patientList").innerHTML = `<div class="loading" style="color:var(--critical)">${escapeHtml(t("error_prefix", { msg: e.message }))}</div>`;
     $("#patientDetail").innerHTML = `<div class="empty-state"><p>${t("connection_error", { base: escapeHtml(state.base) })}</p></div>`;
@@ -644,10 +685,14 @@ function renderPatientList() {
   });
 }
 
-function selectPatient(id) {
+function selectPatient(id, { push = true } = {}) {
   state.selectedPatientId = id;
   $$(".patient-card").forEach(c => c.classList.toggle("selected", c.dataset.id === id));
   renderPatientDetail(id);
+  // don't clobber a ?tab=symbol/api/about deeplink when bootstrap auto-selects
+  if ($("#tab-patients")?.classList.contains("active")) {
+    writeUrl({ tab: "patients", patient: id }, { push });
+  }
 }
 
 /* ── Patient detail ───────────────────────────────────────── */
@@ -1484,6 +1529,8 @@ initTabs();
 initLang();
 initServer();
 initMotivationTooltip();
+state.initialUrl = readUrlState();
+activateTab(state.initialUrl.tab);
 bootstrap();
 
 /* ── Motivering (kodverkslista): snabb tooltip över hel rad / flag-panel ─ */
